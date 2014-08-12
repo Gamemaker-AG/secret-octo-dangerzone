@@ -31,7 +31,6 @@ end
 
 function Resources:load(threaded)
     for name, pair in pairs(self.fontQueue) do
-        print(name)
         self.fonts[name] = love.graphics.newFont(pair[1], pair[2])
         self.fontQueue[name] = nil
     end

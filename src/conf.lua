@@ -1,9 +1,9 @@
 
 function love.conf(t)
 
-    t.title = "ShapeRape"        -- The title of the window the game is in (string)
-    t.author = "Julian Tobergte, Arne Beer, Rafael Epplee, Anne-Victoria Meyer"        -- The author of the game (string)
-    t.url = "https://github.com/Nukesor/ggj14"                 -- The website of the game (string)
+    t.title = ""        -- The title of the window the game is in (string)
+    t.author = ""        -- The author of the game (string)
+    t.url = ""                 -- The website of the game (string)
     t.identity = nil            -- The name of the save directory (string)
     t.version = "0.9.0"         -- The LÖVE version this game was made for (string)
     t.console = false           -- Attach a console (boolean, Windows only)

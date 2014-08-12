@@ -1,15 +1,15 @@
 default: run
 
 clean:
-	@[[ ! -e ShapeRape.love ]] || rm ShapeRape.love
+	@[[ ! -e game.love ]] || rm game.love
 	@[[ ! -e pkg ]] || rm -r pkg        
 
 build: clean
-	@zip -r -0 ShapeRape.love data/*
-	@cd src/ && zip -r ../ShapeRape.love *
+	@zip -r -0 game.love data/*
+	@cd src/ && zip -r ../game.love *
 
 run: build
-	@love ShapeRape.love
+	@love game.love
 
 package-windows:
 	@lib/package.sh windows
