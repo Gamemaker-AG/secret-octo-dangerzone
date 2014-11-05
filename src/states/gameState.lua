@@ -1,6 +1,13 @@
-require("systems/draw/drawSystem")
+-- Components
+require("components/physic/positionComponent")
+require("components/graphic/drawableComponent")
+require("components/graphic/zIndex")
 
+-- Models
 require("models/playerModel")
+
+-- Systems
+require("systems/draw/drawSystem")
 
 GameState = class("GameState", State)
 

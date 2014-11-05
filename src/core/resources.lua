@@ -30,6 +30,7 @@ function Resources:addFont(name, src, size)
 end
 
 function Resources:load(threaded)
+
     for name, pair in pairs(self.fontQueue) do
         self.fonts[name] = love.graphics.newFont(pair[1], pair[2])
         self.fontQueue[name] = nil
@@ -48,4 +49,5 @@ function Resources:load(threaded)
         self.images[name] = love.graphics.newImage(src)
         self.imageQueue[name] = nil
     end
+
 end

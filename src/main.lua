@@ -1,5 +1,6 @@
 -- Main Lövetoys Library
-require("lib/lua-lovetoys/lovetoys/engine")
+require("lib/lovetoys/lovetoys")
+require("helper/tables")
 
 -- Framework Requirements
 require("core/stackhelper")
