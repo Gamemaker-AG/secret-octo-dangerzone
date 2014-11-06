@@ -8,12 +8,15 @@ require("models/playerModel")
 
 -- Systems
 require("systems/draw/drawSystem")
+require("systems/player/playerControlSystem")
 
 GameState = class("GameState", State)
 
 function GameState:load()
     self.engine = Engine()
     self.eventmanager = EventManager()
+
+    self.engine:addSystem(PlayerControlSystem(), "logic", 1)
 
     self.engine:addSystem(DrawSystem(), "draw", 1)
 

@@ -1,23 +1,30 @@
-default: run
+.PHONY: default clean build run lib getwindowlib getmaclib package-linux package-windows package-mac package
+
+default: build
 
 clean:
-	@[[ ! -e game.love ]] || rm game.love
-	@[[ ! -e pkg ]] || rm -r pkg        
+	@[[ ! -e seocda.love ]] || rm seocda.love
+	@[[ ! -e pkg ]] || rm -r pkg
+	@[[ ! -e lib ]] || rm -r lib
+	@[[ ! -e temp ]] || rm -r temp
 
 build: clean
-	@zip -r -0 game.love data/*
-	@cd src/ && zip -r ../game.love *
+	@zip -r -0 seocda.love data/*
+	@cd src/ && zip -r ../seocda.love *
 
 run: build
-	@love game.love
-
-package-windows:
-	@lib/package.sh windows
+	@love seocda.love
 
 package-linux:
-	@lib/package.sh linux
+	./script/download.sh linux
+	@./script/package.sh linux
+
+package-windows:
+	./script/download.sh windows
+	@./script/package.sh windows
 
 package-mac:
-	@lib/package.sh osx
+	./script/download.sh osx
+	@./script/package.sh osx
 
 package: package-linux package-windows package-mac

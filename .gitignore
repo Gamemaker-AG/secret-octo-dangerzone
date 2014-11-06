@@ -2,3 +2,5 @@
 *.love
 *pnotes*
 pkg
+temp
+lib
