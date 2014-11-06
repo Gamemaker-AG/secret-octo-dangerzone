@@ -1,6 +1,8 @@
-PositionComponent = class("PositionComponent")
+local PositionComponent = class("PositionComponent", Component)
 
 function PositionComponent:__init(x, y)
     self.x = x
     self.y = y
 end
+
+return PositionComponent

@@ -1,4 +1,4 @@
-TimerSystem = class("TimerSystem", System)
+local TimerSystem = class("TimerSystem", System)
 
 function TimerSystem:update(dt)
     for index, entity in pairs(self.targets) do
@@ -13,3 +13,5 @@ end
 function TimerSystem:requires()
     return {"TimerComponent"}
 end
+
+return TimerSystem

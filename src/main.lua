@@ -1,18 +1,11 @@
 -- Main Lövetoys Library
 require("lib/lovetoys/lovetoys")
-require("helper/tables")
 
--- Framework Requirements
+-- Core and Helper Requirements
+require("helper/tables")
 require("core/stackhelper")
-require("core/state")
 require("core/resources")
 
--- States
-require("states/menuState")
-require("states/gameState")
-
--- Events
-require("events/keyPressed")
 
 function love.load()
     resources = Resources()
@@ -23,6 +16,8 @@ function love.load()
     resources:load()
 
     stack = StackHelper()
+
+    local MenuState = require("states/menuState")
     stack:push(MenuState())
 end
 

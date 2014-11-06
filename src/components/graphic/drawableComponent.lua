@@ -1,4 +1,4 @@
-DrawableComponent = class("DrawableComponent")
+DrawableComponent = class("DrawableComponent", Component)
 
 function DrawableComponent:__init(image, r, sx, sy, ox, oy)
     self.image = image
@@ -8,3 +8,5 @@ function DrawableComponent:__init(image, r, sx, sy, ox, oy)
     if ox then self.ox = ox * relation() end
     if oy then self.oy = oy * relation() end
 end
+
+return DrawableComponent

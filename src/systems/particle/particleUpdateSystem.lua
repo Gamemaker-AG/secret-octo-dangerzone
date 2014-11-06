@@ -1,4 +1,4 @@
-ParticleUpdateSystem = class("ParticleUpdateSystem", System)
+local ParticleUpdateSystem = class("ParticleUpdateSystem", System)
 
 function ParticleUpdateSystem:update(dt)
     for index, entity in pairs(self.targets) do
@@ -22,3 +22,5 @@ end
 function ParticleUpdateSystem:requires(dt)
     return {"ParticleComponent"}
 end
+
+return ParticleUpdateSystem

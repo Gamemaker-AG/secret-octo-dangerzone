@@ -18,13 +18,11 @@ if [ $TARGET = "linux" ]; then
 	echo "Lol! nothing to do here, because Linux is awesome"
 elif [ $TARGET = "windows" ]; then
     if [ `ls $LIBDIR | wc -l` == 0 ]; then
-		wget https://bitbucket.org/rude/love/downloads/love-0.9.1-win64.zip -O temp/windows.zip
-		unzip $ROOTDIR/temp/$TARGET -d $LIBDIR/
-        if [ `ls $LIBDIR | wc -l` == 1 ]; then 
-          SUBDIR=$(ls $LIBDIR)
-          mv $LIBDIR/$SUBDIR/* $LIBDIR/
-          rm -r $LIBDIR/$SUBDIR
-        fi
+        wget https://bitbucket.org/rude/love/downloads/love-0.9.1-win64.zip -O temp/windows.zip
+        unzip $ROOTDIR/temp/$TARGET -d $LIBDIR/
+        SUBDIR=$(ls $LIBDIR)
+        mv $LIBDIR/$SUBDIR/* $LIBDIR/
+        rm -r $LIBDIR/$SUBDIR
     fi
 elif [ $TARGET = "osx" ]; then
     if [ `ls $LIBDIR | wc -l` == 0 ]; then

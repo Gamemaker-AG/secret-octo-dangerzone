@@ -1,6 +1,6 @@
 .PHONY: default clean build run lib getwindowlib getmaclib package-linux package-windows package-mac package
 
-default: build
+default: run
 
 clean:
 	@[[ ! -e seocda.love ]] || rm seocda.love

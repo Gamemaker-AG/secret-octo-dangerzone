@@ -23,7 +23,7 @@ if [ $TARGET = "linux" ]; then
 	cp $ROOTDIR/$GAME $PKGDIR 
 elif [ $TARGET = "windows" ]; then
 	cd $PKGDIR
-	cat $LIBDIR/love.exe $ROOTDIR/$GAME > $NAME$.exe
+	cat $LIBDIR/love.exe $ROOTDIR/$GAME > $NAME.exe
 elif [ $TARGET = "osx" ]; then
 	mv $PKGDIR/love.app $PKGDIR/$NAME.app
 	cp $ROOTDIR/$GAME $PKGDIR/$NAME.app/Contents/Resources/$GAME

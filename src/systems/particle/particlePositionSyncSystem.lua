@@ -1,4 +1,4 @@
-ParticlePositionSyncSystem = class("ParticlePositionSyncSystem", System)
+local ParticlePositionSyncSystem = class("ParticlePositionSyncSystem", System)
 
 function ParticlePositionSyncSystem:update()
     for k, entity in pairs(self.targets) do
@@ -9,3 +9,5 @@ end
 function ParticlePositionSyncSystem:requires()
     return {"ParticleComponent", "PositionComponent"}
 end
+
+return ParticlePositionSyncSystem

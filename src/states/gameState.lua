@@ -1,16 +1,16 @@
--- Components
-require("components/physic/positionComponent")
-require("components/graphic/drawableComponent")
-require("components/graphic/zIndex")
-
 -- Models
-require("models/playerModel")
+local PlayerModel = require("models/playerModel")
 
 -- Systems
-require("systems/draw/drawSystem")
-require("systems/player/playerControlSystem")
+local DrawSystem = require("systems/draw/drawSystem")
+local PlayerControlSystem = require("systems/pressedevent/playerControlSystem")
 
-GameState = class("GameState", State)
+-- Events
+local KeyPressed = require("events/keyPressed")
+
+-- State superclass
+local State = require("core/state")
+local GameState = class("GameState", State)
 
 function GameState:load()
     self.engine = Engine()
@@ -35,3 +35,5 @@ end
 function GameState:keypressed(key, isrepeat)
     self.eventmanager:fireEvent(KeyPressed(key, isrepeat))
 end
+
+return GameState

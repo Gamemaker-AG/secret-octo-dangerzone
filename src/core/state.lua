@@ -1,4 +1,4 @@
-State = class("State")
+local State = class("State")
 
 State.renderBelow = false
 
@@ -9,3 +9,5 @@ function State:keypressed(key, isrepeat) end
 function State:keyreleased(key, isrepeat) end
 function State:mousepressed(x, y, key) end
 function State:load() end
+
+return State

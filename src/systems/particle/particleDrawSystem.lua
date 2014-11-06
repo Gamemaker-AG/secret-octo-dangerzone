@@ -1,4 +1,4 @@
-ParticleDrawSystem = class("ParticleDrawSystem", System)
+local ParticleDrawSystem = class("ParticleDrawSystem", System)
 
 function ParticleDrawSystem:draw()
     for index, entity in pairs(self.targets) do
@@ -9,3 +9,5 @@ end
 function ParticleDrawSystem:requires()
     return {"ParticleComponent"}
 end
+
+return ParticleDrawSystem

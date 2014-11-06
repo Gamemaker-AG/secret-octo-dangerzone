@@ -1,4 +1,4 @@
-DrawSystem = class("DrawSystem", System)
+local DrawSystem = class("DrawSystem", System)
 
 function DrawSystem:__init()
     self.sortedTargets = {}
@@ -30,3 +30,5 @@ function DrawSystem:removeEntity(entity)
     self.sortedTargets = table.resetIndice(self.targets)
     table.sort(self.sortedTargets, function(a, b) return a:get("ZIndex").index < b:get("ZIndex").index end)
 end
+
+return DrawSystem

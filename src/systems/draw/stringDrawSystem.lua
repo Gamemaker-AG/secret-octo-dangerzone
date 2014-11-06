@@ -1,4 +1,4 @@
-StringDrawSystem = class("StringDrawSystem", System)
+local StringDrawSystem = class("StringDrawSystem", System)
 
 function StringDrawSystem:draw()
     for index, entity in pairs(self.targets) do
@@ -17,3 +17,5 @@ end
 function StringDrawSystem:requires()
     return {"PositionComponent", "StringComponent"}
 end
+
+return StringDrawSystem
