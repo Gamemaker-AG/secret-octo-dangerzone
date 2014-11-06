@@ -15,16 +15,16 @@ build: clean
 run: build
 	@love seocda.love
 
-package-linux:
+package-linux: build
 	./script/download.sh linux
 	@./script/package.sh linux
 
-package-windows:
+package-windows: build
 	./script/download.sh windows
 	@./script/package.sh windows
 
-package-mac:
+package-mac: build
 	./script/download.sh osx
 	@./script/package.sh osx
 
-package: package-linux package-windows package-mac
+package: build package-linux package-windows package-mac
