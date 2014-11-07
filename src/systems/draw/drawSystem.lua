@@ -9,7 +9,9 @@ function DrawSystem:draw()
     for index, entity in ipairs(self.sortedTargets) do
         local drawable = entity:get("DrawableComponent")
         local pos = entity:get("PositionComponent")
-        love.graphics.draw(drawable.image, pos.x, pos.y, drawable.r, drawable.sx, drawable.sy, drawable.ox, drawable.oy)
+        print(drawable.image, pos.position.x, pos.position.y, pos.direction:getRadian(), drawable.sx, drawable.sy, drawable.ox, drawable.oy)
+        print(pos.direction.x, pos.direction.y)
+        love.graphics.draw(drawable.image, pos.position.x, pos.position.y, pos.direction:getRadian(), drawable.sx, drawable.sy, drawable.ox, drawable.oy)
     end
 end
 
