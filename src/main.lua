@@ -6,6 +6,7 @@ require("helper/tables")
 require("core/stackhelper")
 require("core/resources")
 
+local MenuState = require("states/menuState")
 
 function love.load()
     resources = Resources()
@@ -17,7 +18,6 @@ function love.load()
 
     stack = StackHelper()
 
-    local MenuState = require("states/menuState")
     stack:push(MenuState())
 end
 

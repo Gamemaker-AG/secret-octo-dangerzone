@@ -1,10 +1,10 @@
--- Graphic Components
-local PositionComponent = require("components/physic/positionComponent")
+-- Graphic components
 local DrawableComponent = require("components/graphic/drawableComponent")
 local ZIndex = require("components/graphic/zIndex")
 
--- Physic Components
+-- Physic components
 local SpeedComponent = require("components/physic/speedComponent")
+local PositionComponent = require("components/physic/positionComponent")
 local AccelerationComponent = require("components/physic/accelerationComponent")
 
 local PlayerComponent = require("components/player/playerComponent")

@@ -10,7 +10,7 @@ function StringDrawSystem:draw()
         end
         love.graphics.setColor(unpack(str.color))
         love.graphics.setFont(str.font)
-        love.graphics.print(string.format(str.string, unpack(val)), position.x, position.y, 0, 1*relation(), 1*relation())
+        love.graphics.print(string.format(str.string, unpack(val)), position.x, position.y, 0, 1, 1)
     end
 end
 
