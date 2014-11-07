@@ -1,9 +1,15 @@
 -- Models
 local PlayerModel = require("models/playerModel")
 
--- Systems
+-- Graphic systems
 local DrawSystem = require("systems/draw/drawSystem")
-local PlayerControlSystem = require("systems/pressedevent/playerControlSystem")
+
+-- Physic systems
+local MovementSystem = require("systems/physic/movementSystem")
+local AccelerationSystem = require("systems/physic/accelerationSystem")
+
+-- PlayerSystems
+local PlayerControlSystem = require("systems/player/playerControlSystem")
 
 -- Events
 local KeyPressed = require("events/keyPressed")
@@ -17,6 +23,8 @@ function GameState:load()
     self.eventmanager = EventManager()
 
     self.engine:addSystem(PlayerControlSystem(), "logic", 1)
+    self.engine:addSystem(AccelerationSystem(), "logic", 2)
+    self.engine:addSystem(MovementSystem(), "logic", 3)
 
     self.engine:addSystem(DrawSystem(), "draw", 1)
 
