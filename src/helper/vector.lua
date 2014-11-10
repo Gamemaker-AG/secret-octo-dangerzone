@@ -5,6 +5,16 @@ function Vector:__init(x, y)
     self.y = y or 0
 end
 
+function Vector:set(x, y)
+    if type(x) == "number" and type(y) == "number"then
+        self.x = x
+        self.y = y
+    elseif type(x) == "table" then
+        self.x = x.x
+        self.y = x.y
+    end
+end
+
 function Vector:clone()
     return Vector(self.x,self.y)
 end
