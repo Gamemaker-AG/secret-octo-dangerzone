@@ -8,15 +8,13 @@ function DrawSystem:draw()
     love.graphics.setColor(255, 255, 255)
     for index, entity in ipairs(self.sortedTargets) do
         local drawable = entity:get("DrawableComponent")
-        local pos = entity:get("PositionComponent")
-        print(drawable.image, pos.position.x, pos.position.y, pos.direction:getRadian(), drawable.sx, drawable.sy, drawable.ox, drawable.oy)
-        print(pos.direction.x, pos.direction.y)
+        local pos = entity:get("TransformComponent")
         love.graphics.draw(drawable.image, pos.position.x, pos.position.y, pos.direction:getRadian(), drawable.sx, drawable.sy, drawable.ox, drawable.oy)
     end
 end
 
 function DrawSystem:requires()
-    return {"DrawableComponent", "PositionComponent", "ZIndex"}
+    return {"DrawableComponent", "TransformComponent", "ZIndex"}
 end
 
 function DrawSystem:addEntity(entity)

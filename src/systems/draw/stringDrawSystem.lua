@@ -3,7 +3,7 @@ local StringDrawSystem = class("StringDrawSystem", System)
 function StringDrawSystem:draw()
     for index, entity in pairs(self.targets) do
         local str = entity:get("StringComponent")
-        local position = entity:get("PositionComponent")
+        local position = entity:get("TransformComponent")
         local val = {}
         for k, v in pairs(str.values) do
             table.insert(val, v[1][v[2]])
@@ -15,7 +15,7 @@ function StringDrawSystem:draw()
 end
 
 function StringDrawSystem:requires()
-    return {"PositionComponent", "StringComponent"}
+    return {"TransformComponent", "StringComponent"}
 end
 
 return StringDrawSystem

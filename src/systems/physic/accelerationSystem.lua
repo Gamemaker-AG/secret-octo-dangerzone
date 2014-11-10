@@ -4,7 +4,7 @@ local AccelerationSystem = class("AccelerationSystem", System)
 function AccelerationSystem:update(dt)
     for index, entity in pairs(self.targets) do
         local speed = entity:get("SpeedComponent")
-        local position = entity:get("PositionComponent")
+        local position = entity:get("TransformComponent")
         if speed.active == true then
             speed.speed:add(position.direction:multiply(speed.acc*dt))
             if speed.speed:sum() > speed.maxSpeed then
@@ -19,7 +19,7 @@ function AccelerationSystem:update(dt)
 end
 
 function AccelerationSystem:requires()
-    return {"AccelerationComponent", "PositionComponent"}
+    return {"AccelerationComponent", "TransformComponent"}
 end
 
 return AccelerationSystem
