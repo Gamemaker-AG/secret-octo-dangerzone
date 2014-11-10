@@ -5,6 +5,10 @@ function Vector:__init(x, y)
     self.y = y or 0
 end
 
+function Vector:clone()
+    return Vector(self.x,self.y)
+end
+
 function Vector:getUnit()
     local sum = self:sum()
     return Vector(self.x/sum, self.y/sum)
