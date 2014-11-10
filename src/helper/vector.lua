@@ -1,4 +1,4 @@
-Vector = class("Vector")
+local Vector = class("Vector")
 
 function Vector:__init(x, y)
     self.x = x 

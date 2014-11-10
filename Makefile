@@ -15,6 +15,9 @@ build: clean
 run: build
 	@love seocda.love
 
+setup:
+	git submodule update --init
+
 package-linux: build
 	./script/download.sh linux
 	@./script/package.sh linux
