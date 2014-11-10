@@ -5,6 +5,15 @@ function Vector:__init(x, y)
     self.y = y or 0
 end
 
+function Vector:set(vector)
+    if type(vector) == "number" then
+        self.x = self.y = vector
+    elseif type(vector) == "table" then
+        self.x = vector.x
+        self.y = vector.y
+    end
+end
+
 function Vector:getUnit()
     local sum = self:sum()
     return Vector(self.x/sum, self.y/sum)
