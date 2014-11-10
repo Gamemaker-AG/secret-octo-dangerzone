@@ -1,3 +1,3 @@
-PlayerComponent = class("PlayerComponent", Component)
+local PlayerComponent = class("PlayerComponent", Component)
 
 return PlayerComponent
