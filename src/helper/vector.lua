@@ -1,8 +1,8 @@
 local Vector = class("Vector")
 
 function Vector:__init(x, y)
-    self.x = x 
-    self.y = y
+    self.x = x or 0
+    self.y = y or 0
 end
 
 function Vector:getUnit(vector)
@@ -11,12 +11,6 @@ function Vector:getUnit(vector)
     unitVector.x = vector.x / sum
     unitVector.y = vector.y / sum
     return unitVector
-end
-
-function Vector:makeUnit(vector)
-    sum = self.x + self.y 
-    self.x = self.x / sum
-    self.y = self.y / sum
 end
 
 function Vector:sum()
@@ -28,42 +22,34 @@ function Vector:getRadian()
 end
 
 function Vector:add(vector)
-    if type(operator) == "number" then
-        self.x = self.x + operator
-        self.y = self.y + operator
-    elseif type(operator) == "table" then
-        self.x = self.x + operator.x
-        self.y = self.y + operator.y
+    if type(vector) == "number" then
+        return Vector(self.x + vector, self.y + vector)
+    elseif type(vector) == "table" then
+        return Vector(self.x + vectory.x, self.y + vector.y)
     end
 end
 
 function Vector:subtract(vector)
-    if type(operator) == "number" then
-        self.x = self.x - operator
-        self.y = self.y - operator
-    elseif type(operator) == "table" then
-        self.x = self.x - operator.x
-        self.y = self.y - operator.y
+    if type(vector) == "number" then
+        return Vector(self.x - vector, self.y - vector)
+    elseif type(vector) == "table" then
+        return Vector(self.x - vector.x, self.y - vector.y)
     end
 end
 
-function Vector:multiply(operator)
-    if type(operator) == "number" then
-        self.x = self.x * operator
-        self.y = self.y * operator
-    elseif type(operator) == "table" then
-        self.x = self.x * operator.x
-        self.y = self.y * operator.y
+function Vector:multiply(vector)
+    if type(vector) == "number" then
+        return Vector(self.x * vector, self.y * vector)
+    elseif type(vector) == "table" then
+        return Vector(self.x * vector.x, self.y * vector.y)
     end
 end
 
-function Vector:divide(operator)
-    if type(operator) == "number" then
-        self.x = self.x / operator
-        self.y = self.y / operator
-    elseif type(operator) == "table" then
-        self.x = self.x / operator.x
-        self.y = self.y / operator.y
+function Vector:divide(vector)
+    if type(vector) == "number" then
+        return Vector(self.x / vector, self.y / vector)
+    elseif type(vector) == "table" then
+        return Vector(self.x / vector.x, self.y / vector.y)
     end
 end
 
@@ -71,9 +57,7 @@ function Vector:rotate(radian)
     local x, y
     x = self.x * math.cos(radian) - self.y * math.sin(radian)
     y = self.x * math.sin(radian) + self.y * math.cos (radian)
-    self.x = x 
-    self.y = y 
-    self:makeUnit()
+    return Vector(x, y):makeUnit()
 end
 
 return Vector
