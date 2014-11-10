@@ -7,10 +7,12 @@ end
 
 function Vector:set(x, y)
     if type(x) == "number" and type(y) == "number"then
-        self.x = self.y = vector
+        self.x = x
+        self.y = y
     elseif type(x) == "table" then
-        self.x = vector.x
-        self.y = vector.y
+        self.x = x.x
+        self.y = x.y
+    end
 end
 
 function Vector:getUnit()

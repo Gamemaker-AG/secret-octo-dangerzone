@@ -12,8 +12,8 @@ function PlayerControlSystem:update(dt)
             direction = direction:rotate(entity:get("SpeedComponent").rotSpeed * -dt)
         end
         if love.keyboard.isDown("d") or love.keyboard.isDown("right") then
-            local direction = entity:get("TransformComponent")
-            direction.direction = direction.direction:rotate(entity:get("SpeedComponent").rotSpeed * dt)
+            local direction = entity:get("TransformComponent").direction
+            direction:set(direction:rotate(entity:get("SpeedComponent").rotSpeed * dt))
             print("")
             print(direction.x, direction.y)
         end
