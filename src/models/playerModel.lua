@@ -6,14 +6,13 @@ local ZIndex = require("components/graphic/zIndex")
 local SpeedComponent = require("components/physic/speedComponent")
 local PositionComponent = require("components/physic/positionComponent")
 local AccelerationComponent = require("components/physic/accelerationComponent")
-
-local PlayerComponent = require("components/player/playerComponent")
+local ControllableComponent = require("components/physic/controllableComponent")
 
 
 local PlayerModel = class("PlayerModel", Entity)
 
 function PlayerModel:__init()
-    self:add(PlayerComponent())
+    self:add(ControllableComponent())
     self:add(PositionComponent(10, 10))
     self:add(SpeedComponent(0, 50))
     self:add(AccelerationComponent(10))
