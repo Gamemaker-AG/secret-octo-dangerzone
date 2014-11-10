@@ -5,13 +5,12 @@ function Vector:__init(x, y)
     self.y = y or 0
 end
 
-function Vector:set(vector)
-    if type(vector) == "number" then
+function Vector:set(x, y)
+    if type(x) == "number" and type(y) == "number"then
         self.x = self.y = vector
-    elseif type(vector) == "table" then
+    elseif type(x) == "table" then
         self.x = vector.x
         self.y = vector.y
-    end
 end
 
 function Vector:getUnit()
