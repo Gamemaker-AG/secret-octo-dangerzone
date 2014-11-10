@@ -19,7 +19,7 @@ function PlayerControlSystem:update(dt)
 end
 
 function PlayerControlSystem:requires() 
-    return {"PlayerComponent"}
+    return {"ControllableComponent"}
 end
 
 return PlayerControlSystem
