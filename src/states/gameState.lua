@@ -7,6 +7,7 @@ local DrawSystem = require("systems/draw/drawSystem")
 -- Physic systems
 local MovementSystem = require("systems/physic/movementSystem")
 local AccelerationSystem = require("systems/physic/accelerationSystem")
+local RotationSystem = require("systems/physic/rotationSystem")
 
 -- PlayerSystems
 local PlayerControlSystem = require("systems/player/playerControlSystem")
@@ -24,7 +25,8 @@ function GameState:load()
     self.eventmanager = EventManager()
     
     local playercontrol = PlayerControlSystem()
-    self.engine:addSystem(playercontrol, "logic", 1)
+    self.engine:addSystem(playercontrol)
+    self.engine:addSystem(RotationSystem(), "logic", 1)
     self.engine:addSystem(AccelerationSystem(), "logic", 2)
     self.engine:addSystem(MovementSystem(), "logic", 3)
 
