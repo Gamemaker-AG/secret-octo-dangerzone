@@ -2,12 +2,12 @@ local ParticlePositionSyncSystem = class("ParticlePositionSyncSystem", System)
 
 function ParticlePositionSyncSystem:update()
     for k, entity in pairs(self.targets) do
-        entity:get("ParticleComponent").particle:setPosition(entity:get("TransformComponent").x, entity:get("TransformComponent").y)
+        entity:get("Particle").particle:setPosition(entity:get("Transformable").x, entity:get("Transformable").y)
     end
 end
 
 function ParticlePositionSyncSystem:requires()
-    return {"ParticleComponent", "TransformComponent"}
+    return {"Particle", "Transformable"}
 end
 
 return ParticlePositionSyncSystem

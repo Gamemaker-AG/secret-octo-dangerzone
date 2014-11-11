@@ -3,15 +3,15 @@ local ParticleUpdateSystem = class("ParticleUpdateSystem", System)
 function ParticleUpdateSystem:update(dt)
     for index, entity in pairs(self.targets) do
         -- Updates Particles. If timer is below 0 the entity will be removed
-        entity.components.ParticleComponent.particle:update(dt)
-        if entity:get("ParticleTimerComponent") then
-            entity.components.ParticleTimerComponent.emitterlife = entity.components.ParticleTimerComponent.emitterlife - dt
-            if entity.components.ParticleTimerComponent.emitterlife <= 0 then
-                entity.components.ParticleTimerComponent.particlelife = entity.components.ParticleTimerComponent.particlelife - dt
-                if entity.components.ParticleComponent.particle:isActive() then
-                    entity.components.ParticleComponent.particle:pause()
+        entity.components.Particle.particle:update(dt)
+        if entity:get("Particle") then
+            entity.components.Particle.emitterlife = entity.components.Particle.emitterlife - dt
+            if entity.components.Particle.emitterlife <= 0 then
+                entity.components.Particle.particlelife = entity.components.Particle.particlelife - dt
+                if entity.components.Particle.particle:isActive() then
+                    entity.components.Particle.particle:pause()
                 end
-                if entity.components.ParticleTimerComponent.particlelife < 0 then
+                if entity.components.Particle.particlelife < 0 then
                     stack:current().engine:removeEntity(entity)
                 end
             end
@@ -20,7 +20,7 @@ function ParticleUpdateSystem:update(dt)
 end
 
 function ParticleUpdateSystem:requires(dt)
-    return {"ParticleComponent"}
+    return {"Particle"}
 end
 
 return ParticleUpdateSystem
