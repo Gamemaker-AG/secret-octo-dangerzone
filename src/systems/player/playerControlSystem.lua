@@ -20,6 +20,22 @@ function PlayerControlSystem:update(dt)
     end
 end
 
+function PlayerControlSystem:fireEvent(event) 
+    for index, entity in pairs(self.targets) do
+         if event.__name == "KeyPressed" then
+            if event.key == "w" then
+                local speedComponent = entity:get("SpeedComponent")
+                local direction = entity:get("TransformComponent").direction
+                speedComponent.acceleration:set(direction:multiply(speedComponent.defaultAcceleration))
+            end
+         elseif event.__name == "KeyReleased" then
+            if event.key == "w" then
+                entity:get("SpeedComponent").acceleration:set(0, 0)
+            end
+         end
+    end
+end
+
 function PlayerControlSystem:requires() 
     return {"ControllableComponent", "SpeedComponent", "TransformComponent"}
 end
