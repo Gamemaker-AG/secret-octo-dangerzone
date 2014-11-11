@@ -9,7 +9,7 @@ function Vector:set(x, y)
     if type(x) == "number" and type(y) == "number"then
         self.x = x
         self.y = y
-    elseif vector.__name == "Vector" then
+    elseif x.__name == "Vector" then
         self.x = x.x
         self.y = x.y
     end
