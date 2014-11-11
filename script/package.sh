@@ -9,7 +9,8 @@ if ! [ -f $ROOTDIR/$GAME ]; then
     exit 1
 fi
 
-echo -n "Packaging for $TARGET... "
+echo -n "Packaging for $TARGET..."
+echo ""
 
 PKGDIR=$ROOTDIR/pkg/$TARGET
 LIBDIR=$ROOTDIR/lib/$TARGET
@@ -17,7 +18,11 @@ LIBDIR=$ROOTDIR/lib/$TARGET
 rm -rf $PKGDIR
 mkdir -p $PKGDIR
 
-cp -r $LIBDIR/* $PKGDIR
+if [ $TARGET = "linux" ]; then
+    cp -r $LIBDIR $PKGDIR
+else
+    cp -r $LIBDIR/* $PKGDIR
+fi
 
 if [ $TARGET = "linux" ]; then
 	cp $ROOTDIR/$GAME $PKGDIR 
@@ -32,4 +37,5 @@ else
 	exit 1
 fi
 
-echo "DONE"
+echo "$TARGET packaging finished "
+echo ""
