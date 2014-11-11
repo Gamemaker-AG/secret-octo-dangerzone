@@ -71,4 +71,11 @@ function Vector:rotate(radian)
     return Vector(x, y):getUnit()
 end
 
+function Vector:eq(vector)
+    if type(vector) == "table" then
+        return vector.x == self.x and vector.y == self.y
+    end
+    return false
+end
+
 return Vector

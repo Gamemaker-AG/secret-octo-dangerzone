@@ -1,14 +1,15 @@
 
 local AccelerationSystem = class("AccelerationSystem", System)
+local Vector = require("helper/vector")
 
 function AccelerationSystem:update(dt)
     for index, entity in pairs(self.targets) do
-        local speedcomp = entity:get("SpeedComponent")
-        local speed = entity:get("SpeedComponent")
+        local speedComponent = entity:get("SpeedComponent")
+        local speed = speedComponent.speed
         local position = entity:get("TransformComponent")
-        if speedcomp.active == true then
-            speed:set(speed:add(position.direction:multiply(speed.acc*dt)))
-            if speed:sum() > maxSpeed then
+        if not speedComponent.acceleration:eq(Vector(0, 0)) then
+            speed:set(speed:add(speedComponent.acceleration))
+            if speed:sum() > speedComponent.maxSpeed then
                 speed:set(speed:getUnit():multiply(speed.maxSpeed))
             end
         else
@@ -20,7 +21,7 @@ function AccelerationSystem:update(dt)
 end
 
 function AccelerationSystem:requires()
-    return {"AccelerationComponent", "TransformComponent"}
+    return {"SpeedComponent", "TransformComponent"}
 end
 
 return AccelerationSystem

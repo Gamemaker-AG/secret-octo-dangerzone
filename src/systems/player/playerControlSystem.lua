@@ -3,9 +3,9 @@ local PlayerControlSystem = class("PlayerControlSystem", System)
 function PlayerControlSystem:update(dt) 
     for index, entity in pairs(self.targets) do
         if love.keyboard.isDown("w") or love.keyboard.isDown("up") then
-            entity:get("SpeedComponent").active = true
+            entity:get("SpeedComponent").acceleration:set(entity:get("TransformComponent").direction:getUnit():multiply(dt*1000))
         elseif not love.keyboard.isDown("w") then
-            entity:get("SpeedComponent").active = false 
+            entity:get("SpeedComponent").acceleration:set(0, 0)
         end
         if love.keyboard.isDown("a") or love.keyboard.isDown("left") then
             local direction = entity:get("TransformComponent").direction
@@ -19,7 +19,7 @@ function PlayerControlSystem:update(dt)
 end
 
 function PlayerControlSystem:requires() 
-    return {"ControllableComponent"}
+    return {"ControllableComponent", "SpeedComponent", "TransformComponent"}
 end
 
 return PlayerControlSystem

@@ -14,7 +14,7 @@ local PlayerModel = class("PlayerModel", Entity)
 
 function PlayerModel:__init()
     self:add(TransformComponent(Vector(100, 100), Vector(1, 0)))
-    self:add(SpeedComponent(Vector(0,0), 50, math.pi/180*20, 10))
+    self:add(SpeedComponent(Vector(0,0), 50, math.pi, Vector(0,0)))
     local ship = resources.images.circle
     self:add(DrawableComponent(ship, 0, 1, 1, ship:getWidth()/2, ship:getHeight()/2))
     self:add(ControllableComponent())
