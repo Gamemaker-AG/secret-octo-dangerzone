@@ -1,13 +1,19 @@
 local PlayerControlSystem = class("PlayerControlSystem", System)
 
+function PlayerControlSystem:update()
+    for index, entity in pairs(self.targets) do
+        if love.keyboard.isDown("w") or love.keyboard.isDown("up") then
+            local speedComponent = entity:get("SpeedComponent")
+            local direction = entity:get("TransformComponent").direction
+            speedComponent.acceleration:set(direction:multiply(speedComponent.defaultAcceleration))
+        end
+    end
+end
+
 function PlayerControlSystem:fireEvent(event) 
     for index, entity in pairs(self.targets) do
          if event.__name == "KeyPressed" then
-            if event.key == "w" or event.key == "up" then
-                local speedComponent = entity:get("SpeedComponent")
-                local direction = entity:get("TransformComponent").direction
-                speedComponent.acceleration:set(direction:multiply(speedComponent.defaultAcceleration))
-            elseif event.key == "a" or event.key == "left" then
+            if event.key == "a" or event.key == "left" then
                 local speed = entity:get("SpeedComponent")
                 speed.rotSpeed = -speed.defRotSpeed
             elseif event.key == "d" or event.key == "right" then
