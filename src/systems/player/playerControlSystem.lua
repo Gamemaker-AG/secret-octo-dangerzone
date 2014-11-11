@@ -21,7 +21,7 @@ function PlayerControlSystem:fireEvent(event)
                 speed.rotSpeed = speed.defRotSpeed
             end
          elseif event.__name == "KeyReleased" then
-            if event.key == "w" then
+            if event.key == "w" or event.key == "up" then
                 entity:get("SpeedComponent").acceleration:set(0, 0)
             elseif event.key == "a" or event.key == "left" then
                 entity:get("SpeedComponent").rotSpeed = 0
