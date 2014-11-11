@@ -2,13 +2,16 @@
 
 default: run
 
+buildclean:
+	@[[ ! -e seocda.love ]] || rm seocda.love
+
 clean:
 	@[[ ! -e seocda.love ]] || rm seocda.love
 	@[[ ! -e pkg ]] || rm -r pkg
 	@[[ ! -e lib ]] || rm -r lib
 	@[[ ! -e temp ]] || rm -r temp
 
-build: clean
+build: buildclean
 	@zip -q -r -0 seocda.love data/*
 	@cd src/ && zip -q -r ../seocda.love *
 

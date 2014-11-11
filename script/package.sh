@@ -18,9 +18,7 @@ LIBDIR=$ROOTDIR/lib/$TARGET
 rm -rf $PKGDIR
 mkdir -p $PKGDIR
 
-if [ $TARGET = "linux" ]; then
-    cp -r $LIBDIR $PKGDIR
-else
+if [ $TARGET != "linux" ]; then
     cp -r $LIBDIR/* $PKGDIR
 fi
 

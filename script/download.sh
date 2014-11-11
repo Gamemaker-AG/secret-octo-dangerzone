@@ -16,18 +16,26 @@ mkdir -p $ROOTDIR/temp
 mkdir -p $LIBDIR
 
 if [ $TARGET = "windows" ]; then
-    if [ `ls $LIBDIR | wc -l` == 0 ]; then
+    if [ `ls -A $LIBDIR | wc -w` == 0 ]; then
         wget -q https://bitbucket.org/rude/love/downloads/love-0.9.1-win64.zip -O temp/windows.zip
         unzip -q $ROOTDIR/temp/$TARGET -d $LIBDIR/
         SUBDIR=$(ls $LIBDIR)
         mv $LIBDIR/$SUBDIR/* $LIBDIR/
         rm -r $LIBDIR/$SUBDIR
+    else
+        echo "No download needed, already existing"
+        echo ""
+        exit 0
     fi
 elif [ $TARGET = "osx" ]; then
-    if [ `ls $LIBDIR | wc -l` == 0 ]; then
-		wget -q https://bitbucket.org/rude/love/downloads/love-0.9.1-macosx-x64.zip -O temp/osx.zip
-		unzip -q $ROOTDIR/temp/$TARGET -d $LIBDIR/
+    if [ `ls -A $LIBDIR | wc -w` == 0 ]; then
+        wget -q https://bitbucket.org/rude/love/downloads/love-0.9.1-macosx-x64.zip -O temp/osx.zip
+        unzip -q $ROOTDIR/temp/$TARGET -d $LIBDIR/
         rm -r $LIBDIR/__MACOSX
+    else
+        echo "No download needed, already existing"
+        echo ""
+        exit 0
     fi
 elif [ $TARGET != "linux" ]; then
 	echo "ERROR: Unknown target: $TARGET "
