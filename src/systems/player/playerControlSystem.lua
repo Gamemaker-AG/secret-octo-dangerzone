@@ -24,9 +24,13 @@ function PlayerControlSystem:fireEvent(event)
             if event.key == "w" or event.key == "up" then
                 entity:get("Accelerating").acceleration:set(0, 0)
             elseif event.key == "a" or event.key == "left" then
-                entity:get("Rotating").rotationSpeed = 0
+                if not (love.keyboard.isDown("d") or love.keyboard.isDown("right")) then
+                    entity:get("Rotating").rotationSpeed = 0
+                end
             elseif event.key == "d" or event.key == "right" then
-                entity:get("Rotating").rotationSpeed = 0
+                if not (love.keyboard.isDown("a") or love.keyboard.isDown("left")) then
+                    entity:get("Rotating").rotationSpeed = 0
+                end
             end
         end
     end
