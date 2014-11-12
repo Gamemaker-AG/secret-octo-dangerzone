@@ -13,6 +13,7 @@ function love.load()
 
     -- Add your resources here:
     resources:addImage("circle", "data/img/circle.png")
+    resources:addFont("regular", "data/font/Audiowide-Regular.ttf")
 
     resources:load()
 
