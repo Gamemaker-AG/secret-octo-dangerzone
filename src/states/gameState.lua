@@ -3,6 +3,8 @@ local PlayerModel = require("models/playerModel")
 
 -- Graphic systems
 local DrawSystem = require("systems/draw/drawSystem")
+local StringDrawSystem = require("systems/draw/stringDrawSystem")
+
 
 -- Physic systems
 local MovementSystem = require("systems/physic/movementSystem")
@@ -16,6 +18,13 @@ local WeaponSystem = require("systems/gameplay/weaponSystem")
 -- Events
 local KeyPressed = require("events/keyPressed")
 local KeyReleased = require("events/keyReleased")
+
+-- Components
+local DrawableText = require("components/graphic/drawableText")
+local Transformable = require("components/physic/transformable")
+
+-- Helper
+local Vector = require("helper/vector")
 
 -- State superclass
 local State = require("core/state")
@@ -33,12 +42,21 @@ function GameState:load()
     self.engine:addSystem(WeaponSystem(), "logic", 5)
 
     self.engine:addSystem(DrawSystem(), "draw", 1)
+    self.engine:addSystem(StringDrawSystem(), "draw", 2)
 
     self.eventmanager:addListener("KeyPressed", {playercontrol, playercontrol.fireEvent})
     self.eventmanager:addListener("KeyReleased", {playercontrol, playercontrol.fireEvent})
 
     self.player = PlayerModel()
     self.engine:addEntity(self.player)
+    local posstring = Entity()
+    posstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Position %i %i", {{self.player:get("Transformable").position, "x"},{self.player:get("Transformable").position, "y"}} ))
+    posstring:add(Transformable(Vector(50,50)))
+    self.engine:addEntity(posstring)
+    local speedstring = Entity()
+    speedstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Speed %i %i", {{self.player:get("Moving").speed, "x"}, {self.player:get("Moving").speed, "y"}} ))
+    speedstring:add(Transformable(Vector(50,100)))
+    self.engine:addEntity(speedstring)
 end
 
 function GameState:update(dt)
