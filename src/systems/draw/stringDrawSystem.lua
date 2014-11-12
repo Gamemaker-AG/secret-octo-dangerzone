@@ -3,7 +3,7 @@ local StringDrawSystem = class("StringDrawSystem", System)
 function StringDrawSystem:draw()
     for index, entity in pairs(self.targets) do
         local str = entity:get("DrawableText")
-        local position = entity:get("Transformable")
+        local position = entity:get("Transformable").position
         local val = {}
         for k, v in pairs(str.values) do
             table.insert(val, v[1][v[2]])
