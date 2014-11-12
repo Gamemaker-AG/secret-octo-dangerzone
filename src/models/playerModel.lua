@@ -16,9 +16,9 @@ local PlayerModel = class("PlayerModel", Entity)
 
 function PlayerModel:__init()
     self:add(Transformable(Vector(100, 100), Vector(1, 0)))
-    self:add(Moving(Vector(0,0), 200))
-    self:add(Rotating(math.pi/180*40))
-    self:add(Accelerating(40, Vector(0,0)))
+    self:add(Moving(Vector(0,0), constants.player.maxSpeed))
+    self:add(Rotating(constants.player.defaultRotationSpeed))
+    self:add(Accelerating(constants.player.defaultAcceleration, Vector(0,0)))
 
     local ship = resources.images.circle
     local sx, sy = constants.player.width/ship:getWidth(), constants.player.height/ship:getHeight()
