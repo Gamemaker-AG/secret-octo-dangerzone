@@ -28,6 +28,10 @@ function Vector:sum()
     return math.abs(self.x) + math.abs(self.y)
 end
 
+function Vector:length()
+    return math.sqrt(self.x^2 + self.y^2)
+end
+
 function Vector:getRadian()
     return math.atan2( self.y, self.x )
 end
