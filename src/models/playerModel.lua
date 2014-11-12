@@ -6,11 +6,14 @@ local constants = require("constants")
 local Drawable = require("components/graphic/drawable")
 
 -- Physic components
-local Controllable = require("components/physic/controllable")
-local Transformable = require("components/physic/transformable")
 local Moving = require("components/physic/moving")
 local Rotating = require("components/physic/rotating")
 local Accelerating = require("components/physic/accelerating")
+local Transformable = require("components/physic/transformable")
+
+-- Gameplay components
+local Weapon = require("components/gameplay/weapon")
+local Controllable = require("components/gameplay/controllable")
 
 local PlayerModel = class("PlayerModel", Entity)
 
@@ -19,6 +22,10 @@ function PlayerModel:__init()
     self:add(Moving(Vector(0,0), constants.player.maxSpeed))
     self:add(Rotating(constants.player.defaultRotationSpeed))
     self:add(Accelerating(constants.player.defaultAcceleration, Vector(0,0)))
+    local func = function()
+        print("ROFLCOPTER")
+    end
+    self:add(Weapon(func, 0, 2, "penis"))
 
     local ship = resources.images.circle
     local sx, sy = constants.player.width/ship:getWidth(), constants.player.height/ship:getHeight()

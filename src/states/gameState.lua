@@ -9,8 +9,9 @@ local MovementSystem = require("systems/physic/movementSystem")
 local AccelerationSystem = require("systems/physic/accelerationSystem")
 local RotationSystem = require("systems/physic/rotationSystem")
 
--- PlayerSystems
+-- Gameplay 
 local PlayerControlSystem = require("systems/gameplay/playerControlSystem")
+local WeaponSystem = require("systems/gameplay/weaponSystem")
 
 -- Events
 local KeyPressed = require("events/keyPressed")
@@ -29,6 +30,7 @@ function GameState:load()
     self.engine:addSystem(AccelerationSystem(), "logic", 2)
     self.engine:addSystem(MovementSystem(), "logic", 3)
     self.engine:addSystem(RotationSystem(), "logic", 4)
+    self.engine:addSystem(WeaponSystem(), "logic", 5)
 
     self.engine:addSystem(DrawSystem(), "draw", 1)
 
