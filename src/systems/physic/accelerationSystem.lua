@@ -9,7 +9,7 @@ function AccelerationSystem:update(dt)
         local acceleration = entity:get("Accelerating").acceleration
         if not acceleration:eq(Vector(0, 0)) then
             speed:set(speed:add(acceleration:multiply(dt)))
-            if speed:sum() > maxSpeed then
+            if speed:length() > maxSpeed then
                 speed:set(speed:getUnit():multiply(maxSpeed))
             end
         else
