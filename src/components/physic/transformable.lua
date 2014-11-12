@@ -1,3 +1,5 @@
+local Vector = require("helper/vector")
+
 local Transformable = class("Transformable", Component)
 
 function Transformable:__init(position, dir, origin)

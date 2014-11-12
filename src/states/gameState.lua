@@ -10,7 +10,7 @@ local AccelerationSystem = require("systems/physic/accelerationSystem")
 local RotationSystem = require("systems/physic/rotationSystem")
 
 -- PlayerSystems
-local PlayerControlSystem = require("systems/player/playerControlSystem")
+local PlayerControlSystem = require("systems/gameplay/playerControlSystem")
 
 -- Events
 local KeyPressed = require("events/keyPressed")
