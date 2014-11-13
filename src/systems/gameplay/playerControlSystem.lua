@@ -4,7 +4,7 @@ function PlayerControlSystem:update()
     for index, entity in pairs(self.targets) do
         if love.keyboard.isDown("w") or love.keyboard.isDown("up") then
             local accelerating = entity:get("Accelerating")
-            local direction = entity:get("Transformable").direction
+            local direction = entity:get("Transformable").direction:getUnit()
             accelerating.acceleration:set(direction:multiply(accelerating.defaultAcceleration))
         end
     end

@@ -14,6 +14,7 @@ local Transformable = require("components/physic/transformable")
 -- Gameplay components
 local Weapon = require("components/gameplay/weapon")
 local Controllable = require("components/gameplay/controllable")
+local Faction = require("components/gameplay/faction")
 
 local PlayerModel = class("PlayerModel", Entity)
 
@@ -22,6 +23,7 @@ function PlayerModel:__init()
     self:add(Moving(Vector(0,0), constants.player.maxSpeed))
     self:add(Rotating(constants.player.defaultRotationSpeed))
     self:add(Accelerating(constants.player.defaultAcceleration, Vector(0,0)))
+    self:add(Faction("player"))
 
     local ship = resources.images.circle
     local sx, sy = constants.player.width/ship:getWidth(), constants.player.height/ship:getHeight()

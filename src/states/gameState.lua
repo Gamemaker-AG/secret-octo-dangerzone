@@ -6,7 +6,6 @@ local EnemyModel = require("models/enemyModel")
 local DrawSystem = require("systems/draw/drawSystem")
 local StringDrawSystem = require("systems/draw/stringDrawSystem")
 
-
 -- Physic systems
 local MovementSystem = require("systems/physic/movementSystem")
 local AccelerationSystem = require("systems/physic/accelerationSystem")
@@ -16,6 +15,7 @@ local RotationSystem = require("systems/physic/rotationSystem")
 local PlayerControlSystem = require("systems/gameplay/playerControlSystem")
 local WeaponSystem = require("systems/gameplay/weaponSystem")
 local FacingSystem = require("systems/gameplay/facingSystem")
+local TargetMoveSystem = require("systems/gameplay/targetMoveSystem")
 
 -- Events
 local KeyPressed = require("events/keyPressed")
@@ -43,6 +43,7 @@ function GameState:load()
     self.engine:addSystem(RotationSystem(), "logic", 4)
     self.engine:addSystem(WeaponSystem(), "logic", 5)
     self.engine:addSystem(FacingSystem(), "logic", 6)
+    self.engine:addSystem(TargetMoveSystem(), "logic", 7)
 
     self.engine:addSystem(DrawSystem(), "draw", 1)
     self.engine:addSystem(StringDrawSystem(), "draw", 2)
