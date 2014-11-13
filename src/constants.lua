@@ -21,8 +21,9 @@ local constants = {
         height = pixels(15),
         defaultAcceleration = pixels(30),
         defaultRotationSpeed = math.pi,
-        maxSpeed = pixels(50)
     }
 }
+
+constants.enemy.maxSpeed = constants.player.maxSpeed / 5
 
 return constants
