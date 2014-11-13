@@ -12,9 +12,9 @@ local constants = {
     player = {
         width = pixels(20),
         height = pixels(20),
-        defaultAcceleration = pixels(100),
-        defaultRotationSpeed = math.pi,
-        maxSpeed = pixels(100)
+        defaultAcceleration = pixels(130),
+        defaultRotationSpeed = math.pi*3/2,
+        maxSpeed = pixels(50)
     },
     enemy = {
         width = pixels(15),
