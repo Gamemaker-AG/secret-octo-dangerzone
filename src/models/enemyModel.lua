@@ -23,9 +23,7 @@ function EnemyModel:__init(x, y)
     self:add(Rotating(constants.enemy.defaultRotationSpeed))
     self:add(Accelerating(constants.enemy.defaultAcceleration, Vector(0,0)))
     self:add(LookingAt())
-    local func = function()
-        print("ROFLCOPTER")
-    end
+    local func = function() end
     self:add(Weapon(func, 0, 2, 2000, nil))
 
     local ship = resources.images.circle

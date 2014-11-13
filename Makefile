@@ -15,6 +15,14 @@ build: buildclean
 	@zip -q -r -0 seocda.love data/*
 	@cd src/ && zip -q -r ../seocda.love *
 
+build-fast:
+	@zip -q -r -0 seocda.love data/*
+	@./script/fast.sh
+	@cd temp/ && zip -q -r ../seocda.love *
+
+fast: build-fast
+	@love seocda.love
+
 run: build
 	@love seocda.love
 
