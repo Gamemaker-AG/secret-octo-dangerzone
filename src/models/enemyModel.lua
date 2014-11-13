@@ -13,21 +13,25 @@ local Transformable = require("components/physic/transformable")
 
 -- Gameplay components
 local Weapon = require("components/gameplay/weapon")
-local Controllable = require("components/gameplay/controllable")
+local LookingAt = require("components/gameplay/lookingAt")
 
-local PlayerModel = class("PlayerModel", Entity)
+local EnemyModel = class("EnemyModel", Entity)
 
-function PlayerModel:__init()
-    self:add(Transformable(Vector(100, 100), Vector(1, 0)))
-    self:add(Moving(Vector(0,0), constants.player.maxSpeed))
-    self:add(Rotating(constants.player.defaultRotationSpeed))
-    self:add(Accelerating(constants.player.defaultAcceleration, Vector(0,0)))
+function EnemyModel:__init(x, y)
+    self:add(Transformable(Vector(x, y), Vector(1, 0)))
+    self:add(Moving(Vector(0,0), constants.enemy.maxSpeed))
+    self:add(Rotating(constants.enemy.defaultRotationSpeed))
+    self:add(Accelerating(constants.enemy.defaultAcceleration, Vector(0,0)))
+    self:add(LookingAt())
+    local func = function()
+        print("ROFLCOPTER")
+    end
+    self:add(Weapon(func, 0, 2, 2000, nil))
 
     local ship = resources.images.circle
-    local sx, sy = constants.player.width/ship:getWidth(), constants.player.height/ship:getHeight()
+    local sx, sy = constants.enemy.width/ship:getWidth()/5, constants.enemy.height/ship:getHeight()/5
     local ox, oy = ship:getWidth()/2, ship:getHeight()/2
     self:add(Drawable(ship, 0, sx, sy, ox, oy))
-    self:add(Controllable())
 end
 
-return PlayerModel
+return EnemyModel
