@@ -16,6 +16,15 @@ function table.count(list)
     return counter
 end
 
+function table.find(list, pred)
+    for i, v in pairs(list) do
+        if pred(v) then
+            return v
+        end
+    end
+    return nil
+end
+
 function table.contains(list, element)
     for k, v in pairs(list) do
         if v == element then
