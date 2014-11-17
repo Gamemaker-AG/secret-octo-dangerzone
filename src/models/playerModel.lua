@@ -23,7 +23,7 @@ function PlayerModel:__init()
     self:add(Moving(Vector(0,0), constants.player.maxSpeed))
     self:add(Rotating(constants.player.defaultRotationSpeed))
     self:add(Accelerating(constants.player.defaultAcceleration, Vector(0,0)))
-    self:add(Faction("player"))
+    self:add(Faction("player", {enemy=1}))
 
     local ship = resources.images.circle
     local sx, sy = constants.player.width/ship:getWidth(), constants.player.height/ship:getHeight()

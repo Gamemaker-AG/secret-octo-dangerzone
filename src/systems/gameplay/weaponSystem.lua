@@ -9,29 +9,6 @@ function WeaponSystem:update(dt)
         local lowest = weapon.range
         local target = weapon.target
 
-        if target == nil then
-            local list
-            if entity:has("Controllable") then
-                list = stack:current().engine:getEntityList("Enemy") 
-            else
-                list = stack:current().engine:getEntityList("Controllable") 
-            end
-            for index, enemy in pairs(list) do
-                local enemyPosition = enemy:get("Transformable").position
-                if position:subtract(enemyPosition):length() <= lowest then
-                    target = enemy
-                end
-            end
-            -- Setting target if existing
-            if target then
-                -- Setting target for weapon
-                entity:get("Weapon").target = target
-                if entity:has("LookingAt") then
-                    -- Setting target for direction
-                    entity:get("LookingAt").target = target
-                end
-            end
-        end
         weapon.cooldown = weapon.cooldown - dt
         if target ~= nil then
             if weapon.cooldown <= 0 then
