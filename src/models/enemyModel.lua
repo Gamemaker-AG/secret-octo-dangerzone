@@ -32,13 +32,13 @@ function EnemyModel:__init(x, y)
     local player = table.find(stack:current().engine:getEntityList("Faction"), function(i, entity)
         return entity:get("Faction").faction == "player"
     end)
-    if player then self:add(ExplodesOnContact(player, constants.player.width)) end
+    if player then self:add(ExplodesOnContact(player, constants.player.diameter/2)) end
 
     local func = function() end
     self:add(Weapon(func, 0, 2, 2000, nil))
 
     local ship = resources.images.circle
-    local sx, sy = constants.enemy.width/ship:getWidth()/5, constants.enemy.height/ship:getHeight()/5
+    local sx, sy = constants.enemy.diameter/ship:getWidth(), constants.enemy.diameter/ship:getHeight()
     local ox, oy = ship:getWidth()/2, ship:getHeight()/2
     self:add(Drawable(ship, 0, sx, sy, ox, oy))
 end

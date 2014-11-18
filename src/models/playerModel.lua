@@ -26,7 +26,7 @@ function PlayerModel:__init()
     self:add(Faction("player", {enemy=1}))
 
     local ship = resources.images.circle
-    local sx, sy = constants.player.width/ship:getWidth(), constants.player.height/ship:getHeight()
+    local sx, sy = constants.player.diameter/ship:getWidth(), constants.player.diameter/ship:getHeight()
     local ox, oy = ship:getWidth()/2, ship:getHeight()/2
     self:add(Drawable(ship, 0, sx, sy, ox, oy))
     self:add(Controllable())

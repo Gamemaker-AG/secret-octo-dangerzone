@@ -10,15 +10,13 @@ local constants = {
     screenWidth = sw,
     screenHeight = sh,
     player = {
-        width = pixels(20),
-        height = pixels(20),
+        diameter = pixels(20),
         defaultAcceleration = pixels(130),
         defaultRotationSpeed = math.pi*3/2,
         maxSpeed = pixels(50)
     },
     enemy = {
-        width = pixels(15),
-        height = pixels(15),
+        diameter = pixels(5),
         defaultAcceleration = pixels(30),
         defaultRotationSpeed = math.pi,
     }
