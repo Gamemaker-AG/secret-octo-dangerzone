@@ -21,8 +21,8 @@ function TargetingSystem:update()
             for index, enemy in pairs(list) do
                 if entity:get("Faction").attitude[enemy:get("Faction").faction] then
                     local enemyPosition = enemy:get("Transformable").position
-                    if position:subtract(enemyPosition):length() <= lowest then
-                        lowest = position:subtract(enemyPosition):length()
+                    if position:distanceTo(enemyPosition) <= lowest then
+                        lowest = position:distanceTo(enemyPosition)
                         target = enemy
                     end
                 end
