@@ -30,7 +30,7 @@ function TargetingSystem:update()
             -- Setting target if existing
             if target then
                 -- Setting target for weapon
-                entity:get("Weapon").target = target
+                weapon.target = target
             end
         end
     end
