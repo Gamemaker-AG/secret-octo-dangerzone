@@ -13,7 +13,7 @@ function WeaponSystem:update(dt)
         if target ~= nil then
             if weapon.cooldown <= 0 then
                 weapon.cooldown = weapon.defaultCooldown
-                weapon.fire()
+                weapon.fire(entity, target)
             end
         end
     end

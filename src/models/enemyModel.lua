@@ -18,6 +18,9 @@ local LookingAt = require("components/gameplay/lookingAt")
 local MovingTo = require("components/gameplay/movingTo")
 local ExplodesOnContact = require("components/gameplay/explodesOnContact")
 
+local Bullet = require("models/bulletModel")
+local Player = require("models/playerModel")
+
 local EnemyModel = class("EnemyModel", Entity)
 
 function EnemyModel:__init(x, y)
@@ -34,7 +37,9 @@ function EnemyModel:__init(x, y)
     end)
     if player then self:add(ExplodesOnContact(player, constants.player.diameter/2)) end
 
-    local func = function() end
+    local func = function(entity, target)
+        stack:current().engine:addEntity(Bullet(entity:get("Transformable").position, target))
+    end
     self:add(Weapon(func, 0, 2, 2000, nil))
 
     local ship = resources.images.circle
