@@ -17,6 +17,7 @@ local FacingSystem = require("systems/gameplay/facingSystem")
 local TargetingSystem = require("systems/gameplay/targetingSystem")
 local TargetMoveSystem = require("systems/gameplay/targetMoveSystem")
 local PlayerControlSystem = require("systems/gameplay/playerControlSystem")
+local ExplodeOnContactSystem = require("systems/gameplay/explodeOnContactSystem")
 
 -- Events
 local KeyPressed = require("events/keyPressed")
@@ -46,6 +47,7 @@ function GameState:load()
     self.engine:addSystem(FacingSystem(), "logic", 6)
     self.engine:addSystem(TargetMoveSystem(), "logic", 7)
     self.engine:addSystem(playercontrol, "logic", 8)
+    self.engine:addSystem(ExplodeOnContactSystem(), "logic", 9)
 
     self.engine:addSystem(DrawSystem(), "draw", 1)
     self.engine:addSystem(StringDrawSystem(), "draw", 2)

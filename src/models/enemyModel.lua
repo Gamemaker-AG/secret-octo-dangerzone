@@ -16,6 +16,7 @@ local Weapon = require("components/gameplay/weapon")
 local Faction = require("components/gameplay/faction")
 local LookingAt = require("components/gameplay/lookingAt")
 local MovingTo = require("components/gameplay/movingTo")
+local ExplodesOnContact = require("components/gameplay/explodesOnContact")
 
 local EnemyModel = class("EnemyModel", Entity)
 
@@ -27,6 +28,11 @@ function EnemyModel:__init(x, y)
     self:add(LookingAt())
     self:add(MovingTo())
     self:add(Faction("enemy", {player=1}))
+
+    local player = table.find(stack:current().engine:getEntityList("Faction"), function(i, entity)
+        return entity:get("Faction").faction == "player"
+    end)
+    if player then self:add(ExplodesOnContact(player, constants.player.width)) end
 
     local func = function() end
     self:add(Weapon(func, 0, 2, 2000, nil))
