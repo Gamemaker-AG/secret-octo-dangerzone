@@ -45,7 +45,7 @@ function TargetingSystem:update()
 end
 
 function TargetingSystem:requires()
-    return {moving = {"MovingTo"}, looking={"LookingAt"}, weapon={"Weapon"}}
+    return {moving = {"MovingTo"}, looking={"LookingAt"}, weapon={"Weapon", "Faction"}}
 end
 
 return TargetingSystem
