@@ -13,6 +13,9 @@ function love.load()
 
     -- Add your resources here:
     resources:addImage("circle", "data/img/circle.png")
+    resources:addImage("player", "data/img/player.png")
+    resources:addImage("enemy", "data/img/enemy.png")
+    resources:addImage("bg", "data/img/bg.png")
     resources:addFont("regular", "data/font/Audiowide-Regular.ttf")
 
     resources:load()

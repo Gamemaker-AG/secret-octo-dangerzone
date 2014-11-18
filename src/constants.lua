@@ -11,9 +11,9 @@ local constants = {
     screenHeight = sh,
     player = {
         diameter = pixels(20),
-        defaultAcceleration = pixels(130),
+        defaultAcceleration = pixels(100),
         defaultRotationSpeed = math.pi*3/2,
-        maxSpeed = pixels(50)
+        maxSpeed = pixels(60)
     },
     enemy = {
         diameter = pixels(4),

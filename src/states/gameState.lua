@@ -55,6 +55,11 @@ function GameState:load()
     self.eventmanager:addListener("KeyPressed", {playercontrol, playercontrol.fireEvent})
     self.eventmanager:addListener("KeyReleased", {playercontrol, playercontrol.fireEvent})
 
+    local bg = Entity()
+    bg:add(Drawable(resources.images.bg))
+    bg:add(Transformable(Vector(0, 0)))
+    self.engine:addEntity(bg)
+    
     -- PlayerCreation
     player = PlayerModel()
     self.engine:addEntity(player)

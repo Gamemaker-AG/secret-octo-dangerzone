@@ -42,7 +42,7 @@ function EnemyModel:__init(x, y)
     end
     self:add(Weapon(func, 0, 2, 2000, nil))
 
-    local ship = resources.images.circle
+    local ship = resources.images.enemy
     local sx, sy = constants.enemy.diameter/ship:getWidth(), constants.enemy.diameter/ship:getHeight()
     local ox, oy = ship:getWidth()/2, ship:getHeight()/2
     self:add(Drawable(ship, 0, sx, sy, ox, oy))
