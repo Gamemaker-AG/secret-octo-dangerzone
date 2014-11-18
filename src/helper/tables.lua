@@ -18,7 +18,7 @@ end
 
 function table.find(list, pred)
     for i, v in pairs(list) do
-        if pred(v) then
+        if pred(i, v) then
             return v
         end
     end
