@@ -17,6 +17,7 @@ function love.load()
     resources:addImage("enemy", "data/img/enemy.png")
     resources:addImage("bg", "data/img/bg.png")
     resources:addFont("regular", "data/font/Audiowide-Regular.ttf")
+    resources:addImage("particlemuzzle" ,"/data/img/particlemuzzle.png")
 
     resources:load()
 
