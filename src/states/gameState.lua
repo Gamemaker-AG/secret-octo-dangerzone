@@ -6,6 +6,11 @@ local EnemyModel = require("models/enemyModel")
 local DrawSystem = require("systems/draw/drawSystem")
 local StringDrawSystem = require("systems/draw/stringDrawSystem")
 
+-- Particle systems 
+local ParticleDrawSystem = require("systems/particle/particleDrawSystem")
+local ParticlePositionSyncSystem = require("systems/particle/particlePositionSyncSystem")
+local ParticleUpdateSystem = require("systems/particle/particleUpdateSystem")
+
 -- Physic systems
 local MovementSystem = require("systems/physic/movementSystem")
 local AccelerationSystem = require("systems/physic/accelerationSystem")
@@ -48,9 +53,13 @@ function GameState:load()
     self.engine:addSystem(TargetMoveSystem(), "logic", 7)
     self.engine:addSystem(playercontrol, "logic", 8)
     self.engine:addSystem(ExplodeOnContactSystem(), "logic", 9)
+    self.engine:addSystem(ParticleUpdateSystem(), "logic", 10)    
+    self.engine:addSystem(ParticlePositionSyncSystem(), "logic", 11)
 
+    
     self.engine:addSystem(DrawSystem(), "draw", 1)
     self.engine:addSystem(StringDrawSystem(), "draw", 2)
+    self.engine:addSystem(ParticleDrawSystem(), "draw", 3)
 
     self.eventmanager:addListener("KeyPressed", {playercontrol, playercontrol.fireEvent})
     self.eventmanager:addListener("KeyReleased", {playercontrol, playercontrol.fireEvent})
