@@ -63,7 +63,7 @@ function GameState:load()
     -- has to be first to translate the coordinate system
     self.engine:addSystem(cameraSystem, "draw", 1)
 
-    self.engine:addSystem(StringDrawSystem(), "draw", 2)
+    self.engine:addSystem(StringDrawSystem(), "draw", 5)
     self.engine:addSystem(DrawSystem(), "draw", 3)
     self.engine:addSystem(ParticleDrawSystem(), "draw", 4)
 
