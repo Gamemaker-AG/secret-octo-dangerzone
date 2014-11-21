@@ -15,6 +15,7 @@ local Transformable = require("components/physic/transformable")
 local Weapon = require("components/gameplay/weapon")
 local Controllable = require("components/gameplay/controllable")
 local Faction = require("components/gameplay/faction")
+local Camera = require("components/gameplay/camera")
 
 local PlayerModel = class("PlayerModel", Entity)
 
@@ -34,6 +35,10 @@ function PlayerModel:__init()
     particle:setSpread(math.pi*2)
     particle:setParticleLifetime(0.2, 0.3)
     particle:start()
+
+    local camera = Entity()
+    camera:add(Camera(self))
+    stack:current().engine:addEntity(camera)
 
     local ship = resources.images.player
     local sx, sy = constants.player.diameter/ship:getWidth(), constants.player.diameter/ship:getHeight()

@@ -5,6 +5,7 @@ local EnemyModel = require("models/enemyModel")
 -- Graphic systems
 local DrawSystem = require("systems/draw/drawSystem")
 local StringDrawSystem = require("systems/draw/stringDrawSystem")
+local CameraSystem = require("systems/draw/cameraSystem")
 
 -- Particle systems 
 local ParticleDrawSystem = require("systems/particle/particleDrawSystem")
@@ -44,22 +45,27 @@ function GameState:load()
     self.eventmanager = EventManager()
     
     local playercontrol = PlayerControlSystem()
-    self.engine:addSystem(TargetingSystem(), "logic", 1)
-    self.engine:addSystem(AccelerationSystem(), "logic", 2)
-    self.engine:addSystem(MovementSystem(), "logic", 3)
-    self.engine:addSystem(RotationSystem(), "logic", 4)
-    self.engine:addSystem(WeaponSystem(), "logic", 5)
-    self.engine:addSystem(FacingSystem(), "logic", 6)
-    self.engine:addSystem(TargetMoveSystem(), "logic", 7)
-    self.engine:addSystem(playercontrol, "logic", 8)
-    self.engine:addSystem(ExplodeOnContactSystem(), "logic", 9)
-    self.engine:addSystem(ParticleUpdateSystem(), "logic", 10)    
-    self.engine:addSystem(ParticlePositionSyncSystem(), "logic", 11)
+    self.engine:addSystem(TargetingSystem(), "update", 1)
+    self.engine:addSystem(AccelerationSystem(), "update", 2)
+    self.engine:addSystem(MovementSystem(), "update", 3)
+    self.engine:addSystem(RotationSystem(), "update", 4)
+    self.engine:addSystem(WeaponSystem(), "update", 5)
+    self.engine:addSystem(FacingSystem(), "update", 6)
+    self.engine:addSystem(TargetMoveSystem(), "update", 7)
+    self.engine:addSystem(playercontrol, "update", 8)
+    self.engine:addSystem(ExplodeOnContactSystem(), "update", 9)
+    self.engine:addSystem(ParticleUpdateSystem(), "update", 10)    
+    self.engine:addSystem(ParticlePositionSyncSystem(), "update", 11)
 
-    
-    self.engine:addSystem(DrawSystem(), "draw", 1)
+    local cameraSystem = CameraSystem()
+    self.engine:addSystem(cameraSystem, "update", 10)
+
+    -- has to be first to translate the coordinate system
+    self.engine:addSystem(cameraSystem, "draw", 1)
+
     self.engine:addSystem(StringDrawSystem(), "draw", 2)
-    self.engine:addSystem(ParticleDrawSystem(), "draw", 3)
+    self.engine:addSystem(DrawSystem(), "draw", 3)
+    self.engine:addSystem(ParticleDrawSystem(), "draw", 4)
 
     self.eventmanager:addListener("KeyPressed", {playercontrol, playercontrol.fireEvent})
     self.eventmanager:addListener("KeyReleased", {playercontrol, playercontrol.fireEvent})

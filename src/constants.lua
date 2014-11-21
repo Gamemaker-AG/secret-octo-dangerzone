@@ -23,6 +23,10 @@ local constants = {
     bullet = {
         diameter = pixels(1),
         speed = pixels(100)
+    },
+    camera = {
+        -- between 0 and 1
+        speed = 0.1
     }
 }
 
