@@ -1,6 +1,6 @@
-local Transformable = require("components/physic/transformable")
-local ExplodesOnContact = require("components/gameplay/explodesOnContact")
-local Moving = require("components/physic/moving")
+local Transformable = require("components/physic/Transformable")
+local ExplodesOnContact = require("components/gameplay/ExplodesOnContact")
+local Moving = require("components/physic/Moving")
 
 local constants = require("constants")
 

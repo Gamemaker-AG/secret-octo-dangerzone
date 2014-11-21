@@ -1,6 +1,6 @@
 
 local AccelerationSystem = class("AccelerationSystem", System)
-local Vector = require("helper/vector")
+local Vector = require("helper/Vector")
 
 function AccelerationSystem:update(dt)
     for index, entity in pairs(self.targets) do

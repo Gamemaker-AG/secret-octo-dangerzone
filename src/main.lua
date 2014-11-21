@@ -3,17 +3,16 @@ require("lib/lovetoys/lovetoys")
 
 -- Core and Helper Requirements
 require("helper/tables")
-require("core/stackhelper")
-require("core/resources")
+require("core/Stackhelper")
+require("core/Resources")
 
 -- Events
-local KeyPressed = require("events/keyPressed")
-local KeyReleased = require("events/keyReleased")
-local MousePressed = require("events/mousePressed")
-local MouseReleased = require("events/mouseReleased")
+local KeyPressed = require("events/KeyPressed")
+local KeyReleased = require("events/KeyReleased")
+local MousePressed = require("events/MousePressed")
+local MouseReleased = require("events/MouseReleased")
 
-
-local MenuState = require("states/menuState")
+local MenuState = require("states/MenuState")
 
 function love.load()
     resources = Resources()

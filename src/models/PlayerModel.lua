@@ -1,21 +1,21 @@
 -- Core
-local Vector = require("helper/vector")
+local Vector = require("helper/Vector")
 local constants = require("constants")
 
 -- Graphic components
-local Drawable = require("components/graphic/drawable")
-local Particle = require("components/particle/particle")
+local Drawable = require("components/graphic/Drawable")
+local Particle = require("components/particle/Particle")
 -- Physic components
-local Moving = require("components/physic/moving")
-local Rotating = require("components/physic/rotating")
-local Accelerating = require("components/physic/accelerating")
-local Transformable = require("components/physic/transformable")
+local Moving = require("components/physic/Moving")
+local Rotating = require("components/physic/Rotating")
+local Accelerating = require("components/physic/Accelerating")
+local Transformable = require("components/physic/Transformable")
 
 -- Gameplay components
-local Weapon = require("components/gameplay/weapon")
-local Controllable = require("components/gameplay/controllable")
-local Faction = require("components/gameplay/faction")
-local Camera = require("components/gameplay/camera")
+local Weapon = require("components/gameplay/Weapon")
+local Controllable = require("components/gameplay/Controllable")
+local Faction = require("components/gameplay/Faction")
+local Camera = require("components/gameplay/Camera")
 
 local PlayerModel = class("PlayerModel", Entity)
 

@@ -1,9 +1,9 @@
-local GameState = require("states/gameState")
+local GameState = require("states/GameState")
 
-local KeyPressed = require("events/keyPressed")
+local KeyPressed = require("events/KeyPressed")
 
 -- State superclass
-local State = require("core/state")
+local State = require("core/State")
 local MenuState = class("MenuState", State)
 
 function MenuState:load()
