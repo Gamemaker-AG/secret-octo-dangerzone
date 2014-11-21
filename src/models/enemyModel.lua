@@ -40,6 +40,7 @@ function EnemyModel:__init(x, y)
     local func = function(entity, target)
         stack:current().engine:addEntity(Bullet(entity:get("Transformable").position, target))
     end
+    --||-- Why no constants? fire, damage, cooldown, range, target
     self:add(Weapon(func, 0, 2, 2000, nil))
 
     local ship = resources.images.enemy

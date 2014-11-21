@@ -10,7 +10,13 @@ function StringDrawSystem:draw()
         end
         love.graphics.setColor(unpack(str.color))
         love.graphics.setFont(str.font)
-        love.graphics.print(string.format(str.string, unpack(val)), position.x, position.y, 0, 1, 1)
+        local isprint = false
+        if love.keyboard.isDown("t") then
+            isprint = not isprint
+        end
+        if isprint then
+            love.graphics.print(string.format(str.string, unpack(val)), position.x, position.y, 0, 1, 1)
+        end
     end
 end
 
