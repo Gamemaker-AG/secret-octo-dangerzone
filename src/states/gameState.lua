@@ -5,6 +5,7 @@ local EnemyModel = require("models/enemyModel")
 -- Graphic systems
 local DrawSystem = require("systems/draw/drawSystem")
 local StringDrawSystem = require("systems/draw/stringDrawSystem")
+local CameraSystem = require("systems/draw/cameraSystem")
 
 -- Particle systems 
 local ParticleDrawSystem = require("systems/particle/particleDrawSystem")
@@ -56,10 +57,15 @@ function GameState:load()
     self.engine:addSystem(ParticleUpdateSystem(), "logic", 10)    
     self.engine:addSystem(ParticlePositionSyncSystem(), "logic", 11)
 
-    
-    self.engine:addSystem(DrawSystem(), "draw", 1)
+    local cameraSystem = CameraSystem()
+    self.engine:addSystem(cameraSystem, "logic", 10)
+
+    -- has to be first to translate the coordinate system
+    self.engine:addSystem(cameraSystem, "draw", 1)
+
     self.engine:addSystem(StringDrawSystem(), "draw", 2)
-    self.engine:addSystem(ParticleDrawSystem(), "draw", 3)
+    self.engine:addSystem(DrawSystem(), "draw", 3)
+    self.engine:addSystem(ParticleDrawSystem(), "draw", 4)
 
     self.eventmanager:addListener("KeyPressed", {playercontrol, playercontrol.fireEvent})
     self.eventmanager:addListener("KeyReleased", {playercontrol, playercontrol.fireEvent})
