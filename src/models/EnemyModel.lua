@@ -1,25 +1,25 @@
 -- Core
-local Vector = require("helper/vector")
+local Vector = require("helper/Vector")
 local constants = require("constants")
 
 -- Graphic components
-local Drawable = require("components/graphic/drawable")
+local Drawable = require("components/graphic/Drawable")
 
 -- Physic components
-local Moving = require("components/physic/moving")
-local Rotating = require("components/physic/rotating")
-local Accelerating = require("components/physic/accelerating")
-local Transformable = require("components/physic/transformable")
+local Moving = require("components/physic/Moving")
+local Rotating = require("components/physic/Rotating")
+local Accelerating = require("components/physic/Accelerating")
+local Transformable = require("components/physic/Transformable")
 
 -- Gameplay components
-local Weapon = require("components/gameplay/weapon")
-local Faction = require("components/gameplay/faction")
-local LookingAt = require("components/gameplay/lookingAt")
-local MovingTo = require("components/gameplay/movingTo")
-local ExplodesOnContact = require("components/gameplay/explodesOnContact")
+local Weapon = require("components/gameplay/Weapon")
+local Faction = require("components/gameplay/Faction")
+local LookingAt = require("components/gameplay/LookingAt")
+local MovingTo = require("components/gameplay/MovingTo")
+local ExplodesOnContact = require("components/gameplay/ExplodesOnContact")
 
-local Bullet = require("models/bulletModel")
-local Player = require("models/playerModel")
+local Bullet = require("models/BulletModel")
+local Player = require("models/PlayerModel")
 
 local EnemyModel = class("EnemyModel", Entity)
 

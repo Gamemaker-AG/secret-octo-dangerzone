@@ -1,6 +1,6 @@
 
 local RotationSystem = class("RotationSystem", System)
-local Vector = require("helper/vector")
+local Vector = require("helper/Vector")
 
 function RotationSystem:update(dt)
     for index, entity in pairs(self.targets) do

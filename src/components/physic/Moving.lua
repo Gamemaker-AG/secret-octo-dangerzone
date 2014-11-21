@@ -1,4 +1,4 @@
-local Vector = require("helper/vector")
+local Vector = require("helper/Vector")
 
 local Moving = class("Moving", Component)
 

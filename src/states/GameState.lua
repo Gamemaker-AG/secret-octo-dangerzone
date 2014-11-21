@@ -1,43 +1,43 @@
 -- Models
-local PlayerModel = require("models/playerModel")
-local EnemyModel = require("models/enemyModel")
+local PlayerModel = require("models/PlayerModel")
+local EnemyModel = require("models/EnemyModel")
 
 -- Graphic systems
-local DrawSystem = require("systems/draw/drawSystem")
-local StringDrawSystem = require("systems/draw/stringDrawSystem")
-local CameraSystem = require("systems/draw/cameraSystem")
+local DrawSystem = require("systems/draw/DrawSystem")
+local StringDrawSystem = require("systems/draw/StringDrawSystem")
+local CameraSystem = require("systems/draw/CameraSystem")
 
 -- Particle systems 
-local ParticleDrawSystem = require("systems/particle/particleDrawSystem")
-local ParticlePositionSyncSystem = require("systems/particle/particlePositionSyncSystem")
-local ParticleUpdateSystem = require("systems/particle/particleUpdateSystem")
+local ParticleDrawSystem = require("systems/particle/ParticleDrawSystem")
+local ParticlePositionSyncSystem = require("systems/particle/ParticlePositionSyncSystem")
+local ParticleUpdateSystem = require("systems/particle/ParticleUpdateSystem")
 
 -- Physic systems
-local MovementSystem = require("systems/physic/movementSystem")
-local AccelerationSystem = require("systems/physic/accelerationSystem")
-local RotationSystem = require("systems/physic/rotationSystem")
+local MovementSystem = require("systems/physic/MovementSystem")
+local AccelerationSystem = require("systems/physic/AccelerationSystem")
+local RotationSystem = require("systems/physic/RotationSystem")
 
 -- Gameplay 
-local WeaponSystem = require("systems/gameplay/weaponSystem")
-local FacingSystem = require("systems/gameplay/facingSystem")
-local TargetingSystem = require("systems/gameplay/targetingSystem")
-local TargetMoveSystem = require("systems/gameplay/targetMoveSystem")
-local PlayerControlSystem = require("systems/gameplay/playerControlSystem")
-local ExplodeOnContactSystem = require("systems/gameplay/explodeOnContactSystem")
+local WeaponSystem = require("systems/gameplay/WeaponSystem")
+local FacingSystem = require("systems/gameplay/FacingSystem")
+local TargetingSystem = require("systems/gameplay/TargetingSystem")
+local TargetMoveSystem = require("systems/gameplay/TargetMoveSystem")
+local PlayerControlSystem = require("systems/gameplay/PlayerControlSystem")
+local ExplodeOnContactSystem = require("systems/gameplay/ExplodeOnContactSystem")
 
 -- Events
-local KeyPressed = require("events/keyPressed")
-local KeyReleased = require("events/keyReleased")
+local KeyPressed = require("events/KeyPressed")
+local KeyReleased = require("events/KeyReleased")
 
 -- Components
-local DrawableText = require("components/graphic/drawableText")
-local Transformable = require("components/physic/transformable")
+local DrawableText = require("components/graphic/DrawableText")
+local Transformable = require("components/physic/Transformable")
 
 -- Helper
-local Vector = require("helper/vector")
+local Vector = require("helper/Vector")
 
 -- State superclass
-local State = require("core/state")
+local State = require("core/State")
 local GameState = class("GameState", State)
 
 function GameState:load()
