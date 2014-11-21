@@ -58,7 +58,7 @@ function GameState:load()
     self.engine:addSystem(ParticlePositionSyncSystem(), "update", 11)
 
     local cameraSystem = CameraSystem()
-    self.engine:addSystem(cameraSystem, "logic", 10)
+    self.engine:addSystem(cameraSystem, "update", 10)
 
     -- has to be first to translate the coordinate system
     self.engine:addSystem(cameraSystem, "draw", 1)
