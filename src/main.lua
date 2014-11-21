@@ -6,6 +6,13 @@ require("helper/tables")
 require("core/stackhelper")
 require("core/resources")
 
+-- Events
+local KeyPressed = require("events/keyPressed")
+local KeyReleased = require("events/keyReleased")
+local MousePressed = require("events/mousePressed")
+local MouseReleased = require("events/mouseReleased")
+
+
 local MenuState = require("states/menuState")
 
 function love.load()
@@ -36,13 +43,17 @@ function love.draw()
 end 
 
 function love.keypressed(key, isrepeat)
-    stack:current():keypressed(key, isrepeat)
+    stack:current().eventmanager:fireEvent(KeyPressed(key, isrepeat))
 end
 
 function love.keyreleased(key, isrepeat)
-    stack:current():keyreleased(key, isrepeat)
+    stack:current().eventmanager:fireEvent(KeyReleased(key, isrepeat))
 end
 
 function love.mousepressed(x, y, button)
-    stack:current():mousepressed(x, y, button)
+    stack:current().eventmanager:fireEvent(MousePressed(x, y, button))
+end
+
+function love.mousereleased(x, y, button)
+    stack:current().eventmanager:fireEvent(MouseReleased(x, y, button))
 end

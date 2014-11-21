@@ -25,10 +25,6 @@ local TargetMoveSystem = require("systems/gameplay/targetMoveSystem")
 local PlayerControlSystem = require("systems/gameplay/playerControlSystem")
 local ExplodeOnContactSystem = require("systems/gameplay/explodeOnContactSystem")
 
--- Events
-local KeyPressed = require("events/keyPressed")
-local KeyReleased = require("events/keyReleased")
-
 -- Components
 local DrawableText = require("components/graphic/drawableText")
 local Transformable = require("components/physic/transformable")
@@ -104,14 +100,5 @@ end
 function GameState:draw()
     self.engine:draw()
 end
-
-function GameState:keypressed(key, isrepeat)
-    self.eventmanager:fireEvent(KeyPressed(key, isrepeat))
-end
-
-function GameState:keyreleased(key, isrepeat)
-    self.eventmanager:fireEvent(KeyReleased(key, isrepeat))
-end
-
 
 return GameState
