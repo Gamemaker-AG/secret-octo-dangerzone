@@ -25,7 +25,7 @@ function PlayerModel:__init()
     self:add(Rotating(constants.player.defaultRotationSpeed))
     self:add(Accelerating(constants.player.defaultAcceleration, Vector(0,0)))
     self:add(Faction("player", {enemy=1}))
-    self:add(Particle(resources.images.particle1, 1000, {0.2, 1.2}, -1))
+    self:add(Particle(resources.images.particle1, 1000, {0.2, 1.2}, nil))
     local particle = self:get("Particle").particle
     particle:setEmissionRate(100)
     particle:setSpeed(10, 20)
