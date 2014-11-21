@@ -4,7 +4,7 @@ function ParticleUpdateSystem:update(dt)
     for index, entity in pairs(self.targets) do
         local particle = entity:get("Particle")
         --Updates Particles. 
-        entity.components.Particle.particle:update(dt)
+        particle.particle:update(dt)
         -- If emittertimer is below 0 the entity will be removed
         if particle.emitterlife ~= nil then
             particle.emitterlife = particle.emitterlife - dt
