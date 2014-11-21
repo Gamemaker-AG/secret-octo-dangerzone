@@ -9,4 +9,8 @@ function Transformable:__init(position, dir, origin)
     self.origin = origin or Vector(0, 0)
 end
 
+function Transformable:absolutePosition()
+    return self.position:add(self.origin)
+end
+
 return Transformable

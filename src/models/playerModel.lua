@@ -25,13 +25,14 @@ function PlayerModel:__init()
     self:add(Rotating(constants.player.defaultRotationSpeed))
     self:add(Accelerating(constants.player.defaultAcceleration, Vector(0,0)))
     self:add(Faction("player", {enemy=1}))
-    self:add(Particle(resources.images.particle1, 1000, {0.2, 1.2}, nil))
-    local particle = self:get("Particle").particle
+
+    local particleComponent = Particle(resources.images.particle1, 1000, Vector(-100, 0), {0.2, 1.2}, nil)
+    self:add(particleComponent)
+    particle = particleComponent.particle
     particle:setEmissionRate(100)
     particle:setSpeed(10, 20)
-    particle:setDirection(1)
-    particle:setSpread(360)
-    particle:setParticleLifetime(0.2, 1.2)
+    particle:setSpread(math.pi*2)
+    particle:setParticleLifetime(0.2, 0.3)
     particle:start()
 
     local ship = resources.images.player
