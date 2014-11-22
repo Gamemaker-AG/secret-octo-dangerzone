@@ -65,12 +65,14 @@ function GameState:load()
     -- has to be first to translate the coordinate system
     self.engine:addSystem(cameraSystem, "draw", 1)
 
+    local stringDrawSystem = StringDrawSystem()
     self.engine:addSystem(StringDrawSystem(), "draw", 5)
     self.engine:addSystem(DrawSystem(), "draw", 3)
     self.engine:addSystem(ParticleDrawSystem(), "draw", 4)
 
     self.eventmanager:addListener("KeyPressed", {playercontrol, playercontrol.fireEvent})
     self.eventmanager:addListener("KeyReleased", {playercontrol, playercontrol.fireEvent})
+    self.eventmanager:addListener("KeyReleased", {stringDrawSystem, stringDrawSystem.fireEvent})
 
     self.transformableRoot = Transformable()
 
@@ -116,6 +118,5 @@ end
 function GameState:keyreleased(key, isrepeat)
     self.eventmanager:fireEvent(KeyReleased(key, isrepeat))
 end
-
 
 return GameState
