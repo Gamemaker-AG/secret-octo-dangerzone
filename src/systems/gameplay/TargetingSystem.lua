@@ -15,23 +15,18 @@ function TargetingSystem:update()
         local position = entity:get("Transformable").position
 
         local lowest = weapon.range
-        local target = weapon.target
 
-        if target == nil or not target.alive then
+        if weapon.target == nil or not weapon.target.alive then
+            weapon.target = nil
             local list = stack:current().engine:getEntityList("Faction") 
             for index, enemy in pairs(list) do
                 if entity:get("Faction").attitude[enemy:get("Faction").faction] then
                     local enemyPosition = enemy:get("Transformable").position
                     if position:distanceTo(enemyPosition) <= lowest then
                         lowest = position:distanceTo(enemyPosition)
-                        target = enemy
+                        weapon.target = enemy
                     end
                 end
-            end
-            -- Setting target if existing
-            if target then
-                -- Setting target for weapon
-                weapon.target = target
             end
         end
     end
