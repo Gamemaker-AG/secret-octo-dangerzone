@@ -26,13 +26,25 @@ function PlayerModel:__init()
     self:add(Rotating(constants.player.defaultRotationSpeed))
     self:add(Accelerating(constants.player.defaultAcceleration, Vector(0,0)))
     self:add(Faction("player", {enemy=1}))
-    self:add(Particle(resources.images.particle1, 1000, {0.2, 1.2}, nil))
-    local particle = self:get("Particle").particle
-    particle:setEmissionRate(100)
-    particle:setSpeed(10, 20)
-    particle:setDirection(1)
-    particle:setSpread(360)
-    particle:setParticleLifetime(0.2, 1.2)
+
+    local particleComponent = Particle(resources.images.particle1, 1000, Vector(-50, 0), {0.2, 1.2}, nil)
+    self:add(particleComponent)
+    local particle = particleComponent.particle
+
+    -- Setzen der Position
+    local transformable = self:get("Transformable")
+    local radian = transformable.direction:getRadian()
+    local rotatedOffset = particleComponent.offset:rotate(transformable.direction:getRadian()):add(transformable.position)
+
+    particle:setPosition(rotatedOffset.x, rotatedOffset.y)
+    particle:setEmissionRate(1000)
+    particle:setSpeed(300, 600)
+    particle:setAreaSpread("normal",7,7)
+    particle:setSpread(math.pi/40)
+    particle:setParticleLifetime(0.01, 0.1)
+    particle:setColors(50,50,255,100,
+                        0,0,100,150,
+                        0,0,50,50)
     particle:start()
 
     local camera = Entity()
