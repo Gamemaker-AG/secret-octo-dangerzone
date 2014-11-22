@@ -5,7 +5,6 @@ function ParticlePositionSyncSystem:update()
         local particleComponent = entity:get("Particle")
         local transformable = entity:get("Transformable")
         local rotatedOffset = particleComponent.offset:rotate(entity:get("Transformable").direction:getRadian())
-        local newPosition = rotatedOffset:add(transformable:absolutePosition())
         local a = 20
         local w = transformable.direction:getRadian()
         local offsx = math.cos(w)*-50
