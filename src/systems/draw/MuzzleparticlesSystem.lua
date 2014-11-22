@@ -2,15 +2,20 @@ MuzzleparticlesSystem = class("MuzzleparticlesSystem", System)
 
 function MuzzleparticlesSystem:update()
     for k, entity in pairs(self.targets) do
+        local muzzleparticles = entity:get("Muzzleparticles")
         local particle = entity:get("Particle")
         local accelerating = entity:get("Accelerating")
-        local bla = (accelerating.defaultAcceleration*(1/accelerating.acceleration))*particle.maxspeed
-        particle.particle:setSpeed(((accelerating.defaultAcceleration*(1/accelerating.acceleration))*particle.maxspeed)-200, (accelerating.defaultAcceleration*(1/accelerating.acceleration))*particle.maxspeed)
-        print(bla)
+        local speed = entity:get("Moving")
+        local currentAcceleration = accelerating.acceleration:length()
+        local currentSpeed = speed.speed:length()
+        local moving = math.ceil(currentAcceleration * 0.001)
+        local speedpercentage = (1/accelerating.defaultAcceleration)*currentSpeed*10/6
+        particle.particle:setSpeed(moving*speedpercentage*muzzleparticles.maxspeed+muzzleparticles.idlespeed, moving*speedpercentage*2*muzzleparticles.maxspeed+(2*muzzleparticles.idlespeed))
+        particle.particle:setEmissionRate(muzzleparticles.emission*speedpercentage*moving+muzzleparticles.idleemission)
     end
 end
 
 function MuzzleparticlesSystem:requires()
-    return {"Accelerating", "Particle", "Muzzleparticles"}
+    return {"Accelerating", "Particle", "Muzzleparticles", "Moving"}
 end
 return MuzzleparticlesSystem

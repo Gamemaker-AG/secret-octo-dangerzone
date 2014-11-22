@@ -1,12 +1,10 @@
 Muzzleparticles = class("Muzzleparticles", Component)
 
-function Muzzleparticles:__init(idlespeed, maxspeed, idlecount, maxcount, idlespread, maxspread)
-    self.idlespeed = idlespeed
+function Muzzleparticles:__init(idlespeed, maxspeed, idleemission, emission)
     self.maxspeed = maxspeed
-    self.idlecount = idlecount
-    self.maxcount = maxcount
-    self.idlespread = idlespread
-    self.maxspread = maxspread
+    self.emission = emission
+    self.idlespeed = idlespeed
+    self.idleemission = idleemission
 end
 
 return Muzzleparticles
