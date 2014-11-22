@@ -2,9 +2,10 @@ local TargetingSystem = class("TargetingSystem", System)
 
 function TargetingSystem:update()
     for index, entity in pairs(self.targets["moving"]) do
-        if entity:get("MovingTo").target == nil then
+        local moving = entity:get("MovingTo")
+        if moving.target == nil or not moving.target.alive then
             if entity:has("Weapon") then
-                entity:get("MovingTo").target = entity:get("Weapon").target
+                moving.target = entity:get("Weapon").target
             end
         end
     end
@@ -16,7 +17,7 @@ function TargetingSystem:update()
         local lowest = weapon.range
         local target = weapon.target
 
-        if target == nil then
+        if target == nil or not target.alive then
             local list = stack:current().engine:getEntityList("Faction") 
             for index, enemy in pairs(list) do
                 if entity:get("Faction").attitude[enemy:get("Faction").faction] then
@@ -36,9 +37,10 @@ function TargetingSystem:update()
     end
 
     for index, entity in pairs(self.targets["looking"]) do
-        if entity:get("LookingAt").target == nil then
+        local looking = entity:get("LookingAt")
+        if looking.target == nil or not looking.target.alive then
             if entity:has("Weapon") then
-                entity:get("LookingAt").target = entity:get("Weapon").target
+                looking.target = entity:get("Weapon").target
             end
         end
     end

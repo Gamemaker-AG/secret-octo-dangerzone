@@ -12,6 +12,7 @@ local Accelerating = require("components/physic/Accelerating")
 local Transformable = require("components/physic/Transformable")
 
 -- Gameplay components
+local Living = require("components/gameplay/Living")
 local Weapon = require("components/gameplay/Weapon")
 local Faction = require("components/gameplay/Faction")
 local MovingTo = require("components/gameplay/MovingTo")
@@ -29,6 +30,7 @@ function EnemyModel:__init(x, y)
     self:add(Rotating(constants.enemy.defaultRotationSpeed))
     self:add(Accelerating(constants.enemy.defaultAcceleration, Vector(0,0)))
     self:add(LookingAt())
+    self:add(Living(20))
     self:add(MovingTo())
     self:add(Faction("enemy", {player=1}))
 
@@ -41,7 +43,7 @@ function EnemyModel:__init(x, y)
         stack:current().engine:addEntity(Bullet(entity:get("Transformable").position, target))
     end
     --||-- Why no constants? fire, damage, cooldown, range, target
-    self:add(Weapon(func, 0, 2, 2000, nil))
+    self:add(Weapon(func, 10, 2, 2000, nil))
 
     local ship = resources.images.enemy
     local sx, sy = constants.enemy.diameter/ship:getWidth(), constants.enemy.diameter/ship:getHeight()

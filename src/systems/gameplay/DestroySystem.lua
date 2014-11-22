@@ -1,6 +1,6 @@
 local DestroySystem = class("DestroySystem", System)
 
-function DestroySystem:update()
+function DestroySystem:update(dt)
     for _, entity in pairs(self.targets) do
         if entity:has("Particle") then
             local particle = Entity()

@@ -25,10 +25,10 @@ function TurretModel:__init(offset, parent)
     self:add(Rotating(constants.turret.defaultRotationSpeed))
     self:add(Faction("player", {enemy=1}))
     local func = function(entity, target)
-        stack:current().engine:addEntity(Bullet(entity:get("Transformable").position, target))
+        stack:current().engine:addEntity(Bullet(entity:get("Transformable").position, target, entity:get("Weapon").damage))
     end
     --||-- Why no constants? fire, damage, cooldown, range, target
-    self:add(Weapon(func, 0, 2, 2000, nil))
+    self:add(Weapon(func, 10, 0.5, 2000, nil))
     self:add(LookingAt())
 
 
