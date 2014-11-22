@@ -5,6 +5,7 @@ local constants = require("constants")
 -- Graphic components
 local Drawable = require("components/graphic/Drawable")
 local Particle = require("components/particle/Particle")
+local Muzzleparticles = require("components/graphic/Muzzleparticles")
 -- Physic components
 local Moving = require("components/physic/Moving")
 local Rotating = require("components/physic/Rotating")

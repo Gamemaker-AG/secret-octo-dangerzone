@@ -7,6 +7,7 @@ local TurretModel = require("models/TurretModel")
 local DrawSystem = require("systems/draw/DrawSystem")
 local StringDrawSystem = require("systems/draw/StringDrawSystem")
 local CameraSystem = require("systems/draw/CameraSystem")
+local MuzzleparticlesSystem = require("systems/draw/MuzzleparticlesSystem")
 
 -- Particle systems 
 local ParticleDrawSystem = require("systems/particle/ParticleDrawSystem")
@@ -61,6 +62,7 @@ function GameState:load()
     self.engine:addSystem(ParticleUpdateSystem())    
     self.engine:addSystem(ParticlePositionSyncSystem())
     self.engine:addSystem(TargetingSystem())
+    self.engine:addSystem(MuzzleparticlesSystem())
 
     local cameraSystem = CameraSystem()
     self.engine:addSystem(cameraSystem, "update")
