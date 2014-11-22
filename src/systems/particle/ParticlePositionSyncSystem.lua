@@ -2,15 +2,18 @@ local ParticlePositionSyncSystem = class("ParticlePositionSyncSystem", System)
 
 function ParticlePositionSyncSystem:update()
     for k, entity in pairs(self.targets) do
-        local particleComponent = entity:get("Particle")
+        local particle = entity:get("Particle")
         local transformable = entity:get("Transformable")
-        local rotatedOffset = particleComponent.offset:rotate(entity:get("Transformable").direction:getRadian())
-        local a = 20
-        local w = transformable.direction:getRadian()
-        local offsx = math.cos(w)*-50
-        local offsy = math.sin(w)*-50 
-        particleComponent.particle:setPosition(offsx+transformable.position.x, offsy+transformable.position.y)
-        particleComponent.particle:setDirection(math.pi+w)
+        local radian = transformable.direction:getRadian()
+
+        local rotatedOffset = particle.offset:rotate(transformable.direction:getRadian()):add(entity:get("Transformable").position)
+        particle.particle:setPosition(rotatedOffset.x, rotatedOffset.y)
+
+        --local offsx = math.cos(radian)*-50
+        --local offsy = math.sin(radian)*-50 
+        --particle.particle:setPosition(offsx+transformable.position.x, offsy+transformable.position.y)
+
+        particle.particle:setDirection(math.pi+radian)
     end
 end
 

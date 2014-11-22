@@ -3,8 +3,6 @@ local ParticleUpdateSystem = class("ParticleUpdateSystem", System)
 function ParticleUpdateSystem:update(dt)
     for index, entity in pairs(self.targets) do
         local particle = entity:get("Particle")
-        -- local newOffset = particle.offset:rotate(entity:get("Transformable").direction:getRadian())
-        -- particle.particle:setOffset(newOffset.x, newOffset.y)
         --Updates Particles. 
         particle.particle:update(dt)
         -- If emittertimer is below 0 the entity will be removed
