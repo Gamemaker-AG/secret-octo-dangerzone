@@ -20,6 +20,10 @@ local constants = {
         defaultAcceleration = pixels(30),
         defaultRotationSpeed = math.pi,
     },
+    turret = {
+        diameter = pixels(4),
+        defaultRotationSpeed = math.pi*2,
+    },
     bullet = {
         diameter = pixels(1),
         speed = pixels(100)

@@ -14,8 +14,8 @@ local Transformable = require("components/physic/Transformable")
 -- Gameplay components
 local Weapon = require("components/gameplay/Weapon")
 local Faction = require("components/gameplay/Faction")
-local LookingAt = require("components/gameplay/LookingAt")
 local MovingTo = require("components/gameplay/MovingTo")
+local LookingAt = require("components/gameplay/LookingAt")
 local ExplodesOnContact = require("components/gameplay/ExplodesOnContact")
 
 local Bullet = require("models/BulletModel")

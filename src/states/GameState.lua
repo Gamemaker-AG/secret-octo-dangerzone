@@ -1,6 +1,7 @@
 -- Models
-local PlayerModel = require("models/PlayerModel")
 local EnemyModel = require("models/EnemyModel")
+local PlayerModel = require("models/PlayerModel")
+local TurretModel = require("models/TurretModel")
 
 -- Graphic systems
 local DrawSystem = require("systems/draw/DrawSystem")
@@ -14,8 +15,8 @@ local ParticleUpdateSystem = require("systems/particle/ParticleUpdateSystem")
 
 -- Physic systems
 local MovementSystem = require("systems/physic/MovementSystem")
-local AccelerationSystem = require("systems/physic/AccelerationSystem")
 local RotationSystem = require("systems/physic/RotationSystem")
+local AccelerationSystem = require("systems/physic/AccelerationSystem")
 local TransformableUpdateSystem = require("systems/physic/TransformableUpdateSystem")
 
 -- Gameplay 
@@ -80,8 +81,11 @@ function GameState:load()
     self.engine:addEntity(bg)
     
     -- PlayerCreation
-    player = PlayerModel()
-    self.engine:addEntity(player)
+    self.player = PlayerModel()
+    self.engine:addEntity(self.player)
+
+    local turret = TurretModel(Vector(30, 0), self.player)
+    self.engine:addEntity(turret)
 
     -- EnemyCreation
     for i=0, 10 do
@@ -91,13 +95,13 @@ function GameState:load()
 
     -- DebugStrings
     local posstring = Entity()
-    posstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Position %i %i", {{player:get("Transformable").position, "x"},{player:get("Transformable").position, "y"}} ))
-    posstring:add(Transformable(Vector(50,50),nil,player))
+    posstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Position %i %i", {{self.player:get("Transformable").position, "x"},{self.player:get("Transformable").position, "y"}} ))
+    posstring:add(Transformable(Vector(50,50),nil,self.player))
     self.engine:addEntity(posstring)
 
     local speedstring = Entity()
-    speedstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Speed %i %i", {{player:get("Moving").speed, "x"}, {player:get("Moving").speed, "y"}} ))
-    speedstring:add(Transformable(Vector(50,100),nil,player))
+    speedstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Speed %i %i", {{self.player:get("Moving").speed, "x"}, {self.player:get("Moving").speed, "y"}} ))
+    speedstring:add(Transformable(Vector(50,100),nil,self.player))
     self.engine:addEntity(speedstring)
 end
 
