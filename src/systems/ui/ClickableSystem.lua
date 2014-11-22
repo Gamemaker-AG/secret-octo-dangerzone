@@ -1,18 +1,22 @@
-local Vector = require("helper/vector")
+local Vector = require("helper/Vector")
 
 ClickableSystem = class("ClickableSystem", System)
 
-function ClickableSystem:onClick(event)
-    self:eachTarget(function(target)
-        local clickable, transformable, diameter = self:pickRequiredComponents(target)
-        if transformable.position:distanceTo(Vector(event.x, event.y)) <= diameter.diameter then
+function ClickableSystem:mouseReleased(event)
+    for _, target in pairs(self.targets.buttons) do
+        local transformable = target:get("Transformable")
+        local diameter = target:get("Diameter")
+        local clickable = target:get("Clickable")
+        local camPos = table.firstElement(self.targets.camera):get("Camera").position
+        local mouseWorldPosition = Vector(event.x, event.y):add(camPos)
+        if transformable.position:distanceTo(mouseWorldPosition) <= diameter.diameter/2 then
             clickable.clicked()
         end
-    end)
+    end
 end
 
 function ClickableSystem:requires()
-    return {"Clickable", "Transformable", "Diameter"}
+    return {buttons={"Clickable", "Transformable", "Diameter"}, camera={"Camera"}}
 end
 
 return ClickableSystem

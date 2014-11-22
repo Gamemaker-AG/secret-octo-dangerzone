@@ -1,6 +1,7 @@
 -- Models
 local PlayerModel = require("models/PlayerModel")
 local EnemyModel = require("models/EnemyModel")
+local ButtonModel = require("models/ButtonModel")
 
 -- Graphic systems
 local DrawSystem = require("systems/draw/DrawSystem")
@@ -25,6 +26,9 @@ local TargetingSystem = require("systems/gameplay/TargetingSystem")
 local TargetMoveSystem = require("systems/gameplay/TargetMoveSystem")
 local PlayerControlSystem = require("systems/gameplay/PlayerControlSystem")
 local ExplodeOnContactSystem = require("systems/gameplay/ExplodeOnContactSystem")
+
+-- UI
+local ClickableSystem = require("systems/ui/ClickableSystem")
 
 -- Components
 local DrawableText = require("components/graphic/DrawableText")
@@ -70,6 +74,10 @@ function GameState:load()
 
     self.transformableRoot = Transformable()
 
+    local clickableSystem = ClickableSystem()
+    self.engine:addSystem(clickableSystem)
+    self.eventmanager:addListener("MouseReleased", {clickableSystem, clickableSystem.mouseReleased})
+
     local bg = Entity()
     bg:add(Drawable(resources.images.bg))
     bg:add(Transformable(Vector(0, 0)))
@@ -78,6 +86,9 @@ function GameState:load()
     -- PlayerCreation
     player = PlayerModel()
     self.engine:addEntity(player)
+
+    local testButton = ButtonModel()
+    self.engine:addEntity(testButton)
 
     -- EnemyCreation
     for i=0, 10 do
