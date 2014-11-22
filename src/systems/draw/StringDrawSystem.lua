@@ -2,8 +2,6 @@ local lume = require("lib/lume/lume")
 
 local StringDrawSystem = class("StringDrawSystem", System)
 
-local isprint = false
-
 function StringDrawSystem:draw()
     for index, entity in pairs(self.targets) do
         local str = entity:get("DrawableText")
@@ -14,21 +12,7 @@ function StringDrawSystem:draw()
         end
         love.graphics.setColor(unpack(str.color))
         love.graphics.setFont(str.font)
-        if isprint then
-            local player = table.find(stack:current().engine:getEntityList("Faction"), function(i, entity)
-                return entity:get("Faction").faction == "player"
-            end)
-            playerpos = player:get("Transformable").position
-            love.graphics.print(string.format(str.string, unpack(val)), playerpos.x + position.x, playerpos.y + position.y, 0, 1, 1)
-        end
-    end
-end
-
-function StringDrawSystem:fireEvent(event)
-    if event.__name == "KeyReleased" then
-        if event.key == "t" then
-            isprint = not isprint
-        end
+        love.graphics.print(string.format(str.string, unpack(val)), position.x, position.y, 0, 1, 1)
     end
 end
 

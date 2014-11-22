@@ -76,7 +76,7 @@ function Vector:rotate(radian)
     local x, y
     x = self.x * math.cos(radian) - self.y * math.sin(radian)
     y = self.x * math.sin(radian) + self.y * math.cos (radian)
-    return Vector(x, y):getUnit()
+    return Vector(x, y)
 end
 
 function Vector:eq(vector)
