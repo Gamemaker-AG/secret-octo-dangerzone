@@ -20,7 +20,7 @@ local Camera = require("components/gameplay/Camera")
 local PlayerModel = class("PlayerModel", Entity)
 
 
-function PlayerModel:__init(parentPosition)
+function PlayerModel:__init()
     self:add(Transformable(Vector(100, 100), Vector(1, 0)))
     self:add(Moving(Vector(0,0), constants.player.maxSpeed))
     self:add(Rotating(constants.player.defaultRotationSpeed))

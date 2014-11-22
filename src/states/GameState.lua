@@ -85,7 +85,7 @@ function GameState:load()
 
     -- EnemyCreation
     for i=0, 10 do
-        local enemy =  EnemyModel(math.random(100, 1200),math.random(100, 700))
+        local enemy = EnemyModel(math.random(100, 1200),math.random(100, 700))
         self.engine:addEntity(enemy)
     end
 
