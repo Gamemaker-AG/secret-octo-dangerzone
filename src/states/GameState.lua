@@ -117,5 +117,4 @@ function GameState:keyreleased(key, isrepeat)
     self.eventmanager:fireEvent(KeyReleased(key, isrepeat))
 end
 
-
 return GameState
