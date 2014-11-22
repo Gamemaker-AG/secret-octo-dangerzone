@@ -16,6 +16,7 @@ local ParticleUpdateSystem = require("systems/particle/ParticleUpdateSystem")
 local MovementSystem = require("systems/physic/MovementSystem")
 local AccelerationSystem = require("systems/physic/AccelerationSystem")
 local RotationSystem = require("systems/physic/RotationSystem")
+local TransformableUpdateSystem = require("systems/physic/TransformableUpdateSystem")
 
 -- Gameplay 
 local WeaponSystem = require("systems/gameplay/WeaponSystem")
@@ -41,7 +42,7 @@ function GameState:load()
     self.eventmanager = EventManager()
     
     local playercontrol = PlayerControlSystem()
-    self.engine:addSystem(TargetingSystem(), "update", 1)
+    self.engine:addSystem(TransformableUpdateSystem(), "update", 1)
     self.engine:addSystem(AccelerationSystem(), "update", 2)
     self.engine:addSystem(MovementSystem(), "update", 3)
     self.engine:addSystem(RotationSystem(), "update", 4)
@@ -52,6 +53,7 @@ function GameState:load()
     self.engine:addSystem(ExplodeOnContactSystem(), "update", 9)
     self.engine:addSystem(ParticleUpdateSystem(), "update", 10)    
     self.engine:addSystem(ParticlePositionSyncSystem(), "update", 11)
+    self.engine:addSystem(TargetingSystem(), "update", 12)
 
     local cameraSystem = CameraSystem()
     self.engine:addSystem(cameraSystem, "update", 10)
@@ -59,12 +61,16 @@ function GameState:load()
     -- has to be first to translate the coordinate system
     self.engine:addSystem(cameraSystem, "draw", 1)
 
+    local stringDrawSystem = StringDrawSystem()
     self.engine:addSystem(StringDrawSystem(), "draw", 5)
     self.engine:addSystem(DrawSystem(), "draw", 3)
     self.engine:addSystem(ParticleDrawSystem(), "draw", 4)
 
     self.eventmanager:addListener("KeyPressed", {playercontrol, playercontrol.fireEvent})
     self.eventmanager:addListener("KeyReleased", {playercontrol, playercontrol.fireEvent})
+    self.eventmanager:addListener("KeyReleased", {stringDrawSystem, stringDrawSystem.fireEvent})
+
+    self.transformableRoot = Transformable()
 
     local bg = Entity()
     bg:add(Drawable(resources.images.bg))
@@ -77,7 +83,7 @@ function GameState:load()
 
     -- EnemyCreation
     for i=0, 10 do
-        local enemy =  EnemyModel(math.random(100, 1200),math.random(100, 700))
+        local enemy = EnemyModel(math.random(100, 1200),math.random(100, 700))
         self.engine:addEntity(enemy)
     end
 
