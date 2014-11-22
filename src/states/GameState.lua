@@ -16,6 +16,7 @@ local ParticleUpdateSystem = require("systems/particle/ParticleUpdateSystem")
 local MovementSystem = require("systems/physic/MovementSystem")
 local AccelerationSystem = require("systems/physic/AccelerationSystem")
 local RotationSystem = require("systems/physic/RotationSystem")
+local TransformableUpdateSystem = require("systems/physic/TransformableUpdateSystem")
 
 -- Gameplay 
 local WeaponSystem = require("systems/gameplay/WeaponSystem")
@@ -56,6 +57,7 @@ function GameState:load()
     self.engine:addSystem(ExplodeOnContactSystem(), "update", 9)
     self.engine:addSystem(ParticleUpdateSystem(), "update", 10)    
     self.engine:addSystem(ParticlePositionSyncSystem(), "update", 11)
+    self.engine:addSystem(TransformableUpdateSystem(), "update", 12)
 
     local cameraSystem = CameraSystem()
     self.engine:addSystem(cameraSystem, "update", 10)
@@ -69,6 +71,8 @@ function GameState:load()
 
     self.eventmanager:addListener("KeyPressed", {playercontrol, playercontrol.fireEvent})
     self.eventmanager:addListener("KeyReleased", {playercontrol, playercontrol.fireEvent})
+
+    self.transformableRoot = Transformable()
 
     local bg = Entity()
     bg:add(Drawable(resources.images.bg))

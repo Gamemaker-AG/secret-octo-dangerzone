@@ -16,6 +16,12 @@ function table.count(list)
     return counter
 end
 
+function table.each(list, fn)
+    for index, value in pairs(list) do
+        fn(index, value)
+    end
+end
+
 function table.find(list, pred)
     for i, v in pairs(list) do
         if pred(i, v) then
