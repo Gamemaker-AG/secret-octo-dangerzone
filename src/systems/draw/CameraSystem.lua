@@ -5,7 +5,7 @@ local Vector = require("helper/Vector")
 
 local CameraSystem = class("CameraSystem", System)
 
--- This is a system intended for a singleton camera, using multiple cameras for a game would'nt make sense
+-- This is a system intended for a singleton camera, using multiple cameras for a game wouldn't make sense
 function CameraSystem:draw()
     local pos = table.firstElement(self.targets):get("Camera").position
     love.graphics.translate(-pos.x, -pos.y)

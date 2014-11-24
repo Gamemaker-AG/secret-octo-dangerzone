@@ -1,4 +1,4 @@
-local Camera = class("Camera")
+local Camera = class("Camera", Component)
 
 function Camera:__init(target)
     self.target = target

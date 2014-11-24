@@ -1,4 +1,4 @@
-local Faction = class("Faction")
+local Faction = class("Faction", Component)
 
 function Faction:__init(faction, attitude)
     self.faction = faction
