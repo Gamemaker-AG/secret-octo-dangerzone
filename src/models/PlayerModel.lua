@@ -28,11 +28,10 @@ function PlayerModel:__init()
     self:add(Accelerating(constants.player.defaultAcceleration, Vector(0,0)))
     self:add(Faction("player", {enemy=1}))
     self:add(Muzzleparticles(50 ,75, 500, 3000))
-
     local particleComponent = Particle(resources.images.particle1, 5000, Vector(-50, 0), {0.2, 0.8}, nil)
     self:add(particleComponent)
     local particle = particleComponent.particle
-
+    
     -- Setzen der Position
     local transformable = self:get("Transformable")
     local radian = transformable.direction:getRadian()
@@ -40,7 +39,6 @@ function PlayerModel:__init()
 
     particle:setPosition(rotatedOffset.x, rotatedOffset.y)
     particle:setEmissionRate(1000)
-    particle:setSpeed(300, 600)
     particle:setAreaSpread("normal",7,7)
     particle:setSpread(0.001)
     particle:setParticleLifetime(0.01, 0.1)
@@ -54,6 +52,7 @@ function PlayerModel:__init()
                         0,170,185,50,  --greenish blue
                         0,166,84,50   --light green
                         )    --light green
+    particle:setSizes(2.0)
     particle:start()
 
     local camera = Entity()
