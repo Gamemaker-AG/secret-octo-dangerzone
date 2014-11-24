@@ -27,11 +27,11 @@ function PlayerModel:__init()
     self:add(Rotating(constants.player.defaultRotationSpeed))
     self:add(Accelerating(constants.player.defaultAcceleration, Vector(0,0)))
     self:add(Faction("player", {enemy=1}))
-    self:add(Muzzleparticles(50 ,75, 500, 3000))
-    local particleComponent = Particle(resources.images.particle1, 5000, Vector(-50, 0), {0.2, 0.8}, nil)
+    self:add(Muzzleparticles(100 ,500, 500, 3000))
+    local particleComponent = Particle(resources.images.particle1, 5000, Vector(-50, 0), {0.2, 1.2}, nil)
     self:add(particleComponent)
     local particle = particleComponent.particle
-    
+
     -- Setzen der Position
     local transformable = self:get("Transformable")
     local radian = transformable.direction:getRadian()
@@ -39,20 +39,25 @@ function PlayerModel:__init()
 
     particle:setPosition(rotatedOffset.x, rotatedOffset.y)
     particle:setEmissionRate(1000)
-    particle:setAreaSpread("normal",7,7)
-    particle:setSpread(0.001)
+    particle:setAreaSpread("normal",9,9)
+    particle:setSpread(math.pi/40)
     particle:setParticleLifetime(0.01, 0.1)
     particle:setColors(--250,160,30,20,  --orange
-                        --240,80,35,50,  --redish orange
+                       --240,80,35,50,  --redish orange
                         --240,35,40,50,  --red
-                        150,40,135,40, --purple
+                        216,30,60,50, --greeeenish
+                        --255,255,255,50, --white
+                        200,0,255,50, --blueish purple
+                        70,0,92,50, --dark purple
+                        --0,0,0,100, --black
                         --255,255,255,20, --white
                         --20,20,150,50,  --blue
                         --2,125,200,50,  --light blue
-                        0,170,185,50,  --greenish blue
-                        0,166,84,50   --light green
+                        --0,170,185,50,  --greenish blue
+                        0,0,0,100 --black
+                        --0,166,84,50   --light green
                         )    --light green
-    particle:setSizes(2.0)
+    particle:setSizes(1.5, 0.8, 0.1)
     particle:start()
 
     local camera = Entity()
