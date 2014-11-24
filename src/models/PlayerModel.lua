@@ -27,9 +27,9 @@ function PlayerModel:__init()
     self:add(Rotating(constants.player.defaultRotationSpeed))
     self:add(Accelerating(constants.player.defaultAcceleration, Vector(0,0)))
     self:add(Faction("player", {enemy=1}))
-    self:add(Muzzleparticles(50,500, 500, 2000))
+    self:add(Muzzleparticles(50 ,75, 500, 3000))
 
-    local particleComponent = Particle(resources.images.particle1, 1000, Vector(-50, 0), {0.2, 1.2}, nil)
+    local particleComponent = Particle(resources.images.particle1, 5000, Vector(-50, 0), {0.2, 0.8}, nil)
     self:add(particleComponent)
     local particle = particleComponent.particle
 
@@ -42,11 +42,18 @@ function PlayerModel:__init()
     particle:setEmissionRate(1000)
     particle:setSpeed(300, 600)
     particle:setAreaSpread("normal",7,7)
-    particle:setSpread(math.pi/40)
+    particle:setSpread(0.001)
     particle:setParticleLifetime(0.01, 0.1)
-    particle:setColors(50,50,255,100,
-                        0,0,100,150,
-                        0,0,50,50)
+    particle:setColors(--250,160,30,20,  --orange
+                        --240,80,35,50,  --redish orange
+                        --240,35,40,50,  --red
+                        150,40,135,40, --purple
+                        --255,255,255,20, --white
+                        --20,20,150,50,  --blue
+                        --2,125,200,50,  --light blue
+                        0,170,185,50,  --greenish blue
+                        0,166,84,50   --light green
+                        )    --light green
     particle:start()
 
     local camera = Entity()
