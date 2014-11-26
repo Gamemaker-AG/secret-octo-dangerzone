@@ -20,8 +20,8 @@ function Vector:clone()
 end
 
 function Vector:getUnit()
-    local sum = self:sum()
-    return Vector(self.x/sum, self.y/sum)
+    local length = self:length()
+    return Vector(self.x/length, self.y/length)
 end
 
 function Vector:sum()
