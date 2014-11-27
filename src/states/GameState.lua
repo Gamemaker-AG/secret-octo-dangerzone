@@ -28,6 +28,7 @@ local DestroySystem = require("systems/gameplay/DestroySystem")
 local TargetMoveSystem = require("systems/gameplay/TargetMoveSystem")
 local PlayerControlSystem = require("systems/gameplay/PlayerControlSystem")
 local ExplodeOnContactSystem = require("systems/gameplay/ExplodeOnContactSystem")
+local WavesSystem = require("systems/gameplay/WavesSystem")
 
 -- Events
 local KeyPressed = require("events/KeyPressed")
@@ -63,6 +64,7 @@ function GameState:load()
     self.engine:addSystem(ParticlePositionSyncSystem())
     self.engine:addSystem(TargetingSystem())
     self.engine:addSystem(MuzzleparticlesSystem())
+    self.engine:addSystem(WavesSystem())
 
     local cameraSystem = CameraSystem()
     self.engine:addSystem(cameraSystem, "update")
@@ -92,10 +94,10 @@ function GameState:load()
     self.engine:addEntity(turret)
 
     -- EnemyCreation
-    for i=0, 10 do
-        local enemy = EnemyModel(math.random(100, 1200),math.random(100, 700))
-        self.engine:addEntity(enemy)
-    end
+    -- for i=0, 10 do
+    --     local enemy = EnemyModel(math.random(100, 1200),math.random(100, 700))
+    --     self.engine:addEntity(enemy)
+    -- end
 
     -- DebugStrings
     local posstring = Entity()
