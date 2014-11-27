@@ -15,8 +15,8 @@ function CameraSystem:update()
     local cam = table.firstElement(self.targets):get("Camera")
     local targetPos = cam.target:get("Transformable").position:subtract(Vector(constants.screenWidth/2, constants.screenHeight/2))
 
-    cam.position.x = lume.cerp(cam.position.x, targetPos.x, constants.camera.speed)
-    cam.position.y = lume.cerp(cam.position.y, targetPos.y, constants.camera.speed)
+    cam.position.x = lume.smooth(cam.position.x, targetPos.x, constants.camera.speed)
+    cam.position.y = lume.smooth(cam.position.y, targetPos.y, constants.camera.speed)
 end
 
 function CameraSystem:requires()
