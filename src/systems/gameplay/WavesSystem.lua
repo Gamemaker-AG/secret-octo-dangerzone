@@ -1,35 +1,33 @@
 local WavesSystem = class("WavesSystem", System)
--- local enemycount
--- local enemy
--- local EnemyModel
- local EnemyModel = require("models/EnemyModel")
- function WavesSystem:__init()
-     self.enemycount = 0
- end
+local constants = require("constants")
+local EnemyModel = require("models/EnemyModel")
+local timer = constants.waves.timer
 
 function WavesSystem:update(dt)
-    print(self.enemycount)
-
-    if self.enemycount == 0 then
-        self:spawnWave(50)
+    if table.count(self.targets) == 0 then
+        if timer <= 0 then
+            self:spawnWave(20)
+            timer = constants.waves.timer
+        end 
+        timer = timer - 1*dt
     end
 end
 
 function WavesSystem:spawnWave(enemies)
+    local player = table.find(stack:current().engine:getEntityList("Faction"), function (index, entity)
+        return entity:get("Faction").faction == "player"
+    end)
     for i=0, enemies-1 do
-        local enemy = EnemyModel(math.random(100, 1200),math.random(100, 700))
-            stack:current().engine:addEntity(enemy)
-            self.enemycount = self.enemycount + 1
+        local enemy = EnemyModel(math.random(player:get("Transformable").position.x + -1200, 
+                                                player:get("Transformable").position.x + 1200),
+                                    math.random(player:get("Transformable").position.y + -1200, 
+                                                player:get("Transformable").position.y + 700))
+        stack:current().engine:addEntity(enemy)
     end
 end
 
-function WavesSystem:deleteEnemy()
-    
-    self.enemycount = self.enemycount -1
-end
-
 function WavesSystem:requires()
-    return {""}
+    return {"Wave"}
 end
 
 return WavesSystem

@@ -31,6 +31,10 @@ local constants = {
     camera = {
         -- between 0 and 1
         speed = 0.15
+    },
+    waves = {
+        -- time between waves in seconds
+        timer = 5
     }
 }
 
