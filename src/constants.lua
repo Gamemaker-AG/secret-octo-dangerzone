@@ -28,6 +28,11 @@ local constants = {
         diameter = pixels(1),
         speed = pixels(100)
     },
+    rocket = {
+        diameter = pixels(2),
+        speed = pixels(50),
+        traillength = pixels(50)
+    },
     camera = {
         -- between 0 and 1
         speed = 0.15

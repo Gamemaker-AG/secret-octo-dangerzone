@@ -21,6 +21,7 @@ local ExplodesOnContact = require("components/gameplay/ExplodesOnContact")
 local Wave = require("components/gameplay/Wave")
 
 local Bullet = require("models/BulletModel")
+local Rocket = require("models/RocketModel")
 local Player = require("models/PlayerModel")
 
 local EnemyModel = class("EnemyModel", Entity)
@@ -42,7 +43,8 @@ function EnemyModel:__init(x, y)
     if player then self:add(ExplodesOnContact(player, constants.player.diameter/2)) end
 
     local func = function(entity, target)
-        stack:current().engine:addEntity(Bullet(entity:get("Transformable").position, target))
+        -- stack:current().engine:addEntity(Bullet(entity:get("Transformable").position, target))
+        stack:current().engine:addEntity(Rocket(entity:get("Transformable").position, target))
     end
     --||-- Why no constants? fire, damage, cooldown, range, target
     self:add(Weapon(func, 10, 2, 2000, nil))
