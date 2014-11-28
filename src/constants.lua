@@ -25,7 +25,7 @@ local constants = {
         defaultRotationSpeed = math.pi*2,
     },
     bullet = {
-        diameter = pixels(1),
+        diameter = pixels(3),
         speed = pixels(100)
     },
     rocket = {

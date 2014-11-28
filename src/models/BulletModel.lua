@@ -8,7 +8,7 @@ local constants = require("constants")
 
 local Bullet = class("Bullet", Entity)
 
-function Bullet:__init(pos, target, damage, rotation)
+function Bullet:__init(pos, target, damage)
     self:add(Damaging(damage))
     self:add(ExplodesOnContact(target, 100))
 
@@ -21,6 +21,7 @@ function Bullet:__init(pos, target, damage, rotation)
 
     local direction = target:get("Transformable").position:subtract(pos):getUnit()
     self:add(Moving(direction:multiply(constants.bullet.speed)))
+    self:get("Transformable").direction:set(direction)
 
 end
 
