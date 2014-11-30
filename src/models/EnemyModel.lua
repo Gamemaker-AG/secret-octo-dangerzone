@@ -44,7 +44,7 @@ function EnemyModel:__init(x, y)
 
     local func = function(entity, target)
         -- stack:current().engine:addEntity(Bullet(entity:get("Transformable").position, target))
-        stack:current().engine:addEntity(Bullet(entity:get("Transformable").position, target))
+        stack:current().engine:addEntity(Rocket(entity:get("Transformable").position, target))
     end
     --||-- Why no constants? fire, damage, cooldown, range, target
     self:add(Weapon(func, 10, 2, 2000, nil))

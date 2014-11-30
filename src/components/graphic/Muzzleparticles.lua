@@ -5,8 +5,6 @@ function Muzzleparticles:__init(idlespeed, maxspeed, idleemission, maxemission)
     self.maxspeed = maxspeed
     self.idleemission = idleemission
     self.maxemission = maxemission
-    self.idlecolor = {}
-    self.color = {}
 end 
 
 return Muzzleparticles
