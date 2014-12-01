@@ -17,6 +17,7 @@ function love.load()
     resources:addImage("circle", "data/img/circle.png")
     resources:addImage("player", "data/img/player.png")
     resources:addImage("beam", "data/img/beam.png")
+    resources:addImage("rocket", "data/img/rocket.png")
     -- Turret
     resources:addImage("particlemuzzle" ,"/data/img/particlemuzzle.png")
     resources:addImage("particle1" ,"/data/img/particle1.png")
