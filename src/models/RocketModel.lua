@@ -66,7 +66,7 @@ function Rocket:__init(pos, target, damage)
                         )    --light green
     particle:setSizes(1.5, 0.8, 0.1)
     particle:start()
-    self:add(Muzzleparticles(100 ,500, 500, 3000))
+    self:add(Muzzleparticles(100 ,100*constants.rocket.traillength, 500, 3000))
 end
 
 return Rocket
