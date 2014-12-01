@@ -25,8 +25,13 @@ local constants = {
         defaultRotationSpeed = math.pi*2,
     },
     bullet = {
-        diameter = pixels(1),
+        diameter = pixels(3),
         speed = pixels(100)
+    },
+    rocket = {
+        diameter = pixels(2),
+        speed = pixels(50),
+        traillength = pixels(50)
     },
     camera = {
         -- between 0 and 1
