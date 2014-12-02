@@ -43,7 +43,7 @@ local constants = {
     },
     gameplay = {
         --distance to player at which projectiles get deleted automatically
-        debrisMaxDistance = 9000
+        debrisMaxDistance = 2000
     }
 }
 
