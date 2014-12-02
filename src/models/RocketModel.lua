@@ -21,12 +21,15 @@ local Controllable = require("components/gameplay/Controllable")
 local Faction = require("components/gameplay/Faction")
 local Camera = require("components/gameplay/Camera")
 
+
+local Debris = require("components/gameplay/Debris")
 local Rocket = class("Rocket", Entity)
 
 function Rocket:__init(pos, target, damage)
     self:add(Damaging(damage))
     self:add(ExplodesOnContact(target, 100))
     self:add(Transformable(pos:clone()))
+    self:add(Debris(target, 100))
 
     local particleComponent = Particle(resources.images.particle1, 5000, Vector(-10, 0), {0.2, 1.2}, nil)
     self:add(particleComponent)

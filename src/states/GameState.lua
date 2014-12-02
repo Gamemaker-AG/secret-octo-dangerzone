@@ -29,6 +29,7 @@ local TargetMoveSystem = require("systems/gameplay/TargetMoveSystem")
 local PlayerControlSystem = require("systems/gameplay/PlayerControlSystem")
 local ExplodeOnContactSystem = require("systems/gameplay/ExplodeOnContactSystem")
 local WavesSystem = require("systems/gameplay/WavesSystem")
+local DebrisDestroySystem = require("systems/gameplay/DebrisDestroySystem")
 
 -- Events
 local KeyPressed = require("events/KeyPressed")
@@ -65,6 +66,7 @@ function GameState:load()
     self.engine:addSystem(TargetingSystem())
     self.engine:addSystem(MuzzleparticlesSystem())
     self.engine:addSystem(WavesSystem())
+    self.engine:addSystem(DebrisDestroySystem())
 
     local cameraSystem = CameraSystem()
     self.engine:addSystem(cameraSystem, "update")
