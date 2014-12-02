@@ -13,6 +13,7 @@ function love.load()
 
     -- Images
     resources:addImage("bg", "data/img/bg.png")
+    resources:addImage("deepfield", "data/img/deepfield.png")
     resources:addImage("enemy", "data/img/enemy.png")
     resources:addImage("circle", "data/img/circle.png")
     resources:addImage("player", "data/img/player.png")

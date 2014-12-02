@@ -3,6 +3,7 @@ local EnemyModel = require("models/EnemyModel")
 local PlayerModel = require("models/PlayerModel")
 local TurretModel = require("models/TurretModel")
 
+
 -- Graphic systems
 local DrawSystem = require("systems/draw/DrawSystem")
 local StringDrawSystem = require("systems/draw/StringDrawSystem")
@@ -30,6 +31,7 @@ local PlayerControlSystem = require("systems/gameplay/PlayerControlSystem")
 local ExplodeOnContactSystem = require("systems/gameplay/ExplodeOnContactSystem")
 local WavesSystem = require("systems/gameplay/WavesSystem")
 local DebrisDestroySystem = require("systems/gameplay/DebrisDestroySystem")
+local ParallaxSystem = require("systems/draw/ParallaxSystem")
 
 -- Events
 local KeyPressed = require("events/KeyPressed")
@@ -38,6 +40,7 @@ local KeyReleased = require("events/KeyReleased")
 -- Components
 local DrawableText = require("components/graphic/DrawableText")
 local Transformable = require("components/physic/Transformable")
+local Parallax = require("components/gameplay/Parallax")
 
 -- Helper
 local Vector = require("helper/Vector")
@@ -77,15 +80,22 @@ function GameState:load()
     self.engine:addSystem(DrawSystem())
     self.engine:addSystem(ParticleDrawSystem())
     self.engine:addSystem(StringDrawSystem())
+    self.engine:addSystem(ParallaxSystem())
 
     self.eventmanager:addListener("KeyPressed", {playercontrol, playercontrol.fireEvent})
     self.eventmanager:addListener("KeyReleased", {playercontrol, playercontrol.fireEvent})
 
     self.transformableRoot = Transformable()
 
+    local deepfield = Entity()
+    deepfield:add(Drawable(resources.images.deepfield))
+    deepfield:add(Transformable(Vector(0, 0)))
+    deepfield:add(Parallax(2))
+    self.engine:addEntity(deepfield)
     local bg = Entity()
     bg:add(Drawable(resources.images.bg))
     bg:add(Transformable(Vector(0, 0)))
+    bg:add(Parallax(3))
     self.engine:addEntity(bg)
     
     -- PlayerCreation
