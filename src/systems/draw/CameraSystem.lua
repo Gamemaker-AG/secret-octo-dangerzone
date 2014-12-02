@@ -17,6 +17,7 @@ function CameraSystem:update()
 
     cam.position.x = lume.smooth(cam.position.x, targetPos.x, constants.camera.speed)
     cam.position.y = lume.smooth(cam.position.y, targetPos.y, constants.camera.speed)
+
 end
 
 function CameraSystem:requires()
