@@ -3,8 +3,6 @@ local GoldSystem = class("GoldSystem", System)
 
 function GoldSystem:update(dt)
 local loot = 0
-	print(table.count(self.targets.players))
-		print(table.count(self.targets.enemies))
 	for key, entity in pairs(self.targets.enemies) do
 		if entity:has("Destroyed") then
 			local amount = entity:get("DropsGold").gold

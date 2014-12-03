@@ -1,6 +1,7 @@
 local TargetingSystem = class("TargetingSystem", System)
 
 function TargetingSystem:update()
+
     for index, entity in pairs(self.targets["moving"]) do
         local moving = entity:get("MovingTo")
         if moving.target == nil or not moving.target.alive then
