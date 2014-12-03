@@ -6,7 +6,7 @@ local timer = constants.waves.timer
 function WavesSystem:update(dt)
     if table.count(self.targets) == 0 then
         if timer <= 0 then
-            self:spawnWave(20)
+            self:spawnWave(10)
             timer = constants.waves.timer
         end 
         timer = timer - 1*dt
