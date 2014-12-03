@@ -17,6 +17,7 @@ local Weapon = require("components/gameplay/Weapon")
 local Controllable = require("components/gameplay/Controllable")
 local Faction = require("components/gameplay/Faction")
 local Camera = require("components/gameplay/Camera")
+local HasGold = require("components/gameplay/HasGold")
 
 local PlayerModel = class("PlayerModel", Entity)
 
@@ -69,6 +70,7 @@ function PlayerModel:__init()
     local ox, oy = ship:getWidth()*(2/3), ship:getHeight()/2
     self:add(Drawable(ship, 0, sx, sy, ox, oy))
     self:add(Controllable())
+    self:add(HasGold(0))
 end
 
 return PlayerModel

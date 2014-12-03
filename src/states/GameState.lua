@@ -32,6 +32,7 @@ local ExplodeOnContactSystem = require("systems/gameplay/ExplodeOnContactSystem"
 local WavesSystem = require("systems/gameplay/WavesSystem")
 local DebrisDestroySystem = require("systems/gameplay/DebrisDestroySystem")
 local ParallaxSystem = require("systems/draw/ParallaxSystem")
+local GoldSystem = require("systems/gameplay/GoldSystem")
 
 -- Events
 local KeyPressed = require("events/KeyPressed")
@@ -54,6 +55,7 @@ function GameState:load()
     self.eventmanager = EventManager()
     
     local playercontrol = PlayerControlSystem()
+    self.engine:addSystem(GoldSystem())
     self.engine:addSystem(DestroySystem())
     self.engine:addSystem(TransformableUpdateSystem())
     self.engine:addSystem(AccelerationSystem())
@@ -111,12 +113,6 @@ function GameState:load()
     local turret = TurretModel(Vector(30, 0), self.player)
     self.engine:addEntity(turret)
 
-    -- EnemyCreation
-    -- for i=0, 10 do
-    --     local enemy = EnemyModel(math.random(100, 1200),math.random(100, 700))
-    --     self.engine:addEntity(enemy)
-    -- end
-
     -- DebugStrings
     local posstring = Entity()
     posstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Position %i %i", {{self.player:get("Transformable").position, "x"},{self.player:get("Transformable").position, "y"}} ))
@@ -127,6 +123,11 @@ function GameState:load()
     speedstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Speed %i %i", {{self.player:get("Moving").speed, "x"}, {self.player:get("Moving").speed, "y"}} ))
     speedstring:add(Transformable(Vector(50,100),nil,self.player))
     self.engine:addEntity(speedstring)
+
+    local goldstring = Entity()
+    goldstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Gold %i", {{self.player:get("HasGold"), "gold"}} ))
+    goldstring:add(Transformable(Vector(100, 100),nil,self.player))
+    self.engine:addEntity(goldstring)
 end
 
 function GameState:update(dt)

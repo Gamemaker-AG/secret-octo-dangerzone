@@ -19,6 +19,7 @@ local MovingTo = require("components/gameplay/MovingTo")
 local LookingAt = require("components/gameplay/LookingAt")
 local ExplodesOnContact = require("components/gameplay/ExplodesOnContact")
 local Wave = require("components/gameplay/Wave")
+local DropsGold = require("components/gameplay/DropsGold")
 
 local Bullet = require("models/BulletModel")
 local Rocket = require("models/RocketModel")
@@ -36,6 +37,7 @@ function EnemyModel:__init(x, y)
     self:add(MovingTo())
     self:add(Faction("enemy", {player=1}))
     self:add(Wave())
+    self:add(DropsGold(1))
 
     local player = table.find(stack:current().engine:getEntityList("Faction"), function(i, entity)
         return entity:get("Faction").faction == "player"
