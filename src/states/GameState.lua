@@ -114,9 +114,6 @@ function GameState:load()
     self.player = PlayerModel()
     self.engine:addEntity(self.player)
 
-    local testButton = ButtonModel()
-    self.engine:addEntity(testButton)
-
     -- EnemyCreation
     for i=0, 10 do
         local enemy = EnemyModel(math.random(100, 1200),math.random(100, 700))
