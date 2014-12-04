@@ -17,14 +17,19 @@ local MenuState = require("states/MenuState")
 function love.load()
     resources = Resources()
 
-    -- Add your resources here:
+    -- Images
+    resources:addImage("bg", "data/img/bg.png")
+    resources:addImage("deepfield", "data/img/deepfield.png")
+    resources:addImage("enemy", "data/img/enemy.png")
     resources:addImage("circle", "data/img/circle.png")
     resources:addImage("player", "data/img/player.png")
-    resources:addImage("enemy", "data/img/enemy.png")
-    resources:addImage("bg", "data/img/bg.png")
-    resources:addFont("regular", "data/font/Audiowide-Regular.ttf")
+    resources:addImage("beam", "data/img/beam.png")
+    resources:addImage("rocket", "data/img/rocket.png")
+    -- Turret
     resources:addImage("particlemuzzle" ,"/data/img/particlemuzzle.png")
     resources:addImage("particle1" ,"/data/img/particle1.png")
+    -- Fonts
+    resources:addFont("regular", "data/font/Audiowide-Regular.ttf")
 
     resources:load()
 

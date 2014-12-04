@@ -20,13 +20,30 @@ local constants = {
         defaultAcceleration = pixels(30),
         defaultRotationSpeed = math.pi,
     },
+    turret = {
+        diameter = pixels(4),
+        defaultRotationSpeed = math.pi*2,
+    },
     bullet = {
-        diameter = pixels(1),
+        diameter = pixels(3),
         speed = pixels(100)
+    },
+    rocket = {
+        diameter = pixels(2),
+        speed = pixels(50),
+        traillength = pixels(50)
     },
     camera = {
         -- between 0 and 1
-        speed = 0.1
+        speed = 0.15
+    },
+    waves = {
+        -- time between waves in seconds
+        timer = 5
+    },
+    gameplay = {
+        --distance to player at which projectiles get deleted automatically
+        debrisMaxDistance = 2000
     }
 }
 

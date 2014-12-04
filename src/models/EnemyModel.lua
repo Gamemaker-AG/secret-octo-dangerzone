@@ -12,13 +12,17 @@ local Accelerating = require("components/physic/Accelerating")
 local Transformable = require("components/physic/Transformable")
 
 -- Gameplay components
+local Living = require("components/gameplay/Living")
 local Weapon = require("components/gameplay/Weapon")
 local Faction = require("components/gameplay/Faction")
-local LookingAt = require("components/gameplay/LookingAt")
 local MovingTo = require("components/gameplay/MovingTo")
+local LookingAt = require("components/gameplay/LookingAt")
 local ExplodesOnContact = require("components/gameplay/ExplodesOnContact")
+local Wave = require("components/gameplay/Wave")
+local DropsGold = require("components/gameplay/DropsGold")
 
 local Bullet = require("models/BulletModel")
+local Rocket = require("models/RocketModel")
 local Player = require("models/PlayerModel")
 
 local EnemyModel = class("EnemyModel", Entity)
@@ -29,8 +33,11 @@ function EnemyModel:__init(x, y)
     self:add(Rotating(constants.enemy.defaultRotationSpeed))
     self:add(Accelerating(constants.enemy.defaultAcceleration, Vector(0,0)))
     self:add(LookingAt())
+    self:add(Living(20))
     self:add(MovingTo())
     self:add(Faction("enemy", {player=1}))
+    self:add(Wave())
+    self:add(DropsGold(1))
 
     local player = table.find(stack:current().engine:getEntityList("Faction"), function(i, entity)
         return entity:get("Faction").faction == "player"
@@ -38,10 +45,11 @@ function EnemyModel:__init(x, y)
     if player then self:add(ExplodesOnContact(player, constants.player.diameter/2)) end
 
     local func = function(entity, target)
-        stack:current().engine:addEntity(Bullet(entity:get("Transformable").position, target))
+        -- stack:current().engine:addEntity(Bullet(entity:get("Transformable").position, target))
+        stack:current().engine:addEntity(Rocket(entity:get("Transformable").position, target))
     end
     --||-- Why no constants? fire, damage, cooldown, range, target
-    self:add(Weapon(func, 0, 2, 2000, nil))
+    self:add(Weapon(func, 10, 2, 2000, nil))
 
     local ship = resources.images.enemy
     local sx, sy = constants.enemy.diameter/ship:getWidth(), constants.enemy.diameter/ship:getHeight()

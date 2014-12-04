@@ -20,11 +20,10 @@ find $componentdir -type f | while read path; do
     xbase=${p##*/}
     xfext=${xbase##*.}
     xpref=${xbase%.*}
-    corrected=${xpref^}
-    echo "Replacing $corrected"
+    echo "Replacing $xpref"
 
     sedcommand='s/"'
-    sedcommand+=$corrected
+    sedcommand+=$xpref
     sedcommand+='"/'
     sedcommand+=$counter
     sedcommand+='/g'
@@ -32,7 +31,7 @@ find $componentdir -type f | while read path; do
     echo $sedcommand
     echo ""
 
-    sed -i $sedcommand $(grep --binary-files=without-match -rl $corrected $tempdir)
+    sed -i $sedcommand $(grep --binary-files=without-match -rl $xpref $tempdir)
     counter=$((counter+1))
 done
 echo ""

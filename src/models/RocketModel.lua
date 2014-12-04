@@ -1,3 +1,5 @@
+
+
 -- Core
 local Vector = require("helper/Vector")
 local constants = require("constants")
@@ -11,36 +13,43 @@ local Moving = require("components/physic/Moving")
 local Rotating = require("components/physic/Rotating")
 local Accelerating = require("components/physic/Accelerating")
 local Transformable = require("components/physic/Transformable")
-
+local ExplodesOnContact = require("components/gameplay/ExplodesOnContact")
+local Damaging = require("components/gameplay/Damaging")
 -- Gameplay components
 local Weapon = require("components/gameplay/Weapon")
 local Controllable = require("components/gameplay/Controllable")
 local Faction = require("components/gameplay/Faction")
 local Camera = require("components/gameplay/Camera")
-local HasGold = require("components/gameplay/HasGold")
-
-local PlayerModel = class("PlayerModel", Entity)
 
 
-function PlayerModel:__init()
-    self:add(Transformable(Vector(100, 100), Vector(1, 0)))
-    self:add(Moving(Vector(0,0), constants.player.maxSpeed))
-    self:add(Rotating(constants.player.defaultRotationSpeed))
-    self:add(Accelerating(constants.player.defaultAcceleration, Vector(0,0)))
-    self:add(Faction("player", {enemy=1}))
-    self:add(Muzzleparticles(100 ,500, 500, 3000))
-    local particleComponent = Particle(resources.images.particle1, 5000, Vector(-50, 0), {0.2, 1.2}, nil)
+local Debris = require("components/gameplay/Debris")
+local Rocket = class("Rocket", Entity)
+
+function Rocket:__init(pos, target, damage)
+    self:add(Damaging(damage))
+    self:add(ExplodesOnContact(target, 100))
+    self:add(Transformable(pos:clone()))
+    self:add(Debris(target, 100))
+
+    local particleComponent = Particle(resources.images.particle1, 5000, Vector(-10, 0), {0.2, 1.2}, nil)
     self:add(particleComponent)
     local particle = particleComponent.particle
-
-    -- Setzen der Position
+    -- transform
     local transformable = self:get("Transformable")
     local radian = transformable.direction:getRadian()
     local rotatedOffset = particleComponent.offset:rotate(transformable.direction:getRadian()):add(transformable.position)
+    local image = resources.images.rocket
+    local sx, sy = constants.rocket.diameter/image:getWidth(), constants.rocket.diameter/image:getHeight()
+    local ox, oy = image:getWidth()/2, image:getHeight()/2
+    self:add(Drawable(image, 0, sx, sy, ox, oy))
+    local direction = target:get("Transformable").position:subtract(pos):getUnit()
+    self:add(Moving(direction:multiply(constants.rocket.speed)))
+    self:get("Transformable").direction:set(direction)
 
+    --particles
     particle:setPosition(rotatedOffset.x, rotatedOffset.y)
     particle:setEmissionRate(1000)
-    particle:setAreaSpread("normal",9,9)
+    particle:setAreaSpread("normal",3,3)
     particle:setSpread(math.pi/40)
     particle:setParticleLifetime(0.01, 0.1)
     particle:setColors(--250,160,30,20,  --orange
@@ -60,17 +69,7 @@ function PlayerModel:__init()
                         )    --light green
     particle:setSizes(1.5, 0.8, 0.1)
     particle:start()
-
-    local camera = Entity()
-    camera:add(Camera(self))
-    stack:current().engine:addEntity(camera)
-
-    local ship = resources.images.player
-    local sx, sy = constants.player.diameter/ship:getWidth(), constants.player.diameter/ship:getHeight()
-    local ox, oy = ship:getWidth()*(2/3), ship:getHeight()/2
-    self:add(Drawable(ship, 0, sx, sy, ox, oy))
-    self:add(Controllable())
-    self:add(HasGold(0))
+    self:add(Muzzleparticles(100 ,100*constants.rocket.traillength, 500, 3000))
 end
 
-return PlayerModel
+return Rocket
