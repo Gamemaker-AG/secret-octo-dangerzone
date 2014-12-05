@@ -51,7 +51,7 @@ local State = require("core/State")
 local GameState = class("GameState", State)
 
 function GameState:load()
-    self.engine = Engine(true)
+    self.engine = Engine()
     self.engine:getMaster():add(Transformable())
     self.eventmanager = EventManager()
     
