@@ -1,7 +1,7 @@
 local TransformableUpdateSystem = class("TransformableUpdateSystem", System)
 
 function TransformableUpdateSystem:update(dt)
-    local master = stack:current().engine:getMaster()
+    local master = stack:current().engine:getRootEntity()
     local function updatePositions(_, parent)
         local parentTrans = parent:get("Transformable")
         table.each(parent.children, function(_, child)

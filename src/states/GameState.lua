@@ -52,7 +52,7 @@ local GameState = class("GameState", State)
 
 function GameState:load()
     self.engine = Engine()
-    self.engine:getMaster():add(Transformable())
+    self.engine:getRootEntity():add(Transformable())
     self.eventmanager = EventManager()
     
     local playercontrol = PlayerControlSystem()
