@@ -1,16 +1,19 @@
 local TransformableUpdateSystem = class("TransformableUpdateSystem", System)
 
 function TransformableUpdateSystem:update(dt)
-    local root = stack:current().transformableRoot
+    local master = stack:current().engine:getMaster()
     local function updatePositions(_, parent)
+        local parentTrans = parent:get("Transformable")
         table.each(parent.children, function(_, child)
-
-            child.position:set(child.offset:rotate(parent.direction:getRadian()):add(parent.position))
+            local childTrans = child:get("Transformable") 
+            if childTrans then
+            childTrans.position:set(childTrans.offset:rotate(parentTrans.direction:getRadian()):add(parentTrans.position))
             updatePositions(nil, child)
+            end
         end)
     end
 
-    updatePositions(nil, root)
+    updatePositions(nil, master)
 end
 
 return TransformableUpdateSystem

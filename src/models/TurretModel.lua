@@ -21,7 +21,10 @@ local Bullet = require("models/BulletModel")
 local TurretModel = class("TurretModel", Entity)
 
 function TurretModel:__init(offset, parent)
-    self:add(Transformable(offset, nil, parent))
+    if parent then
+        self:setParent(parent)
+    else parent = nil end
+    self:add(Transformable(offset, nil))
     self:add(Rotating(constants.turret.defaultRotationSpeed))
     self:add(Faction("player", {enemy=1}))
     local func = function(entity, target)

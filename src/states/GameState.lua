@@ -51,6 +51,7 @@ local GameState = class("GameState", State)
 
 function GameState:load()
     self.engine = Engine()
+    self.engine:getMaster():add(Transformable())
     self.eventmanager = EventManager()
     
     local playercontrol = PlayerControlSystem()
@@ -85,8 +86,6 @@ function GameState:load()
 
     self.eventmanager:addListener("KeyPressed", {playercontrol, playercontrol.fireEvent})
     self.eventmanager:addListener("KeyReleased", {playercontrol, playercontrol.fireEvent})
-
-    self.transformableRoot = Transformable()
 
     local clickableSystem = ClickableSystem()
     self.engine:addSystem(clickableSystem)
@@ -124,19 +123,19 @@ function GameState:load()
     self.engine:addEntity(turret)
 
     -- DebugStrings
-    local posstring = Entity()
+    local posstring = Entity(self.player)
     posstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Position %i %i", {{self.player:get("Transformable").position, "x"},{self.player:get("Transformable").position, "y"}} ))
-    posstring:add(Transformable(Vector(50,50),nil,self.player))
+    posstring:add(Transformable(Vector(50,50),nil))
     self.engine:addEntity(posstring)
 
-    local speedstring = Entity()
+    local speedstring = Entity(self.player)
     speedstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Speed %i %i", {{self.player:get("Moving").speed, "x"}, {self.player:get("Moving").speed, "y"}} ))
-    speedstring:add(Transformable(Vector(50,100),nil,self.player))
+    speedstring:add(Transformable(Vector(50,100),nil))
     self.engine:addEntity(speedstring)
 
-    local goldstring = Entity()
+    local goldstring = Entity(self.player)
     goldstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Gold %i", {{self.player:get("HasGold"), "gold"}} ))
-    goldstring:add(Transformable(Vector(100, 100),nil,self.player))
+    goldstring:add(Transformable(Vector(100, 100),nil))
     self.engine:addEntity(goldstring)
 end
 
