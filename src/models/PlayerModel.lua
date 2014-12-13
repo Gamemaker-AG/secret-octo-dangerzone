@@ -15,9 +15,10 @@ local Transformable = require("components/physic/Transformable")
 -- Gameplay components
 local Weapon = require("components/gameplay/Weapon")
 local Controllable = require("components/gameplay/Controllable")
-local Faction = require("components/gameplay/Faction")
+local Attitude = require("components/gameplay/Attitude")
 local Camera = require("components/gameplay/Camera")
 local HasGold = require("components/gameplay/HasGold")
+local Player = require("components/meta/Player")
 
 local PlayerModel = class("PlayerModel", Entity)
 
@@ -27,8 +28,9 @@ function PlayerModel:__init()
     self:add(Moving(Vector(0,0), constants.player.maxSpeed))
     self:add(Rotating(constants.player.defaultRotationSpeed))
     self:add(Accelerating(constants.player.defaultAcceleration, Vector(0,0)))
-    self:add(Faction("player", {enemy=1}))
+    self:add(Attitude({Pirate=1}))
     self:add(Muzzleparticles(100 ,500, 500, 3000))
+    self:add(Player())
     local particleComponent = Particle(resources.images.particle1, 5000, Vector(-50, 0), {0.2, 1.2}, nil)
     self:add(particleComponent)
     local particle = particleComponent.particle

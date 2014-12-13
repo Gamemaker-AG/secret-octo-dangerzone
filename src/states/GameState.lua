@@ -1,5 +1,5 @@
 -- Models
-local EnemyModel = require("models/EnemyModel")
+local PirateModel = require("models/PirateModel")
 local PlayerModel = require("models/PlayerModel")
 local TurretModel = require("models/TurretModel")
 

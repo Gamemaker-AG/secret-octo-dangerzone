@@ -1,6 +1,6 @@
 local WavesSystem = class("WavesSystem", System)
 local constants = require("constants")
-local EnemyModel = require("models/EnemyModel")
+local PirateModel = require("models/PirateModel")
 local timer = constants.waves.timer
 
 function WavesSystem:update(dt)
@@ -14,15 +14,15 @@ function WavesSystem:update(dt)
 end
 
 function WavesSystem:spawnWave(enemies)
-    local player = table.find(stack:current().engine:getEntityList("Faction"), function (index, entity)
-        return entity:get("Faction").faction == "player"
-    end)
-    for i=0, enemies-1 do
-        local enemy = EnemyModel(math.random(player:get("Transformable").position.x + -1200, 
-                                                player:get("Transformable").position.x + 1200),
-                                    math.random(player:get("Transformable").position.y + -1200, 
-                                                player:get("Transformable").position.y + 700))
-        stack:current().engine:addEntity(enemy)
+    local player = table.firstElement(stack:current().engine:getEntityList("Player"))
+    if player then
+        for i=0, enemies-1 do
+            local enemy = PirateModel(math.random(player:get("Transformable").position.x + -1200, 
+                                                    player:get("Transformable").position.x + 1200),
+                                        math.random(player:get("Transformable").position.y + -1200, 
+                                                    player:get("Transformable").position.y + 700))
+            stack:current().engine:addEntity(enemy)
+        end
     end
 end
 
