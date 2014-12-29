@@ -33,10 +33,12 @@ local WavesSystem = require("systems/gameplay/WavesSystem")
 local DebrisDestroySystem = require("systems/gameplay/DebrisDestroySystem")
 local ParallaxSystem = require("systems/draw/ParallaxSystem")
 local GoldSystem = require("systems/gameplay/GoldSystem")
+local DamageSystem = require("systems/gameplay/DamageSystem")
 
 -- Events
 local KeyPressed = require("events/KeyPressed")
 local KeyReleased = require("events/KeyReleased")
+local DamageDone = require("events/DamageDone")
 
 -- Components
 local DrawableText = require("components/graphic/DrawableText")
@@ -87,6 +89,10 @@ function GameState:load()
 
     self.eventmanager:addListener("KeyPressed", {playercontrol, playercontrol.fireEvent})
     self.eventmanager:addListener("KeyReleased", {playercontrol, playercontrol.fireEvent})
+
+    -- Pure Event Systems
+    local damagesystem = DamageSystem()
+    self.eventmanager:addListener("DamageDone", {damagesystem, damagesystem.fireEvent})
 
     local deepfield = Entity()
     deepfield:add(Drawable(resources.images.deepfield))

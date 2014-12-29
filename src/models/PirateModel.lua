@@ -12,7 +12,7 @@ local Accelerating = require("components/physic/Accelerating")
 local Transformable = require("components/physic/Transformable")
 
 -- Gameplay components
-local Living = require("components/gameplay/Living")
+local Hull = require("components/gameplay/Hull")
 local Weapon = require("components/gameplay/Weapon")
 local Attitude = require("components/gameplay/Attitude")
 local MovingTo = require("components/gameplay/MovingTo")
@@ -32,7 +32,7 @@ function PirateModel:__init(x, y)
     self:add(Rotating(constants.enemy.defaultRotationSpeed))
     self:add(Accelerating(constants.enemy.defaultAcceleration, Vector(0,0)))
     self:add(LookingAt())
-    self:add(Living(20))
+    self:add(Hull(20))
     self:add(MovingTo())
     self:add(Attitude({Player=1}))
     self:add(Wave())
@@ -43,7 +43,7 @@ function PirateModel:__init(x, y)
     if player then self:add(ExplodesOnContact(player, constants.player.diameter/2)) end
 
     local func = function(entity, target)
-        stack:current().engine:addEntity(Rocket(entity:get("Transformable").position, target))
+        stack:current().engine:addEntity(Rocket(entity:get("Transformable").position, target, 10))
     end
     --||-- Why no constants? fire, damage, cooldown, range, target
     self:add(Weapon(func, 10, 2, 2000, nil))

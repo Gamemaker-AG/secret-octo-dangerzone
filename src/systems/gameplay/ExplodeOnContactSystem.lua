@@ -1,4 +1,5 @@
 local Destroyed = require("components/gameplay/Destroyed")
+local DamageDone = require("events/DamageDone")
 
 local ExplodeOnContactSystem = class("ExplodeOnContactSystem", System)
 
@@ -9,12 +10,8 @@ function ExplodeOnContactSystem:update(dt)
         local target = explodeComponent.target
         if targetPos and targetPos:distanceTo(entity:get("Transformable").position) < explodeComponent.distance then
             if entity:has("Damaging") then
-                if target:has("Living") then
-                    local living = target:get("Living")
-                    living.life = living.life - entity:get("Damaging").damage
-                    if living.life <= 0 then
-                        target:add(Destroyed())
-                    end
+                if target:has("Hull") then
+                    stack:current().eventmanager:fireEvent(DamageDone(entity:get("Damaging").damage, target))
                 end
             end
             entity:add(Destroyed())
