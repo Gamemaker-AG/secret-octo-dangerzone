@@ -3,7 +3,6 @@ local PirateModel = require("models/PirateModel")
 local PlayerModel = require("models/PlayerModel")
 local TurretModel = require("models/TurretModel")
 
-
 -- Graphic systems
 local DrawSystem = require("systems/draw/DrawSystem")
 local StringDrawSystem = require("systems/draw/StringDrawSystem")
@@ -40,6 +39,8 @@ local ShieldSystem = require("systems/gameplay/ShieldSystem")
 local KeyPressed = require("events/KeyPressed")
 local KeyReleased = require("events/KeyReleased")
 local DamageDone = require("events/DamageDone")
+local UpdateTransformable = require("events/UpdateTransformable")
+local UpdateParticlePosition = require("events/UpdateParticlePosition")
 
 -- Components
 local DrawableText = require("components/graphic/DrawableText")
@@ -57,11 +58,23 @@ function GameState:load()
     self.engine = Engine()
     self.engine:getRootEntity():add(Transformable())
     self.eventmanager = EventManager()
+
+    -- Systems containing update and draw
+    local shieldSystem = ShieldSystem()
+    local cameraSystem = CameraSystem()
     
+    -- Systems containing an event function
     local playercontrol = PlayerControlSystem()
+    local transformableUpdateSystem = TransformableUpdateSystem()
+    local particlePositionSyncSystem = ParticlePositionSyncSystem()
+
+    -- Pure event systems
+    local damagesystem = DamageSystem()
+
+    -- Adding update systems
     self.engine:addSystem(GoldSystem())
     self.engine:addSystem(DestroySystem())
-    self.engine:addSystem(TransformableUpdateSystem())
+    self.engine:addSystem(transformableUpdateSystem)
     self.engine:addSystem(AccelerationSystem())
     self.engine:addSystem(MovementSystem())
     self.engine:addSystem(RotationSystem())
@@ -71,59 +84,73 @@ function GameState:load()
     self.engine:addSystem(playercontrol)
     self.engine:addSystem(ExplodeOnContactSystem())
     self.engine:addSystem(ParticleUpdateSystem())    
-    self.engine:addSystem(ParticlePositionSyncSystem())
+    self.engine:addSystem(particlePositionSyncSystem)
     self.engine:addSystem(TargetingSystem())
     self.engine:addSystem(MuzzleparticlesSystem())
     self.engine:addSystem(WavesSystem())
     self.engine:addSystem(DebrisDestroySystem())
-
-    
-    local shieldSystem = ShieldSystem()
-    local cameraSystem = CameraSystem()
     self.engine:addSystem(shieldSystem, "update")
     self.engine:addSystem(cameraSystem, "update")
 
-    -- has to be first to translate the coordinate system
+    -- Adding draw systems
+    -- Camera system has to be first to translate the coordinate system
     self.engine:addSystem(cameraSystem, "draw")
-    self.engine:addSystem(shieldSystem, "draw")
 
     self.engine:addSystem(DrawSystem())
     self.engine:addSystem(ParticleDrawSystem())
     self.engine:addSystem(StringDrawSystem())
     self.engine:addSystem(ParallaxSystem())
+    self.engine:addSystem(shieldSystem, "draw")
 
+    -- Registering event listeners
     self.eventmanager:addListener("KeyPressed", {playercontrol, playercontrol.fireEvent})
     self.eventmanager:addListener("KeyReleased", {playercontrol, playercontrol.fireEvent})
-
-    -- Pure Event Systems
-    local damagesystem = DamageSystem()
     self.eventmanager:addListener("DamageDone", {damagesystem, damagesystem.fireEvent})
+    self.eventmanager:addListener("UpdateTransformable", {transformableUpdateSystem, transformableUpdateSystem.onDemandUpdate})
+    self.eventmanager:addListener("UpdateParticlePosition", {particlePositionSyncSystem, particlePositionSyncSystem.updatePosition})
 
+    -- Adding Initializer to Engine
+    self.engine:addInitializer("Transformable",
+        function(entity)
+            stack:current().eventmanager:fireEvent(UpdateTransformable(entity))
+            if entity:has("Particle") then
+                stack:current().eventmanager:fireEvent(UpdateParticlePosition(entity))
+            end
+        end
+    )
+
+    -- Adding deepfield entity
     local deepfield = Entity()
     deepfield:add(Drawable(resources.images.deepfield))
     deepfield:add(Transformable(Vector(0, 0)))
     deepfield:add(Parallax(1.5))
     self.engine:addEntity(deepfield)
+
+    -- Adding background 1
     local bg = Entity()
     bg:add(Drawable(resources.images.bg))
     bg:add(Transformable(Vector(0, 0)))
     bg:add(Parallax(1.6))
     self.engine:addEntity(bg)
 
+    -- Adding background 2
     local bg = Entity()
     bg:add(Drawable(resources.images.bg))
     bg:add(Transformable(Vector(0, 0)))
     bg:add(Parallax(1.7))
     self.engine:addEntity(bg)
     
-    -- PlayerCreation
+    -- Adding player entity
     self.player = PlayerModel()
     self.engine:addEntity(self.player)
 
+    -- Adding player turret
     local turret = TurretModel(Vector(30, 0), self.player)
     self.engine:addEntity(turret)
 
-    -- DebugStrings
+
+
+    -- Debug strings
     local posstring = Entity(self.player)
     posstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Position %i %i", {{self.player:get("Transformable").position, "x"},{self.player:get("Transformable").position, "y"}} ))
     posstring:add(Transformable(Vector(50,50),nil))
