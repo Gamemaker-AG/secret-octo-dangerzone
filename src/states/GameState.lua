@@ -34,6 +34,7 @@ local DebrisDestroySystem = require("systems/gameplay/DebrisDestroySystem")
 local ParallaxSystem = require("systems/draw/ParallaxSystem")
 local GoldSystem = require("systems/gameplay/GoldSystem")
 local DamageSystem = require("systems/gameplay/DamageSystem")
+local ShieldSystem = require("systems/gameplay/ShieldSystem")
 
 -- Events
 local KeyPressed = require("events/KeyPressed")
@@ -76,11 +77,15 @@ function GameState:load()
     self.engine:addSystem(WavesSystem())
     self.engine:addSystem(DebrisDestroySystem())
 
+    
+    local shieldSystem = ShieldSystem()
     local cameraSystem = CameraSystem()
+    self.engine:addSystem(shieldSystem, "update")
     self.engine:addSystem(cameraSystem, "update")
 
     -- has to be first to translate the coordinate system
     self.engine:addSystem(cameraSystem, "draw")
+    self.engine:addSystem(shieldSystem, "draw")
 
     self.engine:addSystem(DrawSystem())
     self.engine:addSystem(ParticleDrawSystem())
