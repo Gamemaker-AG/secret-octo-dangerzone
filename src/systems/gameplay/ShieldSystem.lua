@@ -18,3 +18,5 @@ end
 function ShieldSystem:requires()
     return {"Shield", "Transformable"}
 end
+
+return ShieldSystem
