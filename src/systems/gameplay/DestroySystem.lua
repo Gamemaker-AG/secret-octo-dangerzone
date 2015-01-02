@@ -1,3 +1,5 @@
+local GameOverState = require("states/GameOverState")
+
 local AddingGold = require("events/AddingGold")
 
 local DestroySystem = class("DestroySystem", System)
@@ -12,6 +14,10 @@ function DestroySystem:update(dt)
         end
         if entity:has("DropsGold") then
             stack:current().eventmanager:fireEvent(AddingGold(entity))
+        end
+        if entity:has("Player") then
+            stack:push(GameOverState())
+            break
         end
         stack:current().engine:removeEntity(entity)
     end
