@@ -21,7 +21,7 @@ function DamageSystem:fireEvent(event)
     if damage > 0 then
         hull.hitpoints = hull.hitpoints - damage
         if hull.hitpoints <= 0 then
-            target:add(Destroyed())
+            target:set(Destroyed())
         end
     end
 end
