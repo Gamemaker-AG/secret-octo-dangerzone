@@ -10,8 +10,6 @@ end
 
 function ShieldSystem:draw()
     for _, entity in pairs(self.targets) do
-        local transformable = entity:get("Transformable")
-        love.graphics.drawCircle()
     end
 end
 

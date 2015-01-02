@@ -10,9 +10,7 @@ function ExplodeOnContactSystem:update(dt)
         local target = explodeComponent.target
         if targetPos and targetPos:distanceTo(entity:get("Transformable").position) < explodeComponent.distance then
             if entity:has("Damaging") then
-                if target:has("Hull") then
-                    stack:current().eventmanager:fireEvent(DamageDone(entity:get("Damaging").damage, target))
-                end
+                stack:current().eventmanager:fireEvent(DamageDone(entity:get("Damaging").damage, target))
             end
             entity:add(Destroyed())
         end

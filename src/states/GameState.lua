@@ -152,6 +152,17 @@ function GameState:load()
     local turret = TurretModel(Vector(30, 0), self.player)
     self.engine:addEntity(turret)
 
+    -- Adding Hull and Shield string entity
+
+    local hull = Entity()
+    hull:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's hull: %i", {{self.player:get("Hull"), "hitpoints"}}))
+    hull:add(Transformable(Vector(10,10),nil))
+    self.engine:addEntity(hull)
+
+    local shield = Entity()
+    shield:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's shield: %i", {{self.player:get("Shield"), "hitpoints"}}))
+    shield:add(Transformable(Vector(10,30),nil))
+    self.engine:addEntity(shield)
 
 
     -- Debug strings
