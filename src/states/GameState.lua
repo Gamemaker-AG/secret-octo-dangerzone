@@ -70,9 +70,9 @@ function GameState:load()
 
     -- Pure event systems
     local damagesystem = DamageSystem()
+    local goldsystem = GoldSystem()
 
     -- Adding update systems
-    self.engine:addSystem(GoldSystem())
     self.engine:addSystem(DestroySystem())
     self.engine:addSystem(transformableUpdateSystem)
     self.engine:addSystem(AccelerationSystem())
@@ -102,9 +102,13 @@ function GameState:load()
     self.engine:addSystem(ParallaxSystem())
     self.engine:addSystem(shieldSystem, "draw")
 
+    -- Adding passive systems
+    self.engine:addSystem(goldsystem)
+
     -- Registering event listeners
     self.eventmanager:addListener("KeyPressed", {playercontrol, playercontrol.fireEvent})
     self.eventmanager:addListener("KeyReleased", {playercontrol, playercontrol.fireEvent})
+    self.eventmanager:addListener("AddingGold", {goldsystem, goldsystem.addGold})
     self.eventmanager:addListener("DamageDone", {damagesystem, damagesystem.fireEvent})
     self.eventmanager:addListener("UpdateTransformable", {transformableUpdateSystem, transformableUpdateSystem.onDemandUpdate})
     self.eventmanager:addListener("UpdateParticlePosition", {particlePositionSyncSystem, particlePositionSyncSystem.updatePosition})

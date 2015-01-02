@@ -1,22 +1,17 @@
 local GoldSystem = class("GoldSystem", System)
 
 
-function GoldSystem:update(dt)
-local loot = 0
-	for key, entity in pairs(self.targets.enemies) do
-		if entity:has("Destroyed") then
-			local amount = entity:get("DropsGold").gold
-			loot = loot + amount
-		end
-	end
-	for key, entity in pairs(self.targets.players) do
+function GoldSystem:addGold(event)
+    local enemy = event.enemy
+	local amount = enemy:get("DropsGold").gold
+	for _, entity in pairs(self.targets) do
 		local playergold = entity:get("HasGold")
-		playergold.gold = playergold.gold + loot 
+		playergold.gold = playergold.gold + amount
 	end
 end
 
 function GoldSystem:requires()
-	return {players = {"HasGold"}, enemies = {"DropsGold"}}
+	return {"HasGold"}
 end
 
 return GoldSystem

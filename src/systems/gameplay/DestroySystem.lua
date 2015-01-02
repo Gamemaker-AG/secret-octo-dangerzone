@@ -1,3 +1,5 @@
+local AddingGold = require("events/AddingGold")
+
 local DestroySystem = class("DestroySystem", System)
 
 function DestroySystem:update(dt)
@@ -7,6 +9,9 @@ function DestroySystem:update(dt)
             particle:add(entity:get("Transformable"))
             particle:add(entity:get("Particle"))
             particle:get("Particle").emitterlife = 0
+        end
+        if entity:has("DropsGold") then
+            stack:current().eventmanager:fireEvent(AddingGold(entity))
         end
         stack:current().engine:removeEntity(entity)
     end
