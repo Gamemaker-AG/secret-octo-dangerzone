@@ -74,7 +74,7 @@ function PlayerModel:__init()
     local ship = resources.images.player
     local sx, sy = constants.player.diameter/ship:getWidth(), constants.player.diameter/ship:getHeight()
     local ox, oy = ship:getWidth()*(2/3), ship:getHeight()/2
-    self:add(Drawable(ship, 0, sx, sy, ox, oy))
+    self:add(Drawable(ship, 1, sx, sy, ox, oy))
     self:add(Controllable())
     self:add(HasGold(0))
 end

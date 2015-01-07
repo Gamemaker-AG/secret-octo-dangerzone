@@ -17,7 +17,7 @@ function Bullet:__init(pos, target, damage)
     local image = resources.images.beam
     local sx, sy = constants.bullet.diameter/image:getWidth(), constants.bullet.diameter/image:getHeight()
     local ox, oy = image:getWidth()/2, image:getHeight()/2
-    self:add(Drawable(image, 0, sx, sy, ox, oy))
+    self:add(Drawable(image, 1, sx, sy, ox, oy))
 
     local direction = target:get("Transformable").position:subtract(pos):getUnit()
     self:add(Moving(direction:multiply(constants.bullet.speed)))

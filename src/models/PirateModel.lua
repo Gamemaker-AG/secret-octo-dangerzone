@@ -51,7 +51,7 @@ function PirateModel:__init(x, y)
     local ship = resources.images.enemy
     local sx, sy = constants.enemy.diameter/ship:getWidth(), constants.enemy.diameter/ship:getHeight()
     local ox, oy = ship:getWidth()/2, ship:getHeight()/2
-    self:add(Drawable(ship, 0, sx, sy, ox, oy))
+    self:add(Drawable(ship, 1, sx, sy, ox, oy))
 end
 
 return PirateModel
