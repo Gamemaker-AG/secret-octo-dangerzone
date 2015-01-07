@@ -97,9 +97,9 @@ function GameState:load()
     -- Camera system has to be first to translate the coordinate system
     self.engine:addSystem(cameraSystem, "draw")
 
-    self.engine:addSystem(ParticleDrawSystem())
-    self.engine:addSystem(StringDrawSystem())
     self.engine:addSystem(DrawSystem())
+    self.engine:addSystem(StringDrawSystem())
+    self.engine:addSystem(ParticleDrawSystem())
     self.engine:addSystem(shieldSystem, "draw")
 
     -- Adding passive systems

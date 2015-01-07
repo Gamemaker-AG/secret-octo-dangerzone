@@ -38,7 +38,7 @@ function TurretModel:__init(offset, parent)
     local turret = resources.images.circle
     local sx, sy = constants.turret.diameter/turret:getWidth(), constants.turret.diameter/turret:getHeight()
     local ox, oy = turret:getWidth()/2, turret:getHeight()/2
-    self:add(Drawable(turret, 1, sx, sy, ox, oy))
+    self:add(Drawable(turret, 2, sx, sy, ox, oy))
 end
 
 return TurretModel
