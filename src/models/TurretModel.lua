@@ -24,7 +24,7 @@ function TurretModel:__init(offset, parent)
     if parent then
         self:setParent(parent)
     else parent = nil end
-    self:add(Transformable(offset, nil))
+    self:add(Transformable(offset, nil, true))
     self:add(Rotating(constants.turret.defaultRotationSpeed))
     self:add(Attitude({Pirate=1}))
     local func = function(entity, target)

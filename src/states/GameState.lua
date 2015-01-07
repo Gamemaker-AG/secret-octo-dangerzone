@@ -168,17 +168,17 @@ function GameState:load()
     -- Debug strings
     local posstring = Entity(self.player)
     posstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Position %i %i", {{self.player:get("Transformable").position, "x"},{self.player:get("Transformable").position, "y"}} ))
-    posstring:add(Transformable(Vector(50,50),nil))
+    posstring:add(Transformable(Vector(50,50),nil, false))
     self.engine:addEntity(posstring)
 
     local speedstring = Entity(self.player)
     speedstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Speed %i %i", {{self.player:get("Moving").speed, "x"}, {self.player:get("Moving").speed, "y"}} ))
-    speedstring:add(Transformable(Vector(50,100),nil))
+    speedstring:add(Transformable(Vector(50,100),nil, false))
     self.engine:addEntity(speedstring)
 
     local goldstring = Entity(self.player)
     goldstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Gold %i", {{self.player:get("HasGold"), "gold"}} ))
-    goldstring:add(Transformable(Vector(100, 100),nil))
+    goldstring:add(Transformable(Vector(50, 150),nil, false))
     self.engine:addEntity(goldstring)
 end
 
