@@ -18,7 +18,7 @@ local Damaging = require("components/gameplay/Damaging")
 -- Gameplay components
 local Weapon = require("components/gameplay/Weapon")
 local Controllable = require("components/gameplay/Controllable")
-local Faction = require("components/gameplay/Faction")
+local Attitude = require("components/gameplay/Attitude")
 local Camera = require("components/gameplay/Camera")
 
 

@@ -19,13 +19,15 @@ function TargetingSystem:update()
 
         if weapon.target == nil or not weapon.target.alive then
             weapon.target = nil
-            local list = stack:current().engine:getEntityList("Faction") 
-            for index, enemy in pairs(list) do
-                if entity:get("Faction").attitude[enemy:get("Faction").faction] then
-                    local enemyPosition = enemy:get("Transformable").position
-                    if position:distanceTo(enemyPosition) <= lowest then
-                        lowest = position:distanceTo(enemyPosition)
-                        weapon.target = enemy
+            local faction = entity:get("Attitude").attitude
+            for Identifier, status in pairs(faction) do
+                if status == 1 then
+                    for _, enemy in pairs(stack:current().engine:getEntityList(Identifier)) do
+                        local enemyPosition = enemy:get("Transformable").position
+                        if position:distanceTo(enemyPosition) <= lowest then
+                            lowest = position:distanceTo(enemyPosition)
+                            weapon.target = enemy
+                        end
                     end
                 end
             end
@@ -43,7 +45,7 @@ function TargetingSystem:update()
 end
 
 function TargetingSystem:requires()
-    return {moving = {"MovingTo"}, looking={"LookingAt"}, weapon={"Weapon", "Faction"}}
+    return {moving = {"MovingTo"}, looking={"LookingAt"}, weapon={"Weapon", "Attitude"}}
 end
 
 return TargetingSystem

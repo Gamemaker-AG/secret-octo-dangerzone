@@ -11,11 +11,11 @@ local Transformable = require("components/physic/Transformable")
 
 -- Gameplay components
 local Weapon = require("components/gameplay/Weapon")
-local Faction = require("components/gameplay/Faction")
+local Attitude = require("components/gameplay/Attitude")
 local LookingAt = require("components/gameplay/LookingAt")
 
 -- Models
-local Enemy = require("models/EnemyModel")
+local Enemy = require("models/PirateModel")
 local Bullet = require("models/BulletModel")
 
 local TurretModel = class("TurretModel", Entity)
@@ -26,7 +26,7 @@ function TurretModel:__init(offset, parent)
     else parent = nil end
     self:add(Transformable(offset, nil))
     self:add(Rotating(constants.turret.defaultRotationSpeed))
-    self:add(Faction("player", {enemy=1}))
+    self:add(Attitude({Pirate=1}))
     local func = function(entity, target)
         stack:current().engine:addEntity(Bullet(entity:get("Transformable").position, target, entity:get("Weapon").damage))
     end
