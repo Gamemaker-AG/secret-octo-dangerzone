@@ -36,6 +36,7 @@ local GoldSystem = require("systems/gameplay/GoldSystem")
 local DamageSystem = require("systems/gameplay/DamageSystem")
 local ShieldSystem = require("systems/gameplay/ShieldSystem")
 local DebugSystem = require("systems/gameplay/DebugSystem")
+local Camera = require("components/gameplay/Camera")
 
 -- Events
 local KeyPressed = require("events/KeyPressed")
@@ -77,7 +78,6 @@ function GameState:load()
 
     -- Adding update systems
     self.engine:addSystem(DestroySystem())
-    self.engine:addSystem(transformableUpdateSystem)
     self.engine:addSystem(AccelerationSystem())
     self.engine:addSystem(MovementSystem())
     self.engine:addSystem(RotationSystem())
@@ -93,8 +93,9 @@ function GameState:load()
     self.engine:addSystem(WavesSystem())
     self.engine:addSystem(DebrisDestroySystem())
     self.engine:addSystem(shieldSystem, "update")
-    self.engine:addSystem(cameraSystem, "update")
     self.engine:addSystem(ParallaxSystem())
+    self.engine:addSystem(cameraSystem, "update")
+    self.engine:addSystem(transformableUpdateSystem)
 
     -- Adding draw systems
     -- Camera system has to be first to translate the coordinate system
@@ -153,19 +154,24 @@ function GameState:load()
     self.player = PlayerModel()
     self.engine:addEntity(self.player)
 
+    local camera = Entity()
+    camera:add(Camera(self.player))
+    camera:add(Transformable(self.player:get("Transformable").position:clone()))
+    stack:current().engine:addEntity(camera)
+
     -- Adding player turret
     local turret = TurretModel(Vector(30, 0), self.player)
     self.engine:addEntity(turret)
 
     -- Adding Hull and Shield string entity
 
-    local hull = Entity()
+    local hull = Entity(camera)
     hull:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's hull: %i", {{self.player:get("Hull"), "hitpoints"}}))
     hull:add(Transformable(Vector(10,10),nil))
     hull:add(DebugText())
     self.engine:addEntity(hull)
 
-    local shield = Entity()
+    local shield = Entity(camera)
     shield:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's shield: %i", {{self.player:get("Shield"), "hitpoints"}}))
     shield:add(Transformable(Vector(10,30),nil))
     shield:add(DebugText())

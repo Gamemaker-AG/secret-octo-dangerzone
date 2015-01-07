@@ -7,16 +7,17 @@ local CameraSystem = class("CameraSystem", System)
 
 -- This is a system intended for a singleton camera, using multiple cameras for a game wouldn't make sense
 function CameraSystem:draw()
-    local pos = table.firstElement(self.targets):get("Camera").position
+    local pos = table.firstElement(self.targets):get("Transformable").position
     love.graphics.translate(-pos.x, -pos.y)
 end
 
 function CameraSystem:update()
-    local cam = table.firstElement(self.targets):get("Camera")
-    local targetPos = cam.target:get("Transformable").position:subtract(Vector(constants.screenWidth/2, constants.screenHeight/2))
+    local transformable = table.firstElement(self.targets):get("Transformable")
+    local camera = table.firstElement(self.targets):get("Camera")
+    local targetPos = camera.target:get("Transformable").position:subtract(Vector(constants.screenWidth/2, constants.screenHeight/2))
 
-    cam.position.x = lume.smooth(cam.position.x, targetPos.x, constants.camera.speed)
-    cam.position.y = lume.smooth(cam.position.y, targetPos.y, constants.camera.speed)
+    transformable.offset.x = math.floor(lume.smooth(transformable.position.x, targetPos.x, constants.camera.speed))
+    transformable.offset.y = math.floor(lume.smooth(transformable.position.y, targetPos.y, constants.camera.speed))
 
 end
 

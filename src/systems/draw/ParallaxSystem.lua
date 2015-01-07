@@ -8,7 +8,7 @@ function ParallaxSystem:update(dt)
         local pos = entity:get("Transformable").position
         local cam = table.firstElement(stack:current().engine:getEntityList("Camera"))
         if cam then 
-            pos:set(cam:get("Camera").position:multiply(1/depth))
+            pos:set(cam:get("Transformable").position:multiply(1/depth))
         end
     end
 end

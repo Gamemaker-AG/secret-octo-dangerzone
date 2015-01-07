@@ -16,7 +16,6 @@ local Transformable = require("components/physic/Transformable")
 local Weapon = require("components/gameplay/Weapon")
 local Controllable = require("components/gameplay/Controllable")
 local Attitude = require("components/gameplay/Attitude")
-local Camera = require("components/gameplay/Camera")
 local HasGold = require("components/gameplay/HasGold")
 local Shield = require("components/gameplay/Shield")
 local Hull = require("components/gameplay/Hull")
@@ -66,10 +65,6 @@ function PlayerModel:__init()
                         )    --light green
     particle:setSizes(1.5, 0.8, 0.1)
     particle:start()
-
-    local camera = Entity()
-    camera:add(Camera(self))
-    stack:current().engine:addEntity(camera)
 
     local ship = resources.images.player
     local sx, sy = constants.player.diameter/ship:getWidth(), constants.player.diameter/ship:getHeight()
