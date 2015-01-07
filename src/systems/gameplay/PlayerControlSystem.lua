@@ -19,8 +19,6 @@ function PlayerControlSystem:fireEvent(event)
             elseif event.key == "d" or event.key == "right" then
                 local rotating = entity:get("Rotating")
                 rotating.rotationSpeed = rotating.defRotationSpeed
-            elseif event.key == "h" then
-                stack:current().engine:toggleSystem("StringDrawSystem")
             end
          elseif event.__name == "KeyReleased" then
             if event.key == "w" or event.key == "up" then

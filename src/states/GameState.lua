@@ -8,6 +8,7 @@ local DrawSystem = require("systems/draw/DrawSystem")
 local StringDrawSystem = require("systems/draw/StringDrawSystem")
 local CameraSystem = require("systems/draw/CameraSystem")
 local MuzzleparticlesSystem = require("systems/draw/MuzzleparticlesSystem")
+local DebugText = require("components/graphic/DebugText")
 
 -- Particle systems 
 local ParticleDrawSystem = require("systems/particle/ParticleDrawSystem")
@@ -34,6 +35,7 @@ local ParallaxSystem = require("systems/draw/ParallaxSystem")
 local GoldSystem = require("systems/gameplay/GoldSystem")
 local DamageSystem = require("systems/gameplay/DamageSystem")
 local ShieldSystem = require("systems/gameplay/ShieldSystem")
+local DebugSystem = require("systems/gameplay/DebugSystem")
 
 -- Events
 local KeyPressed = require("events/KeyPressed")
@@ -71,6 +73,7 @@ function GameState:load()
     -- Pure event systems
     local damagesystem = DamageSystem()
     local goldsystem = GoldSystem()
+    local debugsystem = DebugSystem()
 
     -- Adding update systems
     self.engine:addSystem(DestroySystem())
@@ -104,9 +107,11 @@ function GameState:load()
 
     -- Adding passive systems
     self.engine:addSystem(goldsystem)
+    self.engine:addSystem(debugsystem)
 
     -- Registering event listeners
     self.eventmanager:addListener("KeyPressed", {playercontrol, playercontrol.fireEvent})
+    self.eventmanager:addListener("KeyPressed", {debugsystem, debugsystem.setInvisibility})
     self.eventmanager:addListener("KeyReleased", {playercontrol, playercontrol.fireEvent})
     self.eventmanager:addListener("AddingGold", {goldsystem, goldsystem.addGold})
     self.eventmanager:addListener("DamageDone", {damagesystem, damagesystem.fireEvent})
@@ -157,11 +162,13 @@ function GameState:load()
     local hull = Entity()
     hull:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's hull: %i", {{self.player:get("Hull"), "hitpoints"}}))
     hull:add(Transformable(Vector(10,10),nil))
+    hull:add(DebugText())
     self.engine:addEntity(hull)
 
     local shield = Entity()
     shield:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's shield: %i", {{self.player:get("Shield"), "hitpoints"}}))
     shield:add(Transformable(Vector(10,30),nil))
+    shield:add(DebugText())
     self.engine:addEntity(shield)
 
 

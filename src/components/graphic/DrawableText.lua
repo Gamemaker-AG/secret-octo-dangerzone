@@ -5,6 +5,7 @@ function DrawableText:__init(font, color,string, values)
     self.string = string
     self.color = color
     self.values = values
+    self.visible = true
 end
 
 return DrawableText
