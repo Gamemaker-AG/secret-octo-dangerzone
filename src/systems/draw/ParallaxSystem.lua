@@ -5,10 +5,10 @@ local Vector = require("helper/Vector")
 function ParallaxSystem:update(dt)
     for _, entity in pairs(self.targets) do
         local depth = entity:get("Parallax").depth
-        local pos = entity:get("Transformable").position
+        local offset = entity:get("Transformable").offset
         local cam = table.firstElement(stack:current().engine:getEntityList("Camera"))
         if cam then 
-            pos:set(cam:get("Transformable").position:multiply(1/depth))
+            offset:set(cam:get("Transformable").position:multiply(1/depth))
         end
     end
 end
