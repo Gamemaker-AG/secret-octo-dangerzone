@@ -14,7 +14,7 @@ function WavesSystem:update(dt)
 end
 
 function WavesSystem:spawnWave(enemies)
-    local player = table.firstElement(stack:current().engine:getEntityList("Player"))
+    local player = table.firstElement(stack:current().engine:getEntitiesWithComponent("Player"))
     if player then
         for i=0, enemies-1 do
             local enemy = PirateModel(math.random(player:get("Transformable").position.x + -1200, 

@@ -39,7 +39,7 @@ function PirateModel:__init(x, y)
     self:add(DropsGold(1))
     self:add(Pirate())
 
-    local player = table.firstElement(stack:current().engine:getEntityList("Player"))
+    local player = table.firstElement(stack:current().engine:getEntitiesWithComponent("Player"))
     if player then self:add(ExplodesOnContact(player, constants.player.diameter/2)) end
 
     local func = function(entity, target)
