@@ -27,7 +27,7 @@ function DestroySystem:update(dt)
         local explosion = Entity()
         explosion:add(entity:get("Transformable"))
 
-        local particleComponent = Particle(resources.images.particle1, 5000, Vector(0, 0), {0.2, 0.6}, 0.5)
+        local particleComponent = Particle(resources.images.particle1, 5000, Vector(0, 0), {0.2, 1.2}, 1.2)
         explosion:add(particleComponent)
         local particle = particleComponent.particle
     
@@ -37,12 +37,12 @@ function DestroySystem:update(dt)
             local rotatedOffset = particleComponent.offset:rotate(transformable.direction:getRadian()):add(transformable.position)
             local mass
             if entity:has("Pirate") then
-                mass = 50
+                mass = 20
             else
-                mass = 5
+                mass = 1
             end
 
-            local relation = 1
+            local relation = 1/mass
             particle:setPosition(rotatedOffset.x, rotatedOffset.y)
             particle:setEmissionRate(mass*8)
             particle:setSpeed(mass*3, mass*3)
@@ -55,7 +55,7 @@ function DestroySystem:update(dt)
             particle:setParticleLifetime(0.5, 0.6) -- setzt Lebenszeit in min-max
             -- particle:setOffset(x, y) -- Punkt um den der Partikel rotiert
             particle:setRotation(0, 360) -- Der Rotationswert des Partikels bei seiner Erstellung
-            particle:setDirection(0)
+            particle:setDirection(100)
             particle:setSpread(360)
             particle:setRadialAcceleration((mass*-7.5)*relation, (mass*-7.5)*relation)
             particle:start()
