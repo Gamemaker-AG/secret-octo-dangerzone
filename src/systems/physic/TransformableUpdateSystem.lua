@@ -1,26 +1,23 @@
 local TransformableUpdateSystem = class("TransformableUpdateSystem", System)
 
-function TransformableUpdateSystem:__init()
-
-    self.updatePositions = function (_, parent)
-        local parentTrans = parent:get("Transformable")
-        table.each(parent.children, function(_, child)
-            local childTrans = child:get("Transformable") 
-            if childTrans then
-                if childTrans.rotationEnabled then
-                    childTrans.position:set(childTrans.offset:rotate(parentTrans.direction:getRadian()):add(parentTrans.position))
-                else
-                    childTrans.position:set(childTrans.offset:add(parentTrans.position))
-                end    
-                self.updatePositions(nil, child)
-            end
-        end)
-    end
+function TransformableUpdateSystem:updatePositions(parent)
+    local parentTrans = parent:get("Transformable")
+    table.each(parent.children, function(_, child)
+        local childTrans = child:get("Transformable") 
+        if childTrans then
+            if childTrans.rotationEnabled then
+                childTrans.position:set(childTrans.offset:rotate(parentTrans.direction:getRadian()):add(parentTrans.position))
+            else
+                childTrans.position:set(childTrans.offset:add(parentTrans.position))
+            end    
+            self:updatePositions(child)
+        end
+    end)
 end
 
 function TransformableUpdateSystem:update(dt)
     local master = stack:current().engine:getRootEntity()
-    self.updatePositions(nil, master)
+    self:updatePositions(master)
 end
 
 function TransformableUpdateSystem:onDemandUpdate(event)
@@ -33,7 +30,7 @@ function TransformableUpdateSystem:onDemandUpdate(event)
         transformable.position:set(transformable.offset:add(ParentTransformable.position))
     end
 
-    self.updatePositions(nil, target)
+    self:updatePositions(target)
 end
 
 return TransformableUpdateSystem
