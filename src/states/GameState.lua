@@ -8,7 +8,6 @@ local DrawSystem = require("systems/draw/DrawSystem")
 local StringDrawSystem = require("systems/draw/StringDrawSystem")
 local CameraSystem = require("systems/draw/CameraSystem")
 local MuzzleparticlesSystem = require("systems/draw/MuzzleparticlesSystem")
-local DebugText = require("components/graphic/DebugText")
 
 -- Particle systems 
 local ParticleDrawSystem = require("systems/particle/ParticleDrawSystem")
@@ -48,6 +47,7 @@ local UpdateParticlePosition = require("events/UpdateParticlePosition")
 -- Components
 local DrawableText = require("components/graphic/DrawableText")
 local Transformable = require("components/physic/Transformable")
+local DebugText = require("components/graphic/DebugText")
 local Parallax = require("components/gameplay/Parallax")
 
 -- Helper
@@ -97,6 +97,7 @@ function GameState:load()
     self.engine:addSystem(cameraSystem, "update")
     self.engine:addSystem(transformableUpdateSystem)
 
+
     -- Adding draw systems
     -- Camera system has to be first to translate the coordinate system
     self.engine:addSystem(cameraSystem, "draw")
@@ -108,7 +109,10 @@ function GameState:load()
 
     -- Adding passive systems
     self.engine:addSystem(goldsystem)
-    self.engine:addSystem(debugsystem)
+
+    -- Debugsystem
+    self.engine:addSystem(debugsystem, "update")
+    self.engine:addSystem(debugsystem, "draw")
 
     -- Registering event listeners
     self.eventmanager:addListener("KeyPressed", {playercontrol, playercontrol.fireEvent})
@@ -176,6 +180,19 @@ function GameState:load()
     shield:add(Transformable(Vector(10,30),nil))
     shield:add(DebugText())
     self.engine:addEntity(shield)
+
+    local fps = Entity(camera)
+    fps:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "FPS: %i", {{debugsystem, "fps"}}))
+    fps:add(Transformable(Vector(10,50),nil))
+    fps:add(DebugText())
+    self.engine:addEntity(fps)
+
+    local ups = Entity(camera)
+    ups:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "UPS: %i", {{debugsystem, "ups"}}))
+    ups:add(Transformable(Vector(10,70),nil))
+    ups:add(DebugText())
+    self.engine:addEntity(ups)
+
 
 
     -- Debug strings

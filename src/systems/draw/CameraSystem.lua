@@ -16,8 +16,8 @@ function CameraSystem:update()
     local camera = table.firstElement(self.targets):get("Camera")
     local targetPos = camera.target:get("Transformable").position:subtract(Vector(constants.screenWidth/2, constants.screenHeight/2))
 
-    transformable.offset.x = math.floor(lume.smooth(transformable.position.x, targetPos.x, constants.camera.speed))
-    transformable.offset.y = math.floor(lume.smooth(transformable.position.y, targetPos.y, constants.camera.speed))
+    transformable.offset.x = lume.smooth(transformable.position.x, targetPos.x, constants.camera.speed)
+    transformable.offset.y = lume.smooth(transformable.position.y, targetPos.y, constants.camera.speed)
 
 end
 
