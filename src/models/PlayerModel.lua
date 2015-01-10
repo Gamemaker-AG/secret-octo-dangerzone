@@ -2,9 +2,6 @@
 local Vector = require("helper/Vector")
 local constants = require("constants")
 
--- Models
-local PlayerMenu = require("models/ui/PlayerMenu")
-
 -- Graphic components
 local Drawable = require("components/graphic/Drawable")
 local Particle = require("components/particle/Particle")
@@ -82,8 +79,6 @@ function PlayerModel:__init()
     self:add(Controllable())
     self:add(HasGold(0))
 
-    local playerMenu = PlayerMenu()
-    self:add(Clickable(playerMenu.toggle))
     self:add(Diameter(constants.player.diameter))
 end
 
