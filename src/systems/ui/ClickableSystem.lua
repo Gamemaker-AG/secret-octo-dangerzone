@@ -7,7 +7,7 @@ function ClickableSystem:mouseReleased(event)
         local transformable = target:get("Transformable")
         local diameter = target:get("Diameter").diameter
         local clickable = target:get("Clickable")
-        local camPos = table.firstElement(self.targets.camera):get("Camera").position
+        local camPos = table.firstElement(self.targets.camera):get("Transformable").position
         local mouseWorldPosition = Vector(event.x, event.y):add(camPos)
         if transformable.position:distanceTo(mouseWorldPosition) <= diameter/2 then
             clickable.clicked()
@@ -16,7 +16,7 @@ function ClickableSystem:mouseReleased(event)
 end
 
 function ClickableSystem:requires()
-    return {buttons={"Clickable", "Transformable", "Diameter"}, camera={"Camera"}}
+    return {buttons={"Clickable", "Transformable", "Diameter"}, camera={"Camera", "Transformable"}}
 end
 
 return ClickableSystem
