@@ -75,6 +75,7 @@ function GameState:load()
     -- Pure event systems
     local damagesystem = DamageSystem()
     local goldsystem = GoldSystem()
+    local clickableSystem = ClickableSystem()
 
     -- Adding update systems
     self.engine:addSystem(DestroySystem())
@@ -93,6 +94,7 @@ function GameState:load()
     self.engine:addSystem(MuzzleparticlesSystem())
     self.engine:addSystem(WavesSystem())
     self.engine:addSystem(DebrisDestroySystem())
+    self.engine:addSystem(clickableSystem)
     self.engine:addSystem(shieldSystem, "update")
     self.engine:addSystem(cameraSystem, "update")
 
@@ -117,6 +119,8 @@ function GameState:load()
     self.eventmanager:addListener("DamageDone", {damagesystem, damagesystem.fireEvent})
     self.eventmanager:addListener("UpdateTransformable", {transformableUpdateSystem, transformableUpdateSystem.onDemandUpdate})
     self.eventmanager:addListener("UpdateParticlePosition", {particlePositionSyncSystem, particlePositionSyncSystem.updatePosition})
+    self.eventmanager:addListener("MouseReleased", {clickableSystem, clickableSystem.mouseReleased})
+
 
     -- Adding Initializer to Engine
     self.engine:addInitializer("Transformable",
@@ -152,7 +156,6 @@ function GameState:load()
     -- Adding player entity
     self.player = PlayerModel()
     self.engine:addEntity(self.player)
-
 
     -- Adding player turret
     local turret = TurretModel(Vector(30, 0), self.player)

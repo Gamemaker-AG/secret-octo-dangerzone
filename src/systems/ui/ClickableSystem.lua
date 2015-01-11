@@ -5,11 +5,11 @@ ClickableSystem = class("ClickableSystem", System)
 function ClickableSystem:mouseReleased(event)
     for _, target in pairs(self.targets.buttons) do
         local transformable = target:get("Transformable")
-        local diameter = target:get("Diameter")
+        local diameter = target:get("Diameter").diameter
         local clickable = target:get("Clickable")
         local camPos = table.firstElement(self.targets.camera):get("Camera").position
         local mouseWorldPosition = Vector(event.x, event.y):add(camPos)
-        if transformable.position:distanceTo(mouseWorldPosition) <= diameter.diameter/2 then
+        if transformable.position:distanceTo(mouseWorldPosition) <= diameter/2 then
             clickable.clicked()
         end
     end
