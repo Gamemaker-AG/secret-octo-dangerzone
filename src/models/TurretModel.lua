@@ -8,6 +8,7 @@ local Drawable = require("components/graphic/Drawable")
 -- Physic components
 local Rotating = require("components/physic/Rotating")
 local Transformable = require("components/physic/Transformable")
+local Diameter = require("components/physic/Diameter")
 
 -- Gameplay components
 local Weapon = require("components/gameplay/Weapon")
@@ -17,10 +18,13 @@ local LookingAt = require("components/gameplay/LookingAt")
 -- Models
 local Enemy = require("models/PirateModel")
 local Bullet = require("models/BulletModel")
+local TurretMenu = require("models/ui/TurretMenu")
 
 local TurretModel = class("TurretModel", Entity)
 
 function TurretModel:__init(offset, parent)
+    self:add(Diameter(constants.turret.diameter))
+
     if parent then
         self:setParent(parent)
     else parent = nil end
@@ -38,7 +42,10 @@ function TurretModel:__init(offset, parent)
     local turret = resources.images.circle
     local sx, sy = constants.turret.diameter/turret:getWidth(), constants.turret.diameter/turret:getHeight()
     local ox, oy = turret:getWidth()/2, turret:getHeight()/2
-    self:add(Drawable(turret, 2, sx, sy, ox, oy))
+    self:add(Drawable(turret, 10, sx, sy, ox, oy))
+
+    local menu = TurretMenu(self)
+    self:add(Clickable(function() menu:toggle() end))
 end
 
 return TurretModel

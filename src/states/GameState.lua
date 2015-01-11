@@ -37,6 +37,9 @@ local ShieldSystem = require("systems/gameplay/ShieldSystem")
 local DebugSystem = require("systems/gameplay/DebugSystem")
 local Camera = require("components/gameplay/Camera")
 
+-- UI
+local ClickableSystem = require("systems/ui/ClickableSystem")
+
 -- Events
 local KeyPressed = require("events/KeyPressed")
 local KeyReleased = require("events/KeyReleased")
@@ -75,6 +78,7 @@ function GameState:load()
     local damagesystem = DamageSystem()
     local goldsystem = GoldSystem()
     local debugsystem = DebugSystem()
+    local clickableSystem = ClickableSystem()
 
     -- Adding update systems
     self.engine:addSystem(DestroySystem())
@@ -92,6 +96,7 @@ function GameState:load()
     self.engine:addSystem(MuzzleparticlesSystem())
     self.engine:addSystem(WavesSystem())
     self.engine:addSystem(DebrisDestroySystem())
+    self.engine:addSystem(clickableSystem)
     self.engine:addSystem(shieldSystem, "update")
     self.engine:addSystem(ParallaxSystem())
     self.engine:addSystem(cameraSystem, "update")
@@ -118,10 +123,13 @@ function GameState:load()
     self.eventmanager:addListener("KeyPressed", {playercontrol, playercontrol.fireEvent})
     self.eventmanager:addListener("KeyPressed", {debugsystem, debugsystem.setInvisibility})
     self.eventmanager:addListener("KeyReleased", {playercontrol, playercontrol.fireEvent})
+
     self.eventmanager:addListener("AddingGold", {goldsystem, goldsystem.addGold})
     self.eventmanager:addListener("DamageDone", {damagesystem, damagesystem.fireEvent})
     self.eventmanager:addListener("UpdateTransformable", {transformableUpdateSystem, transformableUpdateSystem.onDemandUpdate})
     self.eventmanager:addListener("UpdateParticlePosition", {particlePositionSyncSystem, particlePositionSyncSystem.updatePosition})
+    self.eventmanager:addListener("MouseReleased", {clickableSystem, clickableSystem.mouseReleased})
+
 
     -- Adding Initializer to Engine
     self.engine:addInitializer("Transformable",
@@ -218,14 +226,6 @@ end
 
 function GameState:draw()
     self.engine:draw()
-end
-
-function GameState:keypressed(key, isrepeat)
-    self.eventmanager:fireEvent(KeyPressed(key, isrepeat))
-end
-
-function GameState:keyreleased(key, isrepeat)
-    self.eventmanager:fireEvent(KeyReleased(key, isrepeat))
 end
 
 return GameState

@@ -6,11 +6,13 @@ local constants = require("constants")
 local Drawable = require("components/graphic/Drawable")
 local Particle = require("components/particle/Particle")
 local Muzzleparticles = require("components/graphic/Muzzleparticles")
+
 -- Physic components
 local Moving = require("components/physic/Moving")
 local Rotating = require("components/physic/Rotating")
 local Accelerating = require("components/physic/Accelerating")
 local Transformable = require("components/physic/Transformable")
+local Diameter = require("components/physic/Diameter")
 
 -- Gameplay components
 local Weapon = require("components/gameplay/Weapon")
@@ -22,7 +24,6 @@ local Hull = require("components/gameplay/Hull")
 local Player = require("components/meta/Player")
 
 local PlayerModel = class("PlayerModel", Entity)
-
 
 function PlayerModel:__init()
     self:add(Transformable(Vector(100, 100), Vector(1, 0)))
@@ -72,6 +73,8 @@ function PlayerModel:__init()
     self:add(Drawable(ship, 1, sx, sy, ox, oy))
     self:add(Controllable())
     self:add(HasGold(0))
+
+    self:add(Diameter(constants.player.diameter))
 end
 
 return PlayerModel
