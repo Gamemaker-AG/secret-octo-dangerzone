@@ -17,27 +17,28 @@ local LookingAt = require("components/gameplay/LookingAt")
 -- Models
 local Bullet = require("models/BulletModel")
 
-local TurretModel = class("TurretModel", Entity)
+function createTurretCollection(entity, offset)
+    -- Physic components
+    entity:add(Transformable(offset, nil, true))
+    entity:add(Rotating(constants.turret.defaultRotationSpeed))
 
-function TurretModel:__init(offset, parent)
-    if parent then
-        self:setParent(parent)
-    else parent = nil end
-    self:add(Transformable(offset, nil, true))
-    self:add(Rotating(constants.turret.defaultRotationSpeed))
-    self:add(Attitude({Pirate=1}))
+    -- Meta components
+    entity:add(LookingAt())
+    entity:add(Attitude({Pirate=1}))
+
+        -- Creating weapon function
     local func = function(entity, target)
         stack:current().engine:addEntity(Bullet(entity:get("Transformable").position, target, entity:get("Weapon").damage))
     end
-    --||-- Why no constants? fire, damage, cooldown, range, target
-    self:add(Weapon(func, 10, 0.5, 2000, nil))
-    self:add(LookingAt())
+    entity:add(Weapon(func, 10, 0.5, 2000, nil))
 
-
+    -- Graphic components
     local turret = resources.images.circle
     local sx, sy = constants.turret.diameter/turret:getWidth(), constants.turret.diameter/turret:getHeight()
     local ox, oy = turret:getWidth()/2, turret:getHeight()/2
-    self:add(Drawable(turret, 2, sx, sy, ox, oy))
+    entity:add(Drawable(turret, 2, sx, sy, ox, oy))
+
+    return entity
 end
 
-return TurretModel
+return createTurretCollection
