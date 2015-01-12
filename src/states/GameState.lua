@@ -1,7 +1,9 @@
 -- Models
 local PirateModel = require("models/PirateModel")
-local PlayerModel = require("models/PlayerModel")
 local TurretModel = require("models/TurretModel")
+
+-- Collections
+local createPlayerCollection = require("collections/createPlayerCollection")
 
 -- Graphic systems
 local DrawSystem = require("systems/draw/DrawSystem")
@@ -155,7 +157,7 @@ function GameState:load()
     self.engine:addEntity(bg)
     
     -- Adding player entity
-    self.player = PlayerModel()
+    self.player = createPlayerCollection(Entity())
     self.engine:addEntity(self.player)
 
     local camera = Entity()
