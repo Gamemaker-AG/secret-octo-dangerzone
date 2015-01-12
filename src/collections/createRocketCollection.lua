@@ -6,11 +6,13 @@ local constants = require("constants")
 local Drawable = require("components/graphic/Drawable")
 local Particle = require("components/particle/Particle")
 local Muzzleparticles = require("components/graphic/Muzzleparticles")
+
 -- Physic components
 local Moving = require("components/physic/Moving")
+local Damaging = require("components/gameplay/Damaging")
 local Transformable = require("components/physic/Transformable")
 local ExplodesOnContact = require("components/gameplay/ExplodesOnContact")
-local Damaging = require("components/gameplay/Damaging")
+
 -- Gameplay components
 local Debris = require("components/gameplay/Debris")
 
