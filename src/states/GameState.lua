@@ -1,5 +1,4 @@
 -- Models
-local PirateModel = require("models/PirateModel")
 local TurretModel = require("models/TurretModel")
 
 -- Collections

@@ -15,7 +15,6 @@ local Attitude = require("components/gameplay/Attitude")
 local LookingAt = require("components/gameplay/LookingAt")
 
 -- Models
-local Enemy = require("models/PirateModel")
 local Bullet = require("models/BulletModel")
 
 local TurretModel = class("TurretModel", Entity)

@@ -24,34 +24,43 @@ local DropsGold = require("components/gameplay/DropsGold")
 local Rocket = require("models/RocketModel")
 local Pirate = require("components/meta/Pirate")
 
-local PirateModel = class("PirateModel", Entity)
+function createPirateCollection(entity, x, y)
+    -- Physical components
+    entity:add(Transformable(Vector(x, y), Vector(1, 0)))
+    entity:add(Moving(Vector(0,0), constants.enemy.maxSpeed))
+    entity:add(Rotating(constants.enemy.defaultRotationSpeed))
+    entity:add(Accelerating(constants.enemy.defaultAcceleration, Vector(0,0)))
 
-function PirateModel:__init(x, y)
-    self:add(Transformable(Vector(x, y), Vector(1, 0)))
-    self:add(Moving(Vector(0,0), constants.enemy.maxSpeed))
-    self:add(Rotating(constants.enemy.defaultRotationSpeed))
-    self:add(Accelerating(constants.enemy.defaultAcceleration, Vector(0,0)))
-    self:add(LookingAt())
-    self:add(Hull(20))
-    self:add(MovingTo())
-    self:add(Attitude({Player=1}))
-    self:add(Wave())
-    self:add(DropsGold(1))
-    self:add(Pirate())
+    -- Meta
+    entity:add(Wave())
+    entity:add(Pirate())
+    entity:add(MovingTo())
+    entity:add(LookingAt())
+    entity:add(Attitude({Player=1}))
 
+    -- Gameplay
+    entity:add(Hull(20))
+    entity:add(DropsGold(1))
+        -- Creating weapon component
+            -- Getting Target for weapon component
     local player = table.firstElement(stack:current().engine:getEntitiesWithComponent("Player"))
-    if player then self:add(ExplodesOnContact(player, constants.player.diameter/2)) end
+    if player then entity:add(ExplodesOnContact(player, constants.player.diameter/2)) end
 
-    local func = function(entity, target)
+
+            -- Creating Function for weapon component
+    local WeaponFunction = function(entity, target)
         stack:current().engine:addEntity(Rocket(entity:get("Transformable").position, target, 10))
     end
-    --||-- Why no constants? fire, damage, cooldown, range, target
-    self:add(Weapon(func, 10, 2, 2000, nil))
+    entity:add(Weapon(WeaponFunction, 10, 2, 2000, nil))
 
+
+    -- Graphic components
     local ship = resources.images.enemy
     local sx, sy = constants.enemy.diameter/ship:getWidth(), constants.enemy.diameter/ship:getHeight()
     local ox, oy = ship:getWidth()/2, ship:getHeight()/2
-    self:add(Drawable(ship, 1, sx, sy, ox, oy))
+    entity:add(Drawable(ship, 1, sx, sy, ox, oy))
+
+    return entity
 end
 
-return PirateModel
+return createPirateCollection
