@@ -14,8 +14,8 @@ local Weapon = require("components/gameplay/Weapon")
 local Attitude = require("components/gameplay/Attitude")
 local LookingAt = require("components/gameplay/LookingAt")
 
--- Models
-local Bullet = require("models/BulletModel")
+-- Collection
+local createBulletCollection = require("collections/createBulletCollection")
 
 function createTurretCollection(entity, offset)
     -- Physic components
@@ -28,7 +28,9 @@ function createTurretCollection(entity, offset)
 
         -- Creating weapon function
     local func = function(entity, target)
-        stack:current().engine:addEntity(Bullet(entity:get("Transformable").position, target, entity:get("Weapon").damage))
+        local damage = entity:get("Weapon").damage
+        local position = entity:get("Transformable").position
+        stack:current().engine:addEntity(createBulletCollection(Entity(), position, target, damage))
     end
     entity:add(Weapon(func, 10, 0.5, 2000, nil))
 
