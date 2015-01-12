@@ -8,43 +8,47 @@ local Particle = require("components/particle/Particle")
 local Muzzleparticles = require("components/graphic/Muzzleparticles")
 -- Physic components
 local Moving = require("components/physic/Moving")
-local Rotating = require("components/physic/Rotating")
-local Accelerating = require("components/physic/Accelerating")
 local Transformable = require("components/physic/Transformable")
 local ExplodesOnContact = require("components/gameplay/ExplodesOnContact")
 local Damaging = require("components/gameplay/Damaging")
 -- Gameplay components
-local Weapon = require("components/gameplay/Weapon")
-local Controllable = require("components/gameplay/Controllable")
-local Attitude = require("components/gameplay/Attitude")
-local Camera = require("components/gameplay/Camera")
-
-
 local Debris = require("components/gameplay/Debris")
-local Rocket = class("Rocket", Entity)
 
-function Rocket:__init(pos, target, damage)
-    self:add(Damaging(damage))
-    self:add(ExplodesOnContact(target, 100))
-    self:add(Transformable(pos:clone()))
-    self:add(Debris(target, 100))
 
-    local particleComponent = Particle(resources.images.particle1, 5000, Vector(-10, 0), {0.2, 1.2}, nil)
-    self:add(particleComponent)
-    local particle = particleComponent.particle
-    -- transform
-    local transformable = self:get("Transformable")
-    local radian = transformable.direction:getRadian()
-    local rotatedOffset = particleComponent.offset:rotate(transformable.direction:getRadian()):add(transformable.position)
+function createRocketCollection(entity, pos, target, damage)
+    -- Physical components
+    entity:add(Debris(target, 100))
+    entity:add(Transformable(pos:clone()))
+        -- Calculate direction to target and set it
+    local direction = target:get("Transformable").position:subtract(pos):getUnit()
+    entity:get("Transformable").direction:set(direction)
+        -- Set rocket speed vector
+    entity:add(Moving(direction:multiply(constants.rocket.speed)))
+
+    -- Meta components
+    entity:add(Damaging(damage))
+    entity:add(ExplodesOnContact(target, 100))
+
+    -- Graphic components
+    entity:add(Muzzleparticles(100 ,100*constants.rocket.traillength, 500, 3000))
+        -- Getting Stuff for image
     local image = resources.images.rocket
     local sx, sy = constants.rocket.diameter/image:getWidth(), constants.rocket.diameter/image:getHeight()
     local ox, oy = image:getWidth()/2, image:getHeight()/2
-    self:add(Drawable(image, 1, sx, sy, ox, oy))
-    local direction = target:get("Transformable").position:subtract(pos):getUnit()
-    self:add(Moving(direction:multiply(constants.rocket.speed)))
-    self:get("Transformable").direction:set(direction)
+    entity:add(Drawable(image, 1, sx, sy, ox, oy))
 
-    --particles
+
+    -- Particle component
+    entity:add(Particle(resources.images.particle1, 5000, Vector(-10, 0), {0.2, 1.2}, nil))
+        -- Set locals for particle
+    local particleComponent = entity:get("Particle")
+    local particle = particleComponent.particle
+    local transformable = entity:get("Transformable")
+    local radian = transformable.direction:getRadian()
+        -- Calculate stuff for particle
+    local rotatedOffset = particleComponent.offset:rotate(transformable.direction:getRadian()):add(transformable.position)
+
+    -- Particle properties
     particle:setPosition(rotatedOffset.x, rotatedOffset.y)
     particle:setEmissionRate(1000)
     particle:setAreaSpread("normal",3,3)
@@ -67,7 +71,8 @@ function Rocket:__init(pos, target, damage)
                         )    --light green
     particle:setSizes(1.5, 0.8, 0.1)
     particle:start()
-    self:add(Muzzleparticles(100 ,100*constants.rocket.traillength, 500, 3000))
+
+    return entity
 end
 
-return Rocket
+return createRocketCollection

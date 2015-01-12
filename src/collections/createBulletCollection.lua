@@ -6,8 +6,6 @@ local ExplodesOnContact = require("components/gameplay/ExplodesOnContact")
 
 local constants = require("constants")
 
-local Bullet = class("Bullet", Entity)
-
 function createBulletCollection(entity, pos, target, damage)
     -- Physic components
     entity:add(Transformable(pos:clone()))

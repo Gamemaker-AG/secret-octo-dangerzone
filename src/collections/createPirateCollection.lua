@@ -13,16 +13,19 @@ local Transformable = require("components/physic/Transformable")
 
 -- Gameplay components
 local Hull = require("components/gameplay/Hull")
+local Wave = require("components/gameplay/Wave")
 local Weapon = require("components/gameplay/Weapon")
 local Attitude = require("components/gameplay/Attitude")
 local MovingTo = require("components/gameplay/MovingTo")
 local LookingAt = require("components/gameplay/LookingAt")
-local ExplodesOnContact = require("components/gameplay/ExplodesOnContact")
-local Wave = require("components/gameplay/Wave")
 local DropsGold = require("components/gameplay/DropsGold")
+local ExplodesOnContact = require("components/gameplay/ExplodesOnContact")
 
-local Rocket = require("models/RocketModel")
+-- Meta
 local Pirate = require("components/meta/Pirate")
+
+-- Collection
+local createRocketCollection = require("collections/createRocketCollection")
 
 function createPirateCollection(entity, x, y)
     -- Physical components
@@ -49,7 +52,7 @@ function createPirateCollection(entity, x, y)
 
             -- Creating Function for weapon component
     local WeaponFunction = function(entity, target)
-        stack:current().engine:addEntity(Rocket(entity:get("Transformable").position, target, 10))
+        stack:current().engine:addEntity(createRocketCollection(Entity(), entity:get("Transformable").position, target, 10))
     end
     entity:add(Weapon(WeaponFunction, 10, 2, 2000, nil))
 
