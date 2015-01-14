@@ -30,6 +30,7 @@ function love.load()
     resources:addImage("particle1" ,"/data/img/particle1.png")
     -- Fonts
     resources:addFont("regular", "data/font/Audiowide-Regular.ttf")
+    resources:addFont("regular40", "data/font/Audiowide-Regular.ttf", 40)
 
     resources:load()
 
@@ -44,7 +45,7 @@ end
 
 function love.draw()
     stack:current():draw()
-end 
+end
 
 function love.keypressed(key, isrepeat)
     stack:current().eventmanager:fireEvent(KeyPressed(key, isrepeat))

@@ -7,7 +7,8 @@ function ClickableSystem:mouseReleased(event)
         local transformable = target:get("Transformable")
         local radius = target:get("Circle").radius
         local clickable = target:get("Clickable")
-        local camPos = table.firstElement(self.targets.camera):get("Transformable").position
+        local camera = table.firstElement(self.targets.camera)
+        local camPos = (camera and camera:get("Transformable").position) or 0
         local mouseWorldPosition = Vector(event.x, event.y):add(camPos)
         if transformable.position:distanceTo(mouseWorldPosition) <= radius then
             clickable.clicked()
