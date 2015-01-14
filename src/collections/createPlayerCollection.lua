@@ -23,27 +23,41 @@ local Shield = require("components/gameplay/Shield")
 local Hull = require("components/gameplay/Hull")
 local Player = require("components/meta/Player")
 
-local PlayerModel = class("PlayerModel", Entity)
+function createPlayerCollection(entity)
+    -- Physical components
+    entity:add(Transformable(Vector(100, 100), Vector(1, 0)))
+    entity:add(Moving(Vector(0,0), constants.player.maxSpeed))
+    entity:add(Rotating(constants.player.defaultRotationSpeed))
+    entity:add(Accelerating(constants.player.defaultAcceleration, Vector(0,0)))
 
-function PlayerModel:__init()
-    self:add(Transformable(Vector(100, 100), Vector(1, 0)))
-    self:add(Moving(Vector(0,0), constants.player.maxSpeed))
-    self:add(Rotating(constants.player.defaultRotationSpeed))
-    self:add(Accelerating(constants.player.defaultAcceleration, Vector(0,0)))
-    self:add(Attitude({Pirate=1}))
-    self:add(Muzzleparticles(100 ,500, 500, 3000))
-    self:add(Hull(200))
-    self:add(Shield(200, 5))
-    self:add(Player())
-    local particleComponent = Particle(resources.images.particle1, 5000, Vector(-50, 0), {0.2, 1.2}, nil)
-    self:add(particleComponent)
-    local particle = particleComponent.particle
+    -- Meta components
+    entity:add(Player())
+    entity:add(Controllable())
+    entity:add(Attitude({Pirate=1}))
 
-    -- Setzen der Position
-    local transformable = self:get("Transformable")
+    -- GamePlay components
+    entity:add(Hull(200))
+    entity:add(HasGold(0))
+    entity:add(Shield(200, 5))
+
+    -- Graphic components
+    entity:add(Muzzleparticles(100 ,500, 500, 3000))
+        local ship = resources.images.player
+        local sx, sy = constants.player.diameter/ship:getWidth(), constants.player.diameter/ship:getHeight()
+        local ox, oy = ship:getWidth()*(2/3), ship:getHeight()/2
+    entity:add(Drawable(ship, 1, sx, sy, ox, oy))
+
+    -- Creating particle system
+    entity:add(Particle(resources.images.particle1, 5000, Vector(-50, 0), {0.2, 1.2}, nil))
+
+    -- Local variables for particle position calculation
+    local particleComponent = entity:get("Particle")
+    local particle = entity:get("Particle").particle
+    local transformable = entity:get("Transformable")
     local radian = transformable.direction:getRadian()
     local rotatedOffset = particleComponent.offset:rotate(transformable.direction:getRadian()):add(transformable.position)
 
+    -- Particle properties
     particle:setPosition(rotatedOffset.x, rotatedOffset.y)
     particle:setEmissionRate(1000)
     particle:setAreaSpread("normal",9,9)
@@ -67,14 +81,7 @@ function PlayerModel:__init()
     particle:setSizes(1.5, 0.8, 0.1)
     particle:start()
 
-    local ship = resources.images.player
-    local sx, sy = constants.player.diameter/ship:getWidth(), constants.player.diameter/ship:getHeight()
-    local ox, oy = ship:getWidth()*(2/3), ship:getHeight()/2
-    self:add(Drawable(ship, 1, sx, sy, ox, oy))
-    self:add(Controllable())
-    self:add(HasGold(0))
-
-    self:add(Diameter(constants.player.diameter))
+    return entity
 end
 
-return PlayerModel
+return createPlayerCollection

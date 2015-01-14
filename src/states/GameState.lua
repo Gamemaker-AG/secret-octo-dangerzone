@@ -1,7 +1,6 @@
--- Models
-local PirateModel = require("models/PirateModel")
-local PlayerModel = require("models/PlayerModel")
-local TurretModel = require("models/TurretModel")
+-- Collections
+local createPlayerCollection = require("collections/createPlayerCollection")
+local createTurretCollection = require("collections/createTurretCollection")
 
 -- Graphic systems
 local DrawSystem = require("systems/draw/DrawSystem")
@@ -163,7 +162,7 @@ function GameState:load()
     self.engine:addEntity(bg)
     
     -- Adding player entity
-    self.player = PlayerModel()
+    self.player = createPlayerCollection(Entity())
     self.engine:addEntity(self.player)
 
     local camera = Entity()
@@ -172,7 +171,8 @@ function GameState:load()
     stack:current().engine:addEntity(camera)
 
     -- Adding player turret
-    local turret = TurretModel(Vector(30, 0), self.player)
+    local turret = Entity(self.player)
+    turret = createTurretCollection(turret, Vector(30, 0))
     self.engine:addEntity(turret)
 
     -- Adding Hull and Shield string entity

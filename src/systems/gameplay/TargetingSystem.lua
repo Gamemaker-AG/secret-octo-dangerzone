@@ -22,7 +22,7 @@ function TargetingSystem:update()
             local faction = entity:get("Attitude").attitude
             for Identifier, status in pairs(faction) do
                 if status == 1 then
-                    for _, enemy in pairs(stack:current().engine:getEntityList(Identifier)) do
+                    for _, enemy in pairs(stack:current().engine:getEntitiesWithComponent(Identifier)) do
                         local enemyPosition = enemy:get("Transformable").position
                         if position:distanceTo(enemyPosition) <= lowest then
                             lowest = position:distanceTo(enemyPosition)
