@@ -31,7 +31,7 @@ function createRocketCollection(entity, pos, target, damage)
 
     -- Meta components
     entity:add(Damaging(damage))
-    entity:add(ExplodesOnContact(target, 100))
+    entity:add(ExplodesOnContact(target))
 
     -- Graphic components
     entity:add(Muzzleparticles(100 ,100*constants.rocket.traillength, 500, 3000))
