@@ -10,6 +10,7 @@ local Moving = require("components/physic/Moving")
 local Rotating = require("components/physic/Rotating")
 local Accelerating = require("components/physic/Accelerating")
 local Transformable = require("components/physic/Transformable")
+local Circle = require("components/physic/Circle")
 
 -- Gameplay components
 local Hull = require("components/gameplay/Hull")
@@ -33,6 +34,7 @@ function createPirateCollection(entity, x, y)
     entity:add(Moving(Vector(0,0), constants.enemy.maxSpeed))
     entity:add(Rotating(constants.enemy.defaultRotationSpeed))
     entity:add(Accelerating(constants.enemy.defaultAcceleration, Vector(0,0)))
+    entity:add(Circle(constants.enemy.diameter/2))
 
     -- Meta
     entity:add(Wave())
@@ -56,10 +58,8 @@ function createPirateCollection(entity, x, y)
     end
     entity:add(Weapon(WeaponFunction, 10, 2, 2000, nil))
 
-
     -- Graphic components
     local ship = resources.images.enemy
-    local sx, sy = constants.enemy.diameter/ship:getWidth(), constants.enemy.diameter/ship:getHeight()
     local ox, oy = ship:getWidth()/2, ship:getHeight()/2
     entity:add(Drawable(ship, 1, sx, sy, ox, oy))
 

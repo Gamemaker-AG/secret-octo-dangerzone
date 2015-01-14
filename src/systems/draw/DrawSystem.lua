@@ -10,10 +10,10 @@ function DrawSystem:draw()
         local drawable = entity:get("Drawable")
         local pos = entity:get("Transformable")
         local sx, sy = drawable.sx, drawable.sy
-        if entity:get("Diameter") then
-            local diameter = entity:get("Diameter").diameter
-            sx = diameter/drawable.image:getWidth()
-            sy = diameter/drawable.image:getHeight()
+        if entity:get("Circle") then
+            local radius = entity:get("Circle").radius*2
+            sx = radius/drawable.image:getWidth()
+            sy = radius/drawable.image:getHeight()
         end
         love.graphics.draw(drawable.image, pos.position.x, pos.position.y, pos.direction:getRadian(), sx, sy, drawable.ox, drawable.oy)
     end

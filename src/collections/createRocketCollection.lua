@@ -12,6 +12,7 @@ local Moving = require("components/physic/Moving")
 local Damaging = require("components/gameplay/Damaging")
 local Transformable = require("components/physic/Transformable")
 local ExplodesOnContact = require("components/gameplay/ExplodesOnContact")
+local Circle = require("components/physic/Circle")
 
 -- Gameplay components
 local Debris = require("components/gameplay/Debris")
@@ -26,6 +27,7 @@ function createRocketCollection(entity, pos, target, damage)
     entity:get("Transformable").direction:set(direction)
         -- Set rocket speed vector
     entity:add(Moving(direction:multiply(constants.rocket.speed)))
+    entity:add(Circle(constants.rocket.diameter))
 
     -- Meta components
     entity:add(Damaging(damage))
@@ -35,10 +37,8 @@ function createRocketCollection(entity, pos, target, damage)
     entity:add(Muzzleparticles(100 ,100*constants.rocket.traillength, 500, 3000))
         -- Getting Stuff for image
     local image = resources.images.rocket
-    local sx, sy = constants.rocket.diameter/image:getWidth(), constants.rocket.diameter/image:getHeight()
     local ox, oy = image:getWidth()/2, image:getHeight()/2
     entity:add(Drawable(image, 1, sx, sy, ox, oy))
-
 
     -- Particle component
     entity:add(Particle(resources.images.particle1, 5000, Vector(-10, 0), {0.2, 1.2}, nil))

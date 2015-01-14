@@ -12,7 +12,7 @@ local Moving = require("components/physic/Moving")
 local Rotating = require("components/physic/Rotating")
 local Accelerating = require("components/physic/Accelerating")
 local Transformable = require("components/physic/Transformable")
-local Diameter = require("components/physic/Diameter")
+local Circle = require("components/physic/Circle")
 
 -- Gameplay components
 local Weapon = require("components/gameplay/Weapon")
@@ -29,6 +29,7 @@ function createPlayerCollection(entity)
     entity:add(Moving(Vector(0,0), constants.player.maxSpeed))
     entity:add(Rotating(constants.player.defaultRotationSpeed))
     entity:add(Accelerating(constants.player.defaultAcceleration, Vector(0,0)))
+    entity:add(Circle(constants.player.diameter/2))
 
     -- Meta components
     entity:add(Player())
@@ -42,8 +43,8 @@ function createPlayerCollection(entity)
 
     -- Graphic components
     entity:add(Muzzleparticles(100 ,500, 500, 3000))
+
         local ship = resources.images.player
-        local sx, sy = constants.player.diameter/ship:getWidth(), constants.player.diameter/ship:getHeight()
         local ox, oy = ship:getWidth()*(2/3), ship:getHeight()/2
     entity:add(Drawable(ship, 1, sx, sy, ox, oy))
 
