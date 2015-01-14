@@ -9,7 +9,13 @@ function DrawSystem:draw()
     for index, entity in ipairs(self.sortedTargets) do
         local drawable = entity:get("Drawable")
         local pos = entity:get("Transformable")
-        love.graphics.draw(drawable.image, pos.position.x, pos.position.y, pos.direction:getRadian(), drawable.sx, drawable.sy, drawable.ox, drawable.oy)
+        local sx, sy = drawable.sx, drawable.sy
+        if entity:get("Diameter") then
+            local diameter = entity:get("Diameter").diameter
+            sx = diameter/drawable.image:getWidth()
+            sy = diameter/drawable.image:getHeight()
+        end
+        love.graphics.draw(drawable.image, pos.position.x, pos.position.y, pos.direction:getRadian(), sx, sy, drawable.ox, drawable.oy)
     end
 end
 

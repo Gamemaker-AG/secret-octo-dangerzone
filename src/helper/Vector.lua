@@ -1,8 +1,13 @@
 local Vector = class("Vector")
 
 function Vector:__init(x, y)
-    self.x = x or 0
-    self.y = y or 0
+    if y == nil then
+        self.x = x or 0
+        self.y = x or 0
+    else
+        self.x = x
+        self.y = y
+    end
 end
 
 function Vector:set(x, y)

@@ -1,8 +1,7 @@
 local sw, sh = love.graphics.getWidth(), love.graphics.getHeight()
 local smallerDimension = sw < sh and sw or sh
 
-
-local function pixels(percent)
+function percentToPixels(percent)
     return percent * smallerDimension/100
 end
 
@@ -10,28 +9,28 @@ local constants = {
     screenWidth = sw,
     screenHeight = sh,
     player = {
-        diameter = pixels(20),
-        defaultAcceleration = pixels(100),
+        diameter = percentToPixels(20),
+        defaultAcceleration = percentToPixels(100),
         defaultRotationSpeed = math.pi*3/2,
-        maxSpeed = pixels(60)
+        maxSpeed = percentToPixels(60)
     },
     enemy = {
-        diameter = pixels(4),
-        defaultAcceleration = pixels(30),
+        diameter = percentToPixels(4),
+        defaultAcceleration = percentToPixels(30),
         defaultRotationSpeed = math.pi,
     },
     turret = {
-        diameter = pixels(4),
+        diameter = percentToPixels(4),
         defaultRotationSpeed = math.pi*2,
     },
     bullet = {
-        diameter = pixels(3),
-        speed = pixels(100)
+        diameter = percentToPixels(3),
+        speed = percentToPixels(100)
     },
     rocket = {
-        diameter = pixels(2),
-        speed = pixels(50),
-        traillength = pixels(50)
+        diameter = percentToPixels(2),
+        speed = percentToPixels(50),
+        traillength = percentToPixels(50)
     },
     camera = {
         -- between 0 and 1
