@@ -8,7 +8,7 @@ local Drawable = require("components/graphic/Drawable")
 -- Physic components
 local Rotating = require("components/physic/Rotating")
 local Transformable = require("components/physic/Transformable")
-local Diameter = require("components/physic/Diameter")
+local Circle = require("components/physic/Circle")
 
 -- Gameplay components
 local Weapon = require("components/gameplay/Weapon")
@@ -24,7 +24,7 @@ function createTurretCollection(entity, offset)
     -- Physic components
     entity:add(Transformable(offset, nil, true))
     entity:add(Rotating(constants.turret.defaultRotationSpeed))
-    entity:add(Diameter(constants.turret.diameter))
+    entity:add(Circle(constants.turret.diameter/2))
 
     -- Meta components
     entity:add(LookingAt())

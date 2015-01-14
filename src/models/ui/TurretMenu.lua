@@ -1,7 +1,7 @@
 local Drawable = require("components/graphic/Drawable")
 local Clickable = require("components/ui/Clickable")
 local Transformable = require("components/physic/Transformable")
-local Diameter = require("components/physic/Diameter")
+local Circle = require("components/physic/Circle")
 
 local Vector = require("helper/Vector")
 
@@ -14,8 +14,8 @@ function TurretMenu:__init(turret)
     self.turret = turret
     self.visible = false
 
-    local button_diameter = turret:get("Diameter").diameter*1.5
-    local distance_to_center = turret:get("Diameter").diameter*2
+    local button_radius = turret:get("Circle").radius*1.5
+    local distance_to_center = turret:get("Circle").radius*4
 
     local button_count = 4
     for i = 0, button_count-1, 1 do
@@ -27,7 +27,7 @@ function TurretMenu:__init(turret)
         local comps = createButtonComponents(function() print("Turret Button was clicked!") end,
             resources.images.circle,
             offset,
-            button_diameter)
+            button_radius)
         button:addMultiple(comps)
 
         table.insert(self.buttons, button)
