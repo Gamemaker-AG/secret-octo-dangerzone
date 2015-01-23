@@ -42,4 +42,7 @@ package-mac: build
 	@./script/download.sh osx
 	@./script/package.sh osx
 
+subupdate:
+	git submodule foreach git pull origin master
+
 package: build package-linux package-windows package-mac
