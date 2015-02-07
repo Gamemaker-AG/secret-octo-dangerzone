@@ -19,6 +19,7 @@ build-fast:
 	@zip -q -r -0 seocda.love data/*
 	@./script/fast.sh
 	@cd temp/ && zip -q -r ../seocda.love *
+	@rm -rf temp
 
 fast: build-fast
 	@love seocda.love

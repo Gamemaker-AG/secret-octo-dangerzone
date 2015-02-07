@@ -4,6 +4,15 @@ function TransformableUpdateSystem:updatePositions(parent)
     local parentTrans = parent:get("Transformable")
     table.each(parent.children, function(_, child)
         local childTrans = child:get("Transformable") 
+        if child:has("DebugText") then
+            print("New Update")
+            print("Old Position")
+            print(childTrans.position.x, childTrans.position.y)
+            print("Parent Position")
+            print(parentTrans.position.x, parentTrans.position.y)
+            print("Child offset")
+            print(childTrans.offset.x, childTrans.offset.y)
+        end
         if childTrans then
             if childTrans.rotationEnabled then
                 childTrans.position:set(childTrans.offset:rotate(parentTrans.direction:getRadian()):add(parentTrans.position))
@@ -11,6 +20,10 @@ function TransformableUpdateSystem:updatePositions(parent)
                 childTrans.position:set(childTrans.offset:add(parentTrans.position))
             end    
             self:updatePositions(child)
+        end
+        if child:has("DebugText") then
+            print("New Position")
+            print(childTrans.position.x, childTrans.position.y)
         end
     end)
 end
