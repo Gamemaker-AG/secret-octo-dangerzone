@@ -1,6 +1,6 @@
 .PHONY: default clean build run lib getwindowlib getmaclib package-linux package-windows package-mac package
 
-default: run
+default: build run
 
 buildclean:
 	@[[ ! -e seocda.love ]] || rm seocda.love
@@ -19,16 +19,15 @@ build-fast:
 	@zip -q -r -0 seocda.love data/*
 	@./script/fast.sh
 	@cd temp/ && zip -q -r ../seocda.love *
-	@rm -rf temp/
 
 fast: build-fast
 	@love seocda.love
 
-run: build
+run:
 	@love seocda.love
 
 setup:
-	git submodule update --init
+	git submodule update --init --recursive
 
 package-linux: build
 	@./script/download.sh linux
