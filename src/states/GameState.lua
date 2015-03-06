@@ -119,15 +119,15 @@ function GameState:load()
     self.engine:addSystem(debugsystem, "draw")
 
     -- Registering event listeners
-    self.eventmanager:addListener("KeyPressed", {playercontrol, playercontrol.fireEvent})
-    self.eventmanager:addListener("KeyPressed", {debugsystem, debugsystem.setInvisibility})
-    self.eventmanager:addListener("KeyReleased", {playercontrol, playercontrol.fireEvent})
+    self.eventmanager:addListener("KeyPressed", playercontrol, playercontrol.fireEvent)
+    self.eventmanager:addListener("KeyPressed", debugsystem, debugsystem.setInvisibility)
+    self.eventmanager:addListener("KeyReleased", playercontrol, playercontrol.fireEvent)
 
-    self.eventmanager:addListener("AddingGold", {goldsystem, goldsystem.addGold})
-    self.eventmanager:addListener("DamageDone", {damagesystem, damagesystem.fireEvent})
-    self.eventmanager:addListener("UpdateTransformable", {transformableUpdateSystem, transformableUpdateSystem.onDemandUpdate})
-    self.eventmanager:addListener("UpdateParticlePosition", {particlePositionSyncSystem, particlePositionSyncSystem.updatePosition})
-    self.eventmanager:addListener("MouseReleased", {clickableSystem, clickableSystem.mouseReleased})
+    self.eventmanager:addListener("AddingGold", goldsystem, goldsystem.addGold)
+    self.eventmanager:addListener("DamageDone", damagesystem, damagesystem.fireEvent)
+    self.eventmanager:addListener("UpdateTransformable", transformableUpdateSystem, transformableUpdateSystem.onDemandUpdate)
+    self.eventmanager:addListener("UpdateParticlePosition", particlePositionSyncSystem, particlePositionSyncSystem.updatePosition)
+    self.eventmanager:addListener("MouseReleased", clickableSystem, clickableSystem.mouseReleased)
 
 
     -- Adding Initializer to Engine

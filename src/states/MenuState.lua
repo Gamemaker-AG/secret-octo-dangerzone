@@ -32,7 +32,7 @@ function MenuState:load()
 
     local clickableSystem = ClickableSystem()
     self.engine:addSystem(clickableSystem)
-    self.eventmanager:addListener("MouseReleased", {clickableSystem, clickableSystem.mouseReleased})
+    self.eventmanager:addListener("MouseReleased", clickableSystem, clickableSystem.mouseReleased)
 
     local startButton = Entity()
     startButton:add(DrawableText(resources.fonts.regular40, nil, "Start Game"))
