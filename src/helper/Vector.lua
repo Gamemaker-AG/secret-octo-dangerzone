@@ -1,4 +1,4 @@
-local Vector = class("Vector")
+Vector = class("Vector")
 
 function Vector:__init(x, y)
     if y == nil then
@@ -75,6 +75,18 @@ function Vector:divide(vector)
     elseif vector.__name == "Vector" then
         return Vector(self.x / vector.x, self.y / vector.y)
     end
+end
+
+function Vector:modulo(vector)
+    if type(vector) == "number" then
+        return Vector(self.x % vector, self.y % vector)
+    elseif vector.__name == "Vector" then
+        return Vector(self.x % vector.x, self.x % vector.y)
+    end
+end
+
+function Vector:abs()
+    return Vector(math.abs(self.x), math.abs(self.y))  
 end
 
 function Vector:rotate(radian)

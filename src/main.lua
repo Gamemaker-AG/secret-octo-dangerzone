@@ -5,6 +5,7 @@ require("lib/lovetoys/lovetoys")
 require("helper/tables")
 require("core/Stackhelper")
 require("core/Resources")
+require("helper/Vector")
 
 -- Events
 local KeyPressed = require("events/KeyPressed")
