@@ -18,6 +18,7 @@ local MovementSystem = require("systems/physic/MovementSystem")
 local RotationSystem = require("systems/physic/RotationSystem")
 local AccelerationSystem = require("systems/physic/AccelerationSystem")
 local TransformableUpdateSystem = require("systems/physic/TransformableUpdateSystem")
+local MapGenerationSystem = require("systems/physic/MapGenerationSystem")
 
 -- Gameplay 
 local WeaponSystem = require("systems/gameplay/WeaponSystem")
@@ -100,6 +101,7 @@ function GameState:load()
     self.engine:addSystem(ParallaxSystem())
     self.engine:addSystem(cameraSystem, "update")
     self.engine:addSystem(transformableUpdateSystem)
+    self.engine:addSystem(MapGenerationSystem())
 
 
     -- Adding draw systems
@@ -139,27 +141,6 @@ function GameState:load()
             end
         end
     )
-
-    -- Adding deepfield entity
-    local deepfield = Entity()
-    deepfield:add(Drawable(resources.images.deepfield))
-    deepfield:add(Transformable(Vector(0, 0)))
-    deepfield:add(Parallax(1.5))
-    self.engine:addEntity(deepfield)
-
-    -- Adding background 1
-    local bg = Entity()
-    bg:add(Drawable(resources.images.bg))
-    bg:add(Transformable(Vector(0, 0)))
-    bg:add(Parallax(1.6))
-    self.engine:addEntity(bg)
-
-    -- Adding background 2
-    local bg = Entity()
-    bg:add(Drawable(resources.images.bg))
-    bg:add(Transformable(Vector(0, 0)))
-    bg:add(Parallax(1.7))
-    self.engine:addEntity(bg)
     
     -- Adding player entity
     self.player = createPlayerCollection(Entity())
@@ -200,8 +181,6 @@ function GameState:load()
     ups:add(Transformable(Vector(10,70),nil))
     ups:add(DebugText())
     self.engine:addEntity(ups)
-
-
 
     -- Debug strings
     local posstring = Entity(self.player)
