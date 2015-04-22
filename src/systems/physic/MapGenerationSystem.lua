@@ -5,6 +5,7 @@ local MapGenerationSystem = class("MapGenerationSystem", System)
 function MapGenerationSystem:__init()
 	self.tileSize = 128
 	self.tileScope = 2
+    self.generatedTiles = {}
 end
 
 function MapGenerationSystem:update(dt)
@@ -38,7 +39,14 @@ end
 function MapGenerationSystem:generateRow(root, size)
     for x=0, size.x, 1 do
         for y=0, size.y, 1 do
-            generateStar(root:add(Vector(x, y)):multiply(self.tileSize), self.tileSize)
+            local position = root:add(Vector(x, y))
+
+            if not self.generatedTiles[position.x] then self.generatedTiles[position.x] = {} end
+
+            if not self.generatedTiles[position.x][position.y] then
+                generateStar(position:multiply(self.tileSize), self.tileSize)
+                self.generatedTiles[position.x][position.y] = true
+            end
         end
     end
 end
