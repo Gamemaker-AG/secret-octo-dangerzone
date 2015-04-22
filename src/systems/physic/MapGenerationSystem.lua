@@ -1,5 +1,7 @@
 local generateStar = require("generators/stars")
 
+local constants = require("constants")
+
 local MapGenerationSystem = class("MapGenerationSystem", System)
 
 function MapGenerationSystem:__init()
@@ -44,7 +46,7 @@ function MapGenerationSystem:generateRow(root, size)
 end
 
 function MapGenerationSystem:initializeMap()
-
+    
 end
 
 function MapGenerationSystem:requires()
