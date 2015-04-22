@@ -1,5 +1,11 @@
 local generateStar = require("generators/stars")
 
+local function createWeakTable()
+    local table = {}
+    setmetatable(table, {__mode = "v"})
+    return table
+end
+
 local MapGenerationSystem = class("MapGenerationSystem", System)
 
 function MapGenerationSystem:__init()
@@ -41,11 +47,11 @@ function MapGenerationSystem:generateRow(root, size)
         for y=0, size.y, 1 do
             local position = root:add(Vector(x, y))
 
-            if not self.generatedTiles[position.x] then self.generatedTiles[position.x] = {} end
+            if not self.generatedTiles[position.x] then self.generatedTiles[position.x] = createWeakTable() end
 
             if not self.generatedTiles[position.x][position.y] then
-                generateStar(position:multiply(self.tileSize), self.tileSize)
-                self.generatedTiles[position.x][position.y] = true
+                local star = generateStar(position:multiply(self.tileSize), self.tileSize)
+                self.generatedTiles[position.x][position.y] = star
             end
         end
     end
