@@ -48,9 +48,8 @@ return function(position, size)
 
     -- Create new entity with tile image
     local star = Entity()
-    star:add(Transformable(position:clone():add(size/2)))
+    star:add(Transformable(position:clone()))
     star:add(Drawable(tempCanvas2))
-    star:add(Circle(percentToPixels(1)))
     star:add(Debris())
     stack:current().engine:addEntity(star)
     return star
