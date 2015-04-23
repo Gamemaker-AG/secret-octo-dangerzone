@@ -17,12 +17,14 @@ return function(position, size)
         for y=0, 5, 1 do
             local starPos = {}
             local subTile = {}
+
             -- Define subTile Position
             subTile.x = position.x-subTileSize+subTileSize*x
             subTile.y = position.y-subTileSize+subTileSize*y
 
             -- Get seed from subTile Position
             math.randomseed(2 * subTile.y + 2 * subTile.y * subTile.x - subTile.x + 2 * subTile.y)
+
             -- Draw Stars
             for k=0, 2, 1 do
                 love.graphics.draw(resources.images.circle, subTile.x + math.random(0, subTileSize), subTile.y + math.random(0, subTileSize))
@@ -33,16 +35,18 @@ return function(position, size)
 
     -- Create quad to cut off unneeded buffer
     local quad = love.graphics.newQuad(subTileSize, subTileSize, size, size, 1, 1)
+
     -- Create final buffer
     local tempCanvas2 = love.graphics.newCanvas(size, size)
     love.graphics.setCanvas(tempCanvas2)
 
-    -- Cut off edges
+    -- Cut off buffer
     love.graphics.draw(tempCanvas, quad, 0, 0)
 
     -- Restore standard canvas
     love.graphics.setCanvas() 
 
+    -- Create new entity with tile image
     local star = Entity()
     star:add(Transformable(position:clone():add(size/2)))
     star:add(Drawable(tempCanvas2))
