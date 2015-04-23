@@ -1,5 +1,6 @@
 local generateStar = require("generators/stars")
 
+-- Creates a weak entity for garbage collection 
 local function createWeakTable()
     local table = {}
     setmetatable(table, {__mode = "v"})
@@ -15,6 +16,7 @@ function MapGenerationSystem:__init()
 end
 
 function MapGenerationSystem:update(dt)
+    -- Gets player reference at first run.
     if not self.player then
     	self.player = table.firstElement(self.targets)
     	self.lastTile = self:getCurrentTile()
@@ -37,11 +39,13 @@ function MapGenerationSystem:update(dt)
     end
 end
 
+-- Gets the current tile the player is on
 function MapGenerationSystem:getCurrentTile()
 	local playerPosition = self.player:get("Transformable").offset
 	return playerPosition:subtract(playerPosition:modulo(self.tileSize)):divide(self.tileSize)
 end
 
+-- 
 function MapGenerationSystem:generateRow(root, size)
     for x=0, size.x, 1 do
         for y=0, size.y, 1 do
