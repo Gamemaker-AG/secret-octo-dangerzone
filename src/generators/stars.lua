@@ -9,10 +9,10 @@ return function(position, size)
     local subTileSize = size/4
 
     -- Create and set canvas for first drawing
-    local tempCanvas = love.graphics.newCanvas(subTileSize*6, subTileSize*6)
-    love.graphics.setCanvas(tempCanvas) 
+    local bakeCanvas = love.graphics.newCanvas(subTileSize*6, subTileSize*6)
+    love.graphics.setCanvas(bakeCanvas)
 
-    
+
     for x=0, 5, 1 do
         for y=0, 5, 1 do
             local starPos = {}
@@ -37,19 +37,19 @@ return function(position, size)
     local quad = love.graphics.newQuad(subTileSize, subTileSize, size, size, 1, 1)
 
     -- Create final buffer
-    local tempCanvas2 = love.graphics.newCanvas(size, size)
-    love.graphics.setCanvas(tempCanvas2)
+    local cutCanvas = love.graphics.newCanvas(size, size)
+    love.graphics.setCanvas(cutCanvas)
 
     -- Cut off buffer
-    love.graphics.draw(tempCanvas, quad, 0, 0)
+    love.graphics.draw(bakeCanvas, quad, 0, 0)
 
     -- Restore standard canvas
-    love.graphics.setCanvas() 
+    love.graphics.setCanvas()
 
     -- Create new entity with tile image
     local star = Entity()
     star:add(Transformable(position:clone()))
-    star:add(Drawable(tempCanvas2))
+    star:add(Drawable(cutCanvas))
     star:add(Debris())
     stack:current().engine:addEntity(star)
     return star
