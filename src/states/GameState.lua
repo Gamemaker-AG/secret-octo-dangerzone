@@ -21,7 +21,7 @@ local TransformableUpdateSystem = require("systems/physic/TransformableUpdateSys
 local MapGenerationSystem = require("systems/physic/MapGenerationSystem")
 
 -- Gameplay 
-local WeaponSystem = require("systems/gameplay/WeaponSystem")
+local ProjectileSystem = require("systems/gameplay/ProjectileSystem")
 local FacingSystem = require("systems/gameplay/FacingSystem")
 local TargetingSystem = require("systems/gameplay/TargetingSystem")
 local DestroySystem = require("systems/gameplay/DestroySystem")
@@ -85,7 +85,7 @@ function GameState:load()
     self.engine:addSystem(AccelerationSystem())
     self.engine:addSystem(MovementSystem())
     self.engine:addSystem(RotationSystem())
-    self.engine:addSystem(WeaponSystem())
+    self.engine:addSystem(ProjectileSystem())
     self.engine:addSystem(FacingSystem())
     self.engine:addSystem(TargetMoveSystem())
     self.engine:addSystem(playercontrol)

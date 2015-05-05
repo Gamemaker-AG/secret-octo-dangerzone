@@ -25,9 +25,6 @@ local ExplodesOnContact = require("components/gameplay/ExplodesOnContact")
 -- Meta
 local Pirate = require("components/meta/Pirate")
 
--- Collection
-local createRocketCollection = require("collections/createRocketCollection")
-
 function createPirateCollection(entity, x, y)
     -- Physical components
     entity:add(Transformable(Vector(x, y), Vector(1, 0)))
@@ -46,16 +43,13 @@ function createPirateCollection(entity, x, y)
     -- Gameplay
     entity:add(Hull(20))
     entity:add(DropsGold(1))
-        -- Creating weapon component
-            -- Getting Target for weapon component
+
+    -- Creating weapon component
+    -- Getting Target for weapon component
     local player = table.firstElement(stack:current().engine:getEntitiesWithComponent("Player"))
     if player then entity:add(ExplodesOnContact(player, 0)) end
 
-            -- Creating Function for weapon component
-    local WeaponFunction = function(entity, target)
-        stack:current().engine:addEntity(createRocketCollection(Entity(), entity:get("Transformable").position, target, 10))
-    end
-    entity:add(Weapon(WeaponFunction, 10, 2, 2000, nil))
+    entity:add(Weapon(2000, nil))
 
     -- Graphic components
     local ship = resources.images.enemy

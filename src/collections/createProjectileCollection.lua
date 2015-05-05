@@ -7,11 +7,17 @@ local ExplodesOnContact = require("components/gameplay/ExplodesOnContact")
 
 local constants = require("constants")
 
-function createBulletCollection(entity, pos, target, damage)
+function createProjectileCollection(entity, pos, target, damage, precision)
     -- Physic components
     entity:add(Transformable(pos:clone()))
         -- Getting direction and setting speed
     local direction = target:get("Transformable").position:subtract(pos):getUnit()
+
+    if (precision and precision ~= 0) then
+        local randomDirection = math.random(-1/2*precision, 1/2*precision)
+        direction:set(direction:rotate(randomDirection*math.pi/180))
+    end
+
     entity:add(Moving(direction:multiply(constants.bullet.speed)))
     entity:get("Transformable").direction:set(direction)
 
@@ -19,7 +25,7 @@ function createBulletCollection(entity, pos, target, damage)
 
     -- Meta components
     entity:add(Damaging(damage))
-    entity:add(ExplodesOnContact(target, 100))
+    entity:add(ExplodesOnContact(target, target:get("Circle").radius))
 
     -- Graphics components
     local image = resources.images.beam
@@ -29,4 +35,4 @@ function createBulletCollection(entity, pos, target, damage)
     return entity
 end
 
-return createBulletCollection
+return createProjectileCollection

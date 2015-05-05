@@ -15,7 +15,6 @@ local Transformable = require("components/physic/Transformable")
 local Circle = require("components/physic/Circle")
 
 -- Gameplay components
-local Weapon = require("components/gameplay/Weapon")
 local Controllable = require("components/gameplay/Controllable")
 local Attitude = require("components/gameplay/Attitude")
 local HasGold = require("components/gameplay/HasGold")
