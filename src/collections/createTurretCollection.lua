@@ -35,9 +35,6 @@ function createTurretCollection(entity, offset)
     local ox, oy = turret:getWidth()/2, turret:getHeight()/2
     entity:add(Drawable(turret, 2, sx, sy, ox, oy))
 
-    local menu = TurretMenu(entity)
-    entity:add(Clickable(function() menu:toggle() end))
-
     return entity
 end
 
