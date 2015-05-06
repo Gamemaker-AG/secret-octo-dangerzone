@@ -13,7 +13,7 @@ function TargetMoveSystem:update(dt)
 end
 
 function TargetMoveSystem:requires()
-    return {"MovingTo", "Transformable"}
+    return {"MovingTo", "Transformable", "Accelerating"}
 end
 
 return TargetMoveSystem
