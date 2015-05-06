@@ -22,6 +22,8 @@ local HasGold = require("components/gameplay/HasGold")
 local Shield = require("components/gameplay/Shield")
 local Hull = require("components/gameplay/Hull")
 local Player = require("components/meta/Player")
+local Inventory = require("components/gameplay/Inventory")
+local createTurretCollection = require("collections/createTurretCollection")
 
 function createPlayerCollection(entity)
     -- Physical components
@@ -40,6 +42,7 @@ function createPlayerCollection(entity)
     entity:add(Hull(200))
     entity:add(HasGold(0))
     entity:add(Shield(200, 5))
+    entity:add(Inventory(createTurretCollection(Entity())))
 
     -- Graphic components
     entity:add(Muzzleparticles(100 ,500, 500, 3000))
