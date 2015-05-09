@@ -1,6 +1,6 @@
-local Projectile = class("Projectile", Component)
+local ShootsProjectile = class("ShootsProjectile", Component)
 
-function Projectile:__init(damage, cooldown, precision, amount)
+function ShootsProjectile:__init(damage, cooldown, precision, amount)
     self.damage = damage
     self.precision = precision or 0
     self.bulletAmount = amount or 1
@@ -8,4 +8,4 @@ function Projectile:__init(damage, cooldown, precision, amount)
     self.cooldown = 0
 end
 
-return Projectile
+return ShootsProjectile

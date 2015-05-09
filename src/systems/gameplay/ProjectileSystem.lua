@@ -6,7 +6,7 @@ function ProjectileSystem:update(dt)
     for index, entity in pairs(self.targets) do
         local weapon = entity:get("Weapon")
         local position = entity:get("Transformable").position
-        local projectile = entity:get("Projectile")
+        local projectile = entity:get("ShootsProjectile")
 
         local lowest = weapon.range
         local target = weapon.target
@@ -25,7 +25,7 @@ end
 
 
 function ProjectileSystem:requires()
-    return {"Weapon", "Projectile", "Transformable"}
+    return {"Weapon", "ShootsProjectile", "Transformable"}
 end
 
 return ProjectileSystem
