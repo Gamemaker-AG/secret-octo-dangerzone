@@ -28,7 +28,7 @@ function createTurretCollection(entity, offset)
     entity:add(LookingAt())
     entity:add(Attitude({Pirate=1}))
     entity:add(Weapon(1000, nil))
-    entity:add(ShootsProjectile(10, 0.01, 0, 1))
+    entity:add(ShootsProjectile(10, 2, 20, 10, 0.1, 0.02))
 
     -- Graphic components
     local turret = resources.images.circle

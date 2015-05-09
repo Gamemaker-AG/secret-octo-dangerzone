@@ -15,8 +15,17 @@ function ProjectileSystem:update(dt)
         if target ~= nil then
             if projectile.cooldown <= 0 then
                 projectile.cooldown = projectile.defaultCooldown
-                for i=0, projectile.bulletAmount, 1 do
-                    stack:current().engine:addEntity(createProjectileCollection(Entity(), position, target, projectile.damage, projectile.precision))
+                projectile.volleyCount = projectile.shotsPerVolley
+            end
+            if projectile.volleyCount > 0 then
+                projectile.waitCooldown = projectile.waitCooldown - dt
+                if projectile.waitCooldown < 0 then
+                    projectile.volleyCount = projectile.volleyCount - 1
+                    for i=0, projectile.simultaneousShots , 1 do
+                        stack:current().engine:addEntity(createProjectileCollection(Entity(), position, target, projectile.damage, projectile.precision))
+                    end
+                    projectile.waitCooldown = projectile.waitTime
+                    projectile.volleyCount = projectile.volleyCount - projectile.simultaneousShots
                 end
             end
         end
