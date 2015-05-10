@@ -46,7 +46,6 @@ function createPirateCollection(entity, x, y)
 
     -- Creating weapon component
     -- Getting Target for weapon component
-    local player = table.firstElement(stack:current().engine:getEntitiesWithComponent("Player"))
     if player then entity:add(ExplodesOnContact(player, 0)) end
 
     entity:add(Weapon(2000, nil))

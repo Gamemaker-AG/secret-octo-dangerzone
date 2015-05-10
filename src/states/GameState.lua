@@ -143,29 +143,29 @@ function GameState:load()
     )
     
     -- Adding player entity
-    self.player = createPlayerCollection(Entity())
-    self.engine:addEntity(self.player)
+    player = createPlayerCollection(Entity())
+    self.engine:addEntity(player)
 
     local camera = Entity()
-    camera:add(Camera(self.player))
-    camera:add(Transformable(self.player:get("Transformable").position:clone()))
+    camera:add(Camera(player))
+    camera:add(Transformable(player:get("Transformable").position:clone()))
     stack:current().engine:addEntity(camera)
 
     -- Adding player turret
-    local turret = Entity(self.player)
+    local turret = Entity(player)
     turret = createTurretCollection(turret, Vector(30, 0))
     self.engine:addEntity(turret)
 
     -- Adding Hull and Shield string entity
 
     local hull = Entity(camera)
-    hull:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's hull: %i", {{self.player:get("Hull"), "hitpoints"}}))
+    hull:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's hull: %i", {{player:get("Hull"), "hitpoints"}}))
     hull:add(Transformable(Vector(10,10),nil))
     hull:add(DebugText())
     self.engine:addEntity(hull)
 
     local shield = Entity(camera)
-    shield:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's shield: %i", {{self.player:get("Shield"), "hitpoints"}}))
+    shield:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's shield: %i", {{player:get("Shield"), "hitpoints"}}))
     shield:add(Transformable(Vector(10,30),nil))
     shield:add(DebugText())
     self.engine:addEntity(shield)
@@ -183,18 +183,18 @@ function GameState:load()
     self.engine:addEntity(ups)
 
     -- Debug strings
-    local posstring = Entity(self.player)
-    posstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Position %i %i", {{self.player:get("Transformable").position, "x"},{self.player:get("Transformable").position, "y"}} ))
+    local posstring = Entity(player)
+    posstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Position %i %i", {{player:get("Transformable").position, "x"},{player:get("Transformable").position, "y"}} ))
     posstring:add(Transformable(Vector(50,50),nil, false))
     self.engine:addEntity(posstring)
 
-    local speedstring = Entity(self.player)
-    speedstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Speed %i %i", {{self.player:get("Moving").speed, "x"}, {self.player:get("Moving").speed, "y"}} ))
+    local speedstring = Entity(player)
+    speedstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Speed %i %i", {{player:get("Moving").speed, "x"}, {player:get("Moving").speed, "y"}} ))
     speedstring:add(Transformable(Vector(50,100),nil, false))
     self.engine:addEntity(speedstring)
 
-    local goldstring = Entity(self.player)
-    goldstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Gold %i", {{self.player:get("HasGold"), "gold"}} ))
+    local goldstring = Entity(player)
+    goldstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Gold %i", {{player:get("HasGold"), "gold"}} ))
     goldstring:add(Transformable(Vector(50, 150),nil, false))
     self.engine:addEntity(goldstring)
 end
