@@ -17,10 +17,13 @@ function WavesSystem:spawnWave(enemies)
     local player = table.firstElement(stack:current().engine:getEntitiesWithComponent("Player"))
     if player then
         for i=1, enemies do
-            local enemy = createPirateCollection(Entity(), math.random(player:get("Transformable").position.x + -1200, 
-                                                    player:get("Transformable").position.x + 1200),
-                                        math.random(player:get("Transformable").position.y + -1200, 
-                                                    player:get("Transformable").position.y + 700))
+            local enemy = Entity()
+            enemy:addMultiple(createPirateCollection(
+            -- Random Positions for enemies in vicinity of Player
+                math.random(player:get("Transformable").position.x + -1200, 
+                            player:get("Transformable").position.x + 1200),
+                math.random(player:get("Transformable").position.y + -1200, 
+                            player:get("Transformable").position.y + 700)))
             stack:current().engine:addEntity(enemy)
         end
     end
