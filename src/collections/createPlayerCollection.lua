@@ -25,38 +25,41 @@ local Inventory = require("components/gameplay/Inventory")
 local createTurretCollection = require("collections/createTurretCollection")
 
 function createPlayerCollection(entity)
+    local components = {}
     -- Physical components
-    entity:add(Transformable(Vector(100, 100), Vector(1, 0)))
-    entity:add(Moving(Vector(0,0), constants.player.maxSpeed))
-    entity:add(Rotating(constants.player.defaultRotationSpeed))
-    entity:add(Accelerating(constants.player.defaultAcceleration, Vector(0,0)))
-    entity:add(Circle(constants.player.diameter/2))
+    local transformable = Transformable(Vector(100, 100), Vector(1, 0))
+    table.insert(components, transformable)
+    table.insert(components, Moving(Vector(0,0), constants.player.maxSpeed))
+    table.insert(components, Rotating(constants.player.defaultRotationSpeed))
+    table.insert(components, Accelerating(constants.player.defaultAcceleration, Vector(0,0)))
+    table.insert(components, Circle(constants.player.diameter/2))
 
     -- Meta components
-    entity:add(Player())
-    entity:add(Controllable())
-    entity:add(Attitude({Pirate=1}))
+    table.insert(components, Player())
+    table.insert(components, Controllable())
+    table.insert(components, Attitude({Pirate=1}))
 
     -- GamePlay components
-    entity:add(Hull(200))
-    entity:add(HasGold(0))
-    entity:add(Shield(200, 5))
-    entity:add(Inventory(createTurretCollection(Entity())))
+    table.insert(components, Hull(200))
+    table.insert(components, HasGold(0))
+    table.insert(components, Shield(200, 5))
+    local turretCollection = Entity()
+    turretCollection:addMultiple(createTurretCollection(turretCollection))
+    table.insert(components, turretCollection)
 
     -- Graphic components
-    entity:add(Muzzleparticles(100 ,500, 500, 3000))
+    table.insert(components, Muzzleparticles(100 ,500, 500, 3000))
 
         local ship = resources.images.player
         local ox, oy = ship:getWidth()*(2/3), ship:getHeight()/2
-    entity:add(Drawable(ship, 1, sx, sy, ox, oy))
+    table.insert(components, (Drawable(ship, 1, sx, sy, ox, oy)))
 
     -- Creating particle system
-    entity:add(Particle(resources.images.particle1, 5000, Vector(-50, 0), {0.2, 1.2}, nil))
+    local particleComponent = Particle(resources.images.particle1, 5000, Vector(-50, 0), {0.2, 1.2}, nil)
+    table.insert(components, particleComponent)
 
     -- Local variables for particle position calculation
-    local particleComponent = entity:get("Particle")
-    local particle = entity:get("Particle").particle
-    local transformable = entity:get("Transformable")
+    local particle = particleComponent.particle
     local radian = transformable.direction:getRadian()
     local rotatedOffset = particleComponent.offset:rotate(transformable.direction:getRadian()):add(transformable.position)
 
@@ -84,7 +87,7 @@ function createPlayerCollection(entity)
     particle:setSizes(1.5, 0.8, 0.1)
     particle:start()
 
-    return entity
+    return components
 end
 
 return createPlayerCollection
