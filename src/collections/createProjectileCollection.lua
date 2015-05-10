@@ -7,9 +7,11 @@ local ExplodesOnContact = require("components/gameplay/ExplodesOnContact")
 
 local constants = require("constants")
 
-function createProjectileCollection(entity, pos, target, damage, precision)
+function createProjectileCollection(pos, target, damage, precision)
+    local components = {}
     -- Physic components
-    entity:add(Transformable(pos:clone()))
+    local transformable = Transformable(pos:clone())
+    table.insert(components, transformable)
         -- Getting direction and setting speed
     local direction = target:get("Transformable").position:subtract(pos):getUnit()
 
@@ -18,21 +20,21 @@ function createProjectileCollection(entity, pos, target, damage, precision)
         direction:set(direction:rotate(randomDirection*math.pi/180))
     end
 
-    entity:add(Moving(direction:multiply(constants.bullet.speed)))
-    entity:get("Transformable").direction:set(direction)
+    table.insert(components, Moving(direction:multiply(constants.bullet.speed)))
+    transformable.direction:set(direction)
 
-    entity:add(Circle(constants.bullet.diameter/2))
+    table.insert(components, Circle(constants.bullet.diameter/2))
 
     -- Meta components
-    entity:add(Damaging(damage))
-    entity:add(ExplodesOnContact(target, target:get("Circle").radius))
+    table.insert(components, Damaging(damage))
+    table.insert(components, ExplodesOnContact(target, target:get("Circle").radius))
 
     -- Graphics components
     local image = resources.images.beam
     local ox, oy = image:getWidth()/2, image:getHeight()/2
-    entity:add(Drawable(image, 1, sx, sy, ox, oy))
+    table.insert(components, Drawable(image, 1, sx, sy, ox, oy))
 
-    return entity
+    return components
 end
 
 return createProjectileCollection
