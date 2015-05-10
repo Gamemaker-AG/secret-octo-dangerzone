@@ -38,7 +38,7 @@ local constants = {
     },
     waves = {
         -- time between waves in seconds
-        timer = 5
+        timer = 1
     },
     gameplay = {
         --distance to player at which projectiles get deleted automatically

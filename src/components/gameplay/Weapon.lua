@@ -1,12 +1,8 @@
 local Weapon = class("Weapon", Component)
 
-function Weapon:__init(fire, damage, cooldown, range, target) 
-    self.fire = fire
-    self.damage = damage
-    self.defaultCooldown = cooldown
-    self.range = range
+function Weapon:__init(range, target) 
     self.target = target or nil
-    self.cooldown = 0
+    self.range = range
 end
 
 return Weapon

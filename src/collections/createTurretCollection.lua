@@ -14,11 +14,9 @@ local Circle = require("components/physic/Circle")
 local Weapon = require("components/gameplay/Weapon")
 local Attitude = require("components/gameplay/Attitude")
 local LookingAt = require("components/gameplay/LookingAt")
+local ShootsProjectile = require("components/gameplay/ShootsProjectile")
 
 local TurretMenu = require("models/ui/TurretMenu")
-
--- Collection
-local createBulletCollection = require("collections/createBulletCollection")
 
 function createTurretCollection(entity, offset)
     -- Physic components
@@ -29,14 +27,8 @@ function createTurretCollection(entity, offset)
     -- Meta components
     entity:add(LookingAt())
     entity:add(Attitude({Pirate=1}))
-
-        -- Creating weapon function
-    local func = function(entity, target)
-        local damage = entity:get("Weapon").damage
-        local position = entity:get("Transformable").position
-        stack:current().engine:addEntity(createBulletCollection(Entity(), position, target, damage))
-    end
-    entity:add(Weapon(func, 10, 0.5, 2000, nil))
+    entity:add(Weapon(1000, nil))
+    entity:add(ShootsProjectile(10, 2, 20, 10, 0.1, 0.02))
 
     -- Graphic components
     local turret = resources.images.circle
