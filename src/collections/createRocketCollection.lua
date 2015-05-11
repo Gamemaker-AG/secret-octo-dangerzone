@@ -19,35 +19,41 @@ local Debris = require("components/gameplay/Debris")
 
 
 function createRocketCollection(entity, pos, target, damage)
+    local components = {}
+
     -- Physical components
-    entity:add(Debris(target, 100))
-    entity:add(Transformable(pos:clone()))
-        -- Calculate direction to target and set it
+    table.insert(components, Debris(target, 100))
+
+    local transformable = entity:get("Transformable")
+    table.insert(components, Transformable(pos:clone()))
+
+    -- Calculate direction to target and set it
     local direction = target:get("Transformable").position:subtract(pos):getUnit()
-    entity:get("Transformable").direction:set(direction)
-        -- Set rocket speed vector
-    entity:add(Moving(direction:multiply(constants.rocket.speed)))
-    entity:add(Circle(constants.rocket.diameter))
+    transformable.direction:set(direction)
+
+    -- Set rocket speed vector
+    table.insert(components, Moving(direction:multiply(constants.rocket.speed)))
+    table.insert(components, Circle(constants.rocket.diameter))
 
     -- Meta components
-    entity:add(Damaging(damage))
-    entity:add(ExplodesOnContact(target))
+    table.insert(components, Damaging(damage))
+    table.insert(components, ExplodesOnContact(target))
 
     -- Graphic components
-    entity:add(Muzzleparticles(100 ,100*constants.rocket.traillength, 500, 3000))
+    table.insert(components, Muzzleparticles(100 ,100*constants.rocket.traillength, 500, 3000))
         -- Getting Stuff for image
     local image = resources.images.rocket
     local ox, oy = image:getWidth()/2, image:getHeight()/2
-    entity:add(Drawable(image, 1, sx, sy, ox, oy))
+    table.insert(components, Drawable(image, 1, sx, sy, ox, oy))
 
     -- Particle component
-    entity:add(Particle(resources.images.particle1, 5000, Vector(-10, 0), {0.2, 1.2}, nil))
-        -- Set locals for particle
-    local particleComponent = entity:get("Particle")
+    local particleComponent = Particle(resources.images.particle1, 5000, Vector(-10, 0), {0.2, 1.2}, nil)
+    table.insert(components, particleComponent)
+
+    -- Set locals for particle
     local particle = particleComponent.particle
-    local transformable = entity:get("Transformable")
     local radian = transformable.direction:getRadian()
-        -- Calculate stuff for particle
+    -- Calculate stuff for particle
     local rotatedOffset = particleComponent.offset:rotate(transformable.direction:getRadian()):add(transformable.position)
 
     -- Particle properties
@@ -74,7 +80,7 @@ function createRocketCollection(entity, pos, target, damage)
     particle:setSizes(1.5, 0.8, 0.1)
     particle:start()
 
-    return entity
+    return components
 end
 
 return createRocketCollection

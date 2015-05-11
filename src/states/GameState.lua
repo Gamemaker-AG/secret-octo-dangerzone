@@ -143,7 +143,8 @@ function GameState:load()
     )
     
     -- Adding player entity
-    self.player = createPlayerCollection(Entity())
+    self.player = Entity()
+    self.player:addMultiple(createPlayerCollection(Entity()))
     self.engine:addEntity(self.player)
 
     local camera = Entity()
@@ -153,7 +154,7 @@ function GameState:load()
 
     -- Adding player turret
     local turret = Entity(self.player)
-    turret = createTurretCollection(turret, Vector(30, 0))
+    turret:addMultiple(createTurretCollection(turret, Vector(30, 0)))
     self.engine:addEntity(turret)
 
     -- Adding Hull and Shield string entity

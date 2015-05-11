@@ -6,26 +6,29 @@ function ProjectileSystem:update(dt)
     for index, entity in pairs(self.targets) do
         local weapon = entity:get("Weapon")
         local position = entity:get("Transformable").position
-        local projectile = entity:get("ShootsProjectile")
+        local shootsProjectile = entity:get("ShootsProjectile")
 
         local lowest = weapon.range
         local target = weapon.target
 
-        projectile.cooldown = projectile.cooldown - dt
+        shootsProjectile.cooldown = shootsProjectile.cooldown - dt
         if target ~= nil then
-            if projectile.cooldown <= 0 then
-                projectile.cooldown = projectile.defaultCooldown
-                projectile.volleyCount = projectile.shotsPerVolley
+            if shootsProjectile.cooldown <= 0 then
+                shootsProjectile.cooldown = shootsProjectile.defaultCooldown
+                shootsProjectile.volleyCount = shootsProjectile.shotsPerVolley
             end
-            if projectile.volleyCount > 0 then
-                projectile.waitCooldown = projectile.waitCooldown - dt
-                if projectile.waitCooldown < 0 then
-                    projectile.volleyCount = projectile.volleyCount - 1
-                    for i=0, projectile.simultaneousShots , 1 do
-                        stack:current().engine:addEntity(createProjectileCollection(Entity(), position, target, projectile.damage, projectile.precision))
+            if shootsProjectile.volleyCount > 0 then
+                shootsProjectile.waitCooldown = shootsProjectile.waitCooldown - dt
+                if shootsProjectile.waitCooldown < 0 then
+                    for i=0, shootsProjectile.simultaneousShots , 1 do
+                        local projectile = Entity()
+                        projectile:addMultiple(
+                            createProjectileCollection(position, target, shootsProjectile.damage, shootsProjectile.precision)
+                        )
+                        stack:current().engine:addEntity(projectile)
                     end
-                    projectile.waitCooldown = projectile.waitTime
-                    projectile.volleyCount = projectile.volleyCount - projectile.simultaneousShots
+                    shootsProjectile.waitCooldown = shootsProjectile.waitTime
+                    shootsProjectile.volleyCount = shootsProjectile.volleyCount - shootsProjectile.simultaneousShots
                 end
             end
         end
