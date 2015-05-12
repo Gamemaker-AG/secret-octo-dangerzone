@@ -39,6 +39,7 @@ local Camera = require("components/gameplay/Camera")
 
 -- UI
 local ClickableSystem = require("systems/ui/ClickableSystem")
+local SpaceStationActivateSystem = require("systems/ui/SpaceStationActivateSystem")
 
 -- Events
 local KeyPressed = require("events/KeyPressed")
@@ -79,8 +80,10 @@ function GameState:load()
     local goldsystem = GoldSystem()
     local debugsystem = DebugSystem()
     local clickableSystem = ClickableSystem()
+    local spaceStationSystem = SpaceStationActivateSystem()
 
     -- Adding update systems
+    self.engine:addSystem(spaceStationSystem)
     self.engine:addSystem(DestroySystem())
     self.engine:addSystem(AccelerationSystem())
     self.engine:addSystem(MovementSystem())
@@ -121,11 +124,12 @@ function GameState:load()
     self.engine:addSystem(debugsystem, "draw")
 
     -- Registering event listeners
+    self.eventmanager:addListener("KeyPressed", spaceStationSystem, spaceStationSystem.keyPressed)
     self.eventmanager:addListener("KeyPressed", playercontrol, playercontrol.fireEvent)
     self.eventmanager:addListener("KeyPressed", debugsystem, debugsystem.setInvisibility)
     self.eventmanager:addListener("KeyReleased", playercontrol, playercontrol.fireEvent)
 
-    self.eventmanager:addListener("AddingGold", goldsystem, goldsystem.addGold)
+    -- self.eventmanager:addListener("AddingGold", goldsystem, goldsystem.addGold)
     self.eventmanager:addListener("DamageDone", damagesystem, damagesystem.fireEvent)
     self.eventmanager:addListener("UpdateTransformable", transformableUpdateSystem, transformableUpdateSystem.onDemandUpdate)
     self.eventmanager:addListener("UpdateParticlePosition", particlePositionSyncSystem, particlePositionSyncSystem.updatePosition)

@@ -1,4 +1,7 @@
 local generateStar = require("generators/stars")
+local generateSpaceStation = require("generators/spaceStations")
+local Debris = require("components/gameplay/Debris")
+local Transformable = require("components/physic/Transformable")
 
 -- Creates a weak entity for garbage collection 
 local function createWeakTable()
@@ -54,15 +57,23 @@ function MapGenerationSystem:generateRow(root, size)
             if not self.generatedTiles[position.x] then self.generatedTiles[position.x] = createWeakTable() end
 
             if not self.generatedTiles[position.x][position.y] then
-                local star = generateStar(position:multiply(self.tileSize), self.tileSize)
-                self.generatedTiles[position.x][position.y] = star
+                local absPosition = position:multiply(self.tileSize)
+                generateStar(absPosition, self.tileSize)
+                generateSpaceStation(absPosition, self.tileSize)
+
+                -- Dummy entity to check wether we should regenerate this tile
+                local debris = Entity()
+                debris:add(Debris())
+                debris:add(Transformable(absPosition))
+                stack:current().engine:addEntity(debris)
+                self.generatedTiles[position.x][position.y] = debris
             end
         end
     end
 end
 
 function MapGenerationSystem:initializeMap()
-
+    -- TODO
 end
 
 function MapGenerationSystem:requires()
