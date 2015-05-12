@@ -4,7 +4,7 @@ local createTurretCollection = require("collections/createTurretCollection")
 
 -- Graphic systems
 local DrawSystem = require("systems/draw/DrawSystem")
-local StringDrawSystem = require("systems/draw/StringDrawSystem")
+local TextDrawSystem = require("systems/draw/TextDrawSystem")
 local CameraSystem = require("systems/draw/CameraSystem")
 local MuzzleparticlesSystem = require("systems/draw/MuzzleparticlesSystem")
 
@@ -109,7 +109,7 @@ function GameState:load()
     self.engine:addSystem(cameraSystem, "draw")
 
     self.engine:addSystem(DrawSystem())
-    self.engine:addSystem(StringDrawSystem())
+    self.engine:addSystem(TextDrawSystem())
     self.engine:addSystem(ParticleDrawSystem())
     self.engine:addSystem(shieldSystem, "draw")
 

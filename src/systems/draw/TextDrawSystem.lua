@@ -1,8 +1,8 @@
 local lume = require("lib/lume/lume")
 
-local StringDrawSystem = class("StringDrawSystem", System)
+local TextDrawSystem = class("TextDrawSystem", System)
 
-function StringDrawSystem:draw()
+function TextDrawSystem:draw()
     for index, entity in pairs(self.targets) do
         local str = entity:get("DrawableText")
         if str.visible then
@@ -18,9 +18,9 @@ function StringDrawSystem:draw()
     end
 end
 
-function StringDrawSystem:requires()
+function TextDrawSystem:requires()
     return {"Transformable", "DrawableText"}
 end
 
 
-return StringDrawSystem
+return TextDrawSystem
