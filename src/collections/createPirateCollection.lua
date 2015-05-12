@@ -25,38 +25,39 @@ local ExplodesOnContact = require("components/gameplay/ExplodesOnContact")
 -- Meta
 local Pirate = require("components/meta/Pirate")
 
-function createPirateCollection(entity, x, y)
+function createPirateCollection(x, y)
+    local components = {}
     -- Physical components
-    entity:add(Transformable(Vector(x, y), Vector(1, 0)))
-    entity:add(Moving(Vector(0,0), constants.enemy.maxSpeed))
-    entity:add(Rotating(constants.enemy.defaultRotationSpeed))
-    entity:add(Accelerating(constants.enemy.defaultAcceleration, Vector(0,0)))
-    entity:add(Circle(constants.enemy.diameter/2))
+    table.insert(components, Transformable(Vector(x, y), Vector(1, 0)))
+    table.insert(components, Moving(Vector(0,0), constants.enemy.maxSpeed))
+    table.insert(components, Rotating(constants.enemy.defaultRotationSpeed))
+    table.insert(components, Accelerating(constants.enemy.defaultAcceleration, Vector(0,0)))
+    table.insert(components, Circle(constants.enemy.diameter/2))
 
     -- Meta
-    entity:add(Wave())
-    entity:add(Pirate())
-    entity:add(MovingTo())
-    entity:add(LookingAt())
-    entity:add(Attitude({Player=1}))
+    table.insert(components, Wave())
+    table.insert(components, Pirate())
+    table.insert(components, MovingTo())
+    table.insert(components, LookingAt())
+    table.insert(components, Attitude({Player=1}))
 
     -- Gameplay
-    entity:add(Hull(20))
-    entity:add(DropsGold(1))
+    table.insert(components, Hull(20))
+    table.insert(components, DropsGold(1))
 
     -- Creating weapon component
     -- Getting Target for weapon component
     local player = table.firstElement(stack:current().engine:getEntitiesWithComponent("Player"))
-    if player then entity:add(ExplodesOnContact(player, 0)) end
+    if player then table.insert(components, ExplodesOnContact(player, 0)) end
 
-    entity:add(Weapon(2000, nil))
+    table.insert(components, (Weapon(2000, nil)))
 
     -- Graphic components
     local ship = resources.images.enemy
     local ox, oy = ship:getWidth()/2, ship:getHeight()/2
-    entity:add(Drawable(ship, 1, sx, sy, ox, oy))
+    table.insert(components, Drawable(ship, 1, sx, sy, ox, oy))
 
-    return entity
+    return components
 end
 
 return createPirateCollection
