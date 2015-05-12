@@ -9,7 +9,7 @@ function WavesSystem:update(dt)
             self:spawnWave(10)
             timer = constants.waves.timer
         end 
-        timer = timer - 1*dt
+        timer = timer - dt
     end
 end
 
