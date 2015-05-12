@@ -4,6 +4,11 @@ local Circle = require("components/physic/Circle")
 local Debris = require("components/gameplay/Debris")
 
 return function(position, size)
+    -- temporarily disable this
+    if true then 
+        return nil
+    end
+
     local amount = 32
     local starPositions = {}
     local subTileSize = size/4
