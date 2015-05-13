@@ -1,28 +1,31 @@
 -- Core
 local Vector = require("helper/Vector")
 local constants = require("constants")
-
--- Graphic components
-local Drawable = require("components/graphic/Drawable")
-local Particle = require("components/particle/Particle")
-local Muzzleparticles = require("components/graphic/Muzzleparticles")
-
--- Physic components
-local Moving = require("components/physic/Moving")
-local Rotating = require("components/physic/Rotating")
-local Accelerating = require("components/physic/Accelerating")
-local Transformable = require("components/physic/Transformable")
-local Circle = require("components/physic/Circle")
-
--- Gameplay components
-local Controllable = require("components/gameplay/Controllable")
-local Attitude = require("components/gameplay/Attitude")
-local HasGold = require("components/gameplay/HasGold")
-local Shield = require("components/gameplay/Shield")
-local Hull = require("components/gameplay/Hull")
-local Player = require("components/meta/Player")
-local Inventory = require("components/gameplay/Inventory")
 local createTurretCollection = require("collections/createTurretCollection")
+
+Component.load({
+    -- Graphic components
+    "components/graphic/Drawable",
+    "components/particle/Particle",
+    "components/graphic/Muzzleparticles",
+
+    -- Physic components
+    "components/physic/Moving",
+    "components/physic/Rotating",
+    "components/physic/Accelerating",
+    "components/physic/Transformable",
+    "components/physic/Circle",
+
+    -- Gameplay components
+    "components/gameplay/Weapon",
+    "components/gameplay/Controllable",
+    "components/gameplay/Attitude",
+    "components/gameplay/HasGold",
+    "components/gameplay/Shield",
+    "components/gameplay/Hull",
+    "components/gameplay/Inventory",
+    "components/meta/Player"
+})
 
 function createPlayerCollection(entity)
     local components = {}
