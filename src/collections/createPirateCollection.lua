@@ -55,7 +55,7 @@ function createPirateCollection(x, y)
     -- Graphic components
     local ship = resources.images.enemy
     local ox, oy = ship:getWidth()/2, ship:getHeight()/2
-    table.insert(components, Drawable(ship, 1, sx, sy, ox, oy))
+    table.insert(components, Drawable(ship, 1, nil, nil, ox, oy))
 
     return components
 end

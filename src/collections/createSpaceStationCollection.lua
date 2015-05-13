@@ -4,12 +4,17 @@ local Debris = require("components/gameplay/Debris")
 local CircleShape = require("components/physic/Circle")
 local SpaceStation = require("components/gameplay/SpaceStation")
 
+local constants = require("constants")
+
 return function(position)
 	local components = {}
 
-	table.insert(components, Drawable(resources.images.space_station))
+	local img = resources.images.space_station
+	local ox, oy = img:getWidth()/2, img:getHeight()/2
+
+	table.insert(components, Drawable(img, nil, nil, nil, ox, oy))
 	table.insert(components, Transformable(position))
-	table.insert(components, CircleShape(percentToPixels(10)))
+	table.insert(components, CircleShape(constants.spaceStation.diameter))
 	table.insert(components, SpaceStation())
 	table.insert(components, Debris())
 
