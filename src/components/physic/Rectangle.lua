@@ -1,8 +1,1 @@
-local Rectangle = class("Rectangle")
-
-function Rectangle:__init(width, height)
-    self.width = width or 0
-    self.height = height or 0
-end
-
-return Rectangle
+return Component.create("Rectangle", {width = 0, height = 0})

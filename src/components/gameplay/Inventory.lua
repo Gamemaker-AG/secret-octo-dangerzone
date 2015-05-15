@@ -1,4 +1,4 @@
-local Inventory = class("Inventory", Component)
+local Inventory = Component.create("Inventory")
 
 function Inventory:__init(inventory)
     self.inventory = inventory or {}
@@ -7,7 +7,7 @@ end
 function Inventory:add(element)
 	-- #[self.inventory] behaviour is undefined in Lua 5.2.
 	-- Should insert at first nil index in table
-		table.insert(self.inventory, #self.inventory+1, element)
+	table.insert(self.inventory, #self.inventory+1, element)
 end
 
 function Inventory:remove(element)
