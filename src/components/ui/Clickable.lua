@@ -1,1 +1,1 @@
-return Component.create("Clickable", {clicked = function() end})
+return Component.create("Clickable", {{clicked = function() end}})
