@@ -1,4 +1,4 @@
-local Particle = class("Particle", Component)
+local Particle = Component.create("Particle")
 
 function Particle:__init(image, maxParticles, offset, particlelife, emitterlife)
     self.particle = love.graphics.newParticleSystem(image, maxParticles)

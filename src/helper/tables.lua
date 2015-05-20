@@ -8,7 +8,7 @@ function table.getKey(list, element)
     return false
 end
 
-function table.count(list) 
+function table.count(list)
     local counter = 0
     for index, value in pairs(list) do
         counter = counter + 1
@@ -44,18 +44,13 @@ function table.firstElement(list)
     for index, value in pairs(list) do
         return value
     end
-end 
+end
 
 function table.removeElement(list, element)
-    local indice = {}
     for index, value in pairs(list) do
         if value == element then
-            table.insert(indice, index)
+          table.remove(list, index)
         end
-    end
-    table.sort(indice, function(a, b) return a > b end)
-    for index, value in pairs(indice) do
-        table.remove(list, value)
     end
 end
 
@@ -125,7 +120,7 @@ function table.show(t, name, indent)
          -- info.name is nil because o is not a calling level
          if info.what == "C" then
             return string.format("%q", so .. ", C function")
-         else 
+         else
             -- the information is defined through lines
             return string.format("%q", so .. ", defined in (" ..
                 info.linedefined .. "-" .. info.lastlinedefined ..
@@ -149,7 +144,7 @@ function table.show(t, name, indent)
          cart = cart .. " = " .. basicSerialize(value) .. ";\n"
       else
          if saved[value] then
-            cart = cart .. " = {}; -- " .. saved[value] 
+            cart = cart .. " = {}; -- " .. saved[value]
                         .. " (self reference)\n"
             autoref = autoref ..  name .. " = " .. saved[value] .. ";\n"
          else

@@ -7,7 +7,7 @@ local Circle = require("components/physic/Circle")
 local Transformable = require("components/physic/Transformable")
 local Clickable = require("components/ui/Clickable")
 
-local StringDrawSystem = require("systems/draw/StringDrawSystem")
+local TextDrawSystem = require("systems/draw/TextDrawSystem")
 local ClickableSystem = require("systems/ui/ClickableSystem")
 local TransformableUpdateSystem = require("systems/physic/TransformableUpdateSystem")
 
@@ -27,7 +27,7 @@ function MenuState:load()
         stack:push(GameState())
     end})
 
-    self.engine:addSystem(StringDrawSystem())
+    self.engine:addSystem(TextDrawSystem())
     self.engine:addSystem(TransformableUpdateSystem())
 
     local clickableSystem = ClickableSystem()

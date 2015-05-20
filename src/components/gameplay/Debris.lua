@@ -1,6 +1,6 @@
 local constants = require("constants")
 
-local Debris = class("Debris", Component)
+local Debris = Component.create("Debris")
 
 function Debris:__init(target, distance)
     self.target = target or stack:current().player

@@ -9,13 +9,13 @@ local createButtonComponents = require("models/ui/createButtonComponents")
 
 local TurretMenu = class("TurretMenu")
 
-function TurretMenu:__init(turret)
+function TurretMenu:__init(turret, circle)
     self.buttons = {}
     self.turret = turret
     self.visible = false
 
-    local button_radius = turret:get("Circle").radius*1.5
-    local distance_to_center = turret:get("Circle").radius*4
+    local button_radius = circle.radius*1.5
+    local distance_to_center = circle.radius*4
 
     local button_count = 4
     for i = 0, button_count-1, 1 do

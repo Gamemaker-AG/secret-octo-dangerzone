@@ -1,7 +1,5 @@
-local Transformable = require("components/physic/Transformable")
-local MovingTo = require("components/gameplay/MovingTo")
-local Accelerating = require("components/physic/Accelerating")
-local Moving = require("components/physic/Moving")
+Component.load({"MovingTo", "Transformable", "Drawable", "Accelerating", "Moving"})
+
 local GoldSystem = class("GoldSystem", System)
 
 function GoldSystem:addGold(event)

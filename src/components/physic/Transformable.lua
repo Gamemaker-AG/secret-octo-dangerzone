@@ -1,6 +1,6 @@
 local Vector = require("helper/Vector")
 
-local Transformable = class("Transformable", Component)
+local Transformable = Component.create("Transformable")
 
 function Transformable:__init(offset, dir, rotflag)
     self.offset = offset or Vector()
@@ -13,6 +13,5 @@ function Transformable:__init(offset, dir, rotflag)
     	self.rotationEnabled = rotflag
     end
 end
-
 
 return Transformable
