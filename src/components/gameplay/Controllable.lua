@@ -1,3 +1,1 @@
-local Controllable = class("Controllable", Component)
-
-return Controllable
+return Component.create("Controllable")

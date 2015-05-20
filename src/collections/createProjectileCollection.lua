@@ -1,9 +1,4 @@
-local Moving = require("components/physic/Moving")
-local Transformable = require("components/physic/Transformable")
-local Circle = require("components/physic/Circle")
-
-local Damaging = require("components/gameplay/Damaging")
-local ExplodesOnContact = require("components/gameplay/ExplodesOnContact")
+Component.load({"Moving", "Transformable", "Circle", "Damaging", "ExplodesOnContact", "Drawable"})
 
 local constants = require("constants")
 

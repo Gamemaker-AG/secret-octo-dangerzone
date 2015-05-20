@@ -1,4 +1,1 @@
--- Identifier for Attitude and Attitude
-local Pirate = class("Pirate", Component)
-
-return Pirate
+return Component.create("Pirate")

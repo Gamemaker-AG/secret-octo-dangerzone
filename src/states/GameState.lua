@@ -1,3 +1,43 @@
+-- Load Components
+require("components/gameplay/Attitude")
+require("components/gameplay/Camera")
+require("components/gameplay/Controllable")
+require("components/gameplay/Damaging")
+require("components/gameplay/Debris")
+require("components/gameplay/Destroyed")
+require("components/gameplay/DropsGold")
+require("components/gameplay/ExplodesOnContact")
+require("components/gameplay/HasGold")
+require("components/gameplay/Hull")
+require("components/gameplay/Inventory")
+require("components/gameplay/LookingAt")
+require("components/gameplay/MovingTo")
+require("components/gameplay/Parallax")
+require("components/gameplay/Shield")
+require("components/gameplay/ShootsProjectile")
+require("components/gameplay/Wave")
+require("components/gameplay/Weapon")
+
+require("components/graphic/DebugText")
+require("components/graphic/Drawable")
+require("components/graphic/DrawableText")
+require("components/graphic/Muzzleparticles")
+
+require("components/meta/Pirate")
+require("components/meta/Player")
+
+require("components/particle/Particle")
+
+require("components/physic/Accelerating")
+require("components/physic/Circle")
+require("components/physic/CountingDown")
+require("components/physic/Moving")
+require("components/physic/Rectangle")
+require("components/physic/Rotating")
+require("components/physic/Transformable")
+
+require("components/ui/Clickable")
+
 -- Collections
 local createPlayerCollection = require("collections/createPlayerCollection")
 local createTurretCollection = require("collections/createTurretCollection")

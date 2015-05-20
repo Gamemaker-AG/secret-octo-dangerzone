@@ -1,7 +1,1 @@
-local Circle = class("Circle")
-
-function Circle:__init(radius)
-    self.radius = radius
-end
-
-return Circle
+return Component.create("Circle", {"radius"})

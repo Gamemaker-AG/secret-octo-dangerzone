@@ -1,20 +1,7 @@
--- Core
+Component.load({"Drawable", "Rotating", "Circle", "Transformable", "Weapon", "Attitude", "LookingAt", "ShootsProjectile", "Clickable"})
+
 local Vector = require("helper/Vector")
 local constants = require("constants")
-
--- Graphic components
-local Drawable = require("components/graphic/Drawable")
-
--- Physic components
-local Rotating = require("components/physic/Rotating")
-local Transformable = require("components/physic/Transformable")
-local Circle = require("components/physic/Circle")
-
--- Gameplay components
-local Weapon = require("components/gameplay/Weapon")
-local Attitude = require("components/gameplay/Attitude")
-local LookingAt = require("components/gameplay/LookingAt")
-local ShootsProjectile = require("components/gameplay/ShootsProjectile")
 
 local TurretMenu = require("models/ui/TurretMenu")
 

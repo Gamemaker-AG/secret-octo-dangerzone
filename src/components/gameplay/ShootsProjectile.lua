@@ -1,4 +1,4 @@
-local ShootsProjectile = class("ShootsProjectile", Component)
+local ShootsProjectile = Component.create("ShootsProjectile")
 
 function ShootsProjectile:__init(damage, cooldown, precision, shotsPerVolley, volleyTime, waitTime)
     self.damage = damage

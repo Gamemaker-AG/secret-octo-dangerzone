@@ -15,10 +15,10 @@ function PlayerControlSystem:fireEvent(event)
          if event.__name == "KeyPressed" then
             if event.key == "a" or event.key == "left" then
                 local rotating = entity:get("Rotating")
-                rotating.rotationSpeed = -rotating.defRotationSpeed
+                rotating.rotationSpeed = -rotating.defaultRotationSpeed
             elseif event.key == "d" or event.key == "right" then
                 local rotating = entity:get("Rotating")
-                rotating.rotationSpeed = rotating.defRotationSpeed
+                rotating.rotationSpeed = rotating.defaultRotationSpeed
             end
          elseif event.__name == "KeyReleased" then
             if event.key == "w" or event.key == "up" then
