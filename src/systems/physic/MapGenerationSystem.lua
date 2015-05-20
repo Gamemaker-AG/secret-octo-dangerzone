@@ -13,14 +13,15 @@ function MapGenerationSystem:__init()
 	self.tileSize = 128
 	self.tileScope = 2
     self.generatedTiles = {}
+    self.firstRun = true
 end
 
 function MapGenerationSystem:update(dt)
     -- Gets player reference at first run.
-    if not self.player then
-    	self.player = table.firstElement(self.targets)
+    if self.firstRun then
     	self.lastTile = self:getCurrentTile()
         self:initializeMap()
+        self.firstRun = false
     end
    	local currentTile = self:getCurrentTile()
 
@@ -41,7 +42,7 @@ end
 
 -- Gets the current tile the player is on
 function MapGenerationSystem:getCurrentTile()
-	local playerPosition = self.player:get("Transformable").offset
+	local playerPosition = player:get("Transformable").offset
 	return playerPosition:subtract(playerPosition:modulo(self.tileSize)):divide(self.tileSize)
 end
 
@@ -63,10 +64,6 @@ end
 
 function MapGenerationSystem:initializeMap()
 
-end
-
-function MapGenerationSystem:requires()
-    return {"Player"}
 end
 
 return MapGenerationSystem
