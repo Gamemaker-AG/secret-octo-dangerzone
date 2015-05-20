@@ -1,5 +1,3 @@
-return Component.create("Drawable", {
-	"image",
-	{index = 0},
-	"sx", "sy", "ox", "oy"	
-})
+return Component.create("Drawable",
+  {"image", "index", "sx", "sy", "ox", "oy"},
+  {index = 0})

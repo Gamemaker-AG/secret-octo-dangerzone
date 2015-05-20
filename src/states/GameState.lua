@@ -48,7 +48,7 @@ local TextDrawSystem = require("systems/draw/TextDrawSystem")
 local CameraSystem = require("systems/draw/CameraSystem")
 local MuzzleparticlesSystem = require("systems/draw/MuzzleparticlesSystem")
 
--- Particle systems 
+-- Particle systems
 local ParticleDrawSystem = require("systems/particle/ParticleDrawSystem")
 local ParticlePositionSyncSystem = require("systems/particle/ParticlePositionSyncSystem")
 local ParticleUpdateSystem = require("systems/particle/ParticleUpdateSystem")
@@ -60,7 +60,7 @@ local AccelerationSystem = require("systems/physic/AccelerationSystem")
 local TransformableUpdateSystem = require("systems/physic/TransformableUpdateSystem")
 local MapGenerationSystem = require("systems/physic/MapGenerationSystem")
 
--- Gameplay 
+-- Gameplay
 local ProjectileSystem = require("systems/gameplay/ProjectileSystem")
 local FacingSystem = require("systems/gameplay/FacingSystem")
 local TargetingSystem = require("systems/gameplay/TargetingSystem")
@@ -108,7 +108,7 @@ function GameState:load()
     -- Systems containing update and draw
     local shieldSystem = ShieldSystem()
     local cameraSystem = CameraSystem()
-    
+
     -- Systems containing an event function
     local playercontrol = PlayerControlSystem()
     local transformableUpdateSystem = TransformableUpdateSystem()
@@ -130,7 +130,7 @@ function GameState:load()
     self.engine:addSystem(TargetMoveSystem())
     self.engine:addSystem(playercontrol)
     self.engine:addSystem(ExplodeOnContactSystem())
-    self.engine:addSystem(ParticleUpdateSystem())    
+    self.engine:addSystem(ParticleUpdateSystem())
     self.engine:addSystem(particlePositionSyncSystem)
     self.engine:addSystem(TargetingSystem())
     self.engine:addSystem(MuzzleparticlesSystem())
@@ -181,7 +181,7 @@ function GameState:load()
             end
         end
     )
-    
+
     -- Adding player entity
     self.player = Entity()
     self.player:addMultiple(createPlayerCollection(Entity()))

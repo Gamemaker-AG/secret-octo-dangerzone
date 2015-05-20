@@ -1,1 +1,3 @@
-return Component.create("Rectangle", {{width = 0}, {height = 0}})
+return Component.create("Rectangle",
+  {"width", "height"},
+  {width = 0, height = 0})

@@ -1,7 +1,7 @@
-return Component.create("DrawableText", {
-	"font",
-	{color = {255, 255, 255}},
-	"string",
-	{values = {}},
-	{visible = true}
-})
+return Component.create("DrawableText",
+	{"font", "color", "string", "values", "visible"},
+  {
+    color = {255, 255, 255},
+    values = {},
+    visible = true
+  })
