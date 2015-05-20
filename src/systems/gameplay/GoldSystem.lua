@@ -1,4 +1,5 @@
-local Transformable = require("components/physic/Transformable")
+Component.load({"Transformable", "Drawable"})
+
 local GoldSystem = class("GoldSystem", System)
 
 function GoldSystem:addGold(event)

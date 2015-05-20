@@ -1,3 +1,43 @@
+-- Load Components
+require("components/gameplay/Attitude")
+require("components/gameplay/Camera")
+require("components/gameplay/Controllable")
+require("components/gameplay/Damaging")
+require("components/gameplay/Debris")
+require("components/gameplay/Destroyed")
+require("components/gameplay/DropsGold")
+require("components/gameplay/ExplodesOnContact")
+require("components/gameplay/HasGold")
+require("components/gameplay/Hull")
+require("components/gameplay/Inventory")
+require("components/gameplay/LookingAt")
+require("components/gameplay/MovingTo")
+require("components/gameplay/Parallax")
+require("components/gameplay/Shield")
+require("components/gameplay/ShootsProjectile")
+require("components/gameplay/Wave")
+require("components/gameplay/Weapon")
+
+require("components/graphic/DebugText")
+require("components/graphic/Drawable")
+require("components/graphic/DrawableText")
+require("components/graphic/Muzzleparticles")
+
+require("components/meta/Pirate")
+require("components/meta/Player")
+
+require("components/particle/Particle")
+
+require("components/physic/Accelerating")
+require("components/physic/Circle")
+require("components/physic/CountingDown")
+require("components/physic/Moving")
+require("components/physic/Rectangle")
+require("components/physic/Rotating")
+require("components/physic/Transformable")
+
+require("components/ui/Clickable")
+
 -- Collections
 local createPlayerCollection = require("collections/createPlayerCollection")
 local createTurretCollection = require("collections/createTurretCollection")
@@ -8,7 +48,7 @@ local TextDrawSystem = require("systems/draw/TextDrawSystem")
 local CameraSystem = require("systems/draw/CameraSystem")
 local MuzzleparticlesSystem = require("systems/draw/MuzzleparticlesSystem")
 
--- Particle systems 
+-- Particle systems
 local ParticleDrawSystem = require("systems/particle/ParticleDrawSystem")
 local ParticlePositionSyncSystem = require("systems/particle/ParticlePositionSyncSystem")
 local ParticleUpdateSystem = require("systems/particle/ParticleUpdateSystem")
@@ -20,7 +60,7 @@ local AccelerationSystem = require("systems/physic/AccelerationSystem")
 local TransformableUpdateSystem = require("systems/physic/TransformableUpdateSystem")
 local MapGenerationSystem = require("systems/physic/MapGenerationSystem")
 
--- Gameplay 
+-- Gameplay
 local ProjectileSystem = require("systems/gameplay/ProjectileSystem")
 local FacingSystem = require("systems/gameplay/FacingSystem")
 local TargetingSystem = require("systems/gameplay/TargetingSystem")
@@ -68,7 +108,7 @@ function GameState:load()
     -- Systems containing update and draw
     local shieldSystem = ShieldSystem()
     local cameraSystem = CameraSystem()
-    
+
     -- Systems containing an event function
     local playercontrol = PlayerControlSystem()
     local transformableUpdateSystem = TransformableUpdateSystem()
@@ -90,7 +130,7 @@ function GameState:load()
     self.engine:addSystem(TargetMoveSystem())
     self.engine:addSystem(playercontrol)
     self.engine:addSystem(ExplodeOnContactSystem())
-    self.engine:addSystem(ParticleUpdateSystem())    
+    self.engine:addSystem(ParticleUpdateSystem())
     self.engine:addSystem(particlePositionSyncSystem)
     self.engine:addSystem(TargetingSystem())
     self.engine:addSystem(MuzzleparticlesSystem())
@@ -141,7 +181,7 @@ function GameState:load()
             end
         end
     )
-    
+
     -- Adding player entity
     self.player = Entity()
     self.player:addMultiple(createPlayerCollection(Entity()))
