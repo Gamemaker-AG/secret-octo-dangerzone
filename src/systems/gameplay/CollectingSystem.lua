@@ -7,12 +7,11 @@ function CollectingSystem:update(dt)
     for _, loot in pairs(self.targets) do
         local lootPosition = loot:get("Transformable").position
         local distance = playerPosition:distanceTo(lootPosition)
-        if distance < 50 then -- richtige Distanz?
+        if distance < player:get("Circle").radius then
             loot:set(Destroyed())
             local playergold = player:get("HasGold")
-            playergold.gold = playergold.gold + 10 -- wie viel?
+            playergold.gold = playergold.gold + loot:get("Collectible").gold
         end
-
     end
 end
 

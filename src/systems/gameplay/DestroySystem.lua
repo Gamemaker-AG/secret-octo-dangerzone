@@ -16,7 +16,7 @@ function DestroySystem:update(dt)
             particle:add(entity:get("Particle"))
             particle:get("Particle").emitterlife = 0
         end
-        if entity:has("DropsGold") then
+        if entity:has("HasLoot") then
             stack:current().eventmanager:fireEvent(AddingGold(entity))
         end
         if entity:has("Player") then

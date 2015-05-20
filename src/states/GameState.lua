@@ -1,3 +1,5 @@
+require("constants")
+
 -- Load Components
 require("components/gameplay/Attitude")
 require("components/gameplay/Camera")
@@ -5,7 +7,7 @@ require("components/gameplay/Controllable")
 require("components/gameplay/Damaging")
 require("components/gameplay/Debris")
 require("components/gameplay/Destroyed")
-require("components/gameplay/DropsGold")
+require("components/gameplay/HasLoot")
 require("components/gameplay/ExplodesOnContact")
 require("components/gameplay/HasGold")
 require("components/gameplay/Hull")
@@ -17,6 +19,7 @@ require("components/gameplay/Shield")
 require("components/gameplay/ShootsProjectile")
 require("components/gameplay/Wave")
 require("components/gameplay/Weapon")
+require("components/gameplay/Collectible")
 
 require("components/graphic/DebugText")
 require("components/graphic/Drawable")
@@ -76,6 +79,7 @@ local DamageSystem = require("systems/gameplay/DamageSystem")
 local ShieldSystem = require("systems/gameplay/ShieldSystem")
 local DebugSystem = require("systems/gameplay/DebugSystem")
 local Camera = require("components/gameplay/Camera")
+local CollectingSystem = require("systems/gameplay/CollectingSystem")
 
 -- UI
 local ClickableSystem = require("systems/ui/ClickableSystem")
@@ -108,7 +112,7 @@ function GameState:load()
     -- Systems containing update and draw
     local shieldSystem = ShieldSystem()
     local cameraSystem = CameraSystem()
-
+    
     -- Systems containing an event function
     local playercontrol = PlayerControlSystem()
     local transformableUpdateSystem = TransformableUpdateSystem()
@@ -142,6 +146,7 @@ function GameState:load()
     self.engine:addSystem(cameraSystem, "update")
     self.engine:addSystem(transformableUpdateSystem)
     self.engine:addSystem(MapGenerationSystem())
+    self.engine:addSystem(CollectingSystem())
 
 
     -- Adding draw systems

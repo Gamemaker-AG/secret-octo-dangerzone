@@ -1,6 +1,5 @@
 -- Core
 local Vector = require("helper/Vector")
-local constants = require("constants")
 
 -- Graphic components
 local Drawable = require("components/graphic/Drawable")

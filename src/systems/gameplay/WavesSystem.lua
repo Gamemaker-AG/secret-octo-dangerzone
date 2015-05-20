@@ -1,5 +1,4 @@
 local WavesSystem = class("WavesSystem", System)
-local constants = require("constants")
 local createPirateCollection = require("collections/createPirateCollection")
 local timer = constants.waves.timer
 

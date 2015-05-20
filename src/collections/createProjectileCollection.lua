@@ -1,7 +1,5 @@
 Component.load({"Moving", "Transformable", "Circle", "Damaging", "ExplodesOnContact", "Drawable"})
 
-local constants = require("constants")
-
 function createProjectileCollection(pos, target, damage, precision)
     local components = {}
     -- Physic components

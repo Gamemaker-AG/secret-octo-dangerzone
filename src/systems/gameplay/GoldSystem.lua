@@ -1,20 +1,19 @@
-Component.load({"MovingTo", "Transformable", "Drawable", "Accelerating", "Moving"})
+Component.load({"MovingTo", "Transformable", "Drawable", "Accelerating", "Moving", "Collectible"})
 
 local GoldSystem = class("GoldSystem", System)
 
 function GoldSystem:addGold(event)
-    local enemy = event.enemy
-	local amount = enemy:get("DropsGold").gold
+    local enemy = event.enemy  
 	local player = table.firstElement(stack:current().engine:getEntitiesWithComponent("Player"))
-	local playergold = player:get("HasGold")
-	playergold.gold = playergold.gold + amount
 
 	local loot = Entity()
 	loot:add(Transformable(enemy:get("Transformable").offset:clone()))
-	loot:add(Drawable(resources.images.circle, 0, 0.3, 0.3))
-	loot:add(Accelerating(40))
-	loot:add(Moving(nil, 100))
+	loot:add(Drawable(resources.images.circle, 0, 0.1, 0.1))
+	loot:add(Accelerating(constants.collectible.defaultAcceleration, Vector()))
+	loot:add(Moving(Vector(), constants.collectible.maxSpeed))
 	loot:add(MovingTo(player))
+    local drop = enemy:get("HasLoot")
+    loot:add(Collectible(drop.gold, drop.item))
 	stack:current().engine:addEntity(loot)
 end
 

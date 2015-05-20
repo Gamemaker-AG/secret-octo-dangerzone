@@ -1,6 +1,5 @@
 local Destroyed = require("components/gameplay/Destroyed")
 
-local constants = require("constants")
 local DebrisDestroySystem = class("DebrisDestroySystem", System)
 
 function DebrisDestroySystem:update(dt)

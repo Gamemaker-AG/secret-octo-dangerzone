@@ -1,6 +1,5 @@
 -- Core
 local Vector = require("helper/Vector")
-local constants = require("constants")
 local createTurretCollection = require("collections/createTurretCollection")
 
 Component.load({

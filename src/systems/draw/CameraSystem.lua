@@ -1,6 +1,5 @@
 local lume = require("lib/lume/lume")
 
-local constants = require("constants")
 local Vector = require("helper/Vector")
 
 local CameraSystem = class("CameraSystem", System)

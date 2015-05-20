@@ -1,5 +1,3 @@
-local constants = require("constants")
-
 local Debris = Component.create("Debris")
 
 function Debris:__init(target, distance)

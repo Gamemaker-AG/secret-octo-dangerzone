@@ -1,7 +1,6 @@
 Component.load({"Drawable", "Rotating", "Circle", "Transformable", "Weapon", "Attitude", "LookingAt", "ShootsProjectile", "Clickable"})
 
 local Vector = require("helper/Vector")
-local constants = require("constants")
 
 local TurretMenu = require("models/ui/TurretMenu")
 

@@ -1,3 +1,1 @@
-local Collectible = class("Collectible", Component)
-
-return Collectible
+return Component.create("Collectible", {"gold", "item"})

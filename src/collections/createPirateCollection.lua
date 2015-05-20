@@ -1,6 +1,5 @@
 -- Core
 local Vector = require("helper/Vector")
-local constants = require("constants")
 
 -- Graphic components
 local Drawable = require("components/graphic/Drawable")
@@ -19,7 +18,7 @@ local Weapon = require("components/gameplay/Weapon")
 local Attitude = require("components/gameplay/Attitude")
 local MovingTo = require("components/gameplay/MovingTo")
 local LookingAt = require("components/gameplay/LookingAt")
-local DropsGold = require("components/gameplay/DropsGold")
+local HasLoot = require("components/gameplay/HasLoot")
 local ExplodesOnContact = require("components/gameplay/ExplodesOnContact")
 
 -- Meta
@@ -43,7 +42,7 @@ function createPirateCollection(x, y)
 
     -- Gameplay
     table.insert(components, Hull(20))
-    table.insert(components, DropsGold(1))
+    table.insert(components, HasLoot(1))
 
     -- Creating weapon component
     -- Getting Target for weapon component
