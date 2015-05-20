@@ -5,26 +5,26 @@ local createTurretCollection = require("collections/createTurretCollection")
 
 Component.load({
     -- Graphic components
-    "components/graphic/Drawable",
-    "components/particle/Particle",
-    "components/graphic/Muzzleparticles",
+    "Drawable",
+    "Particle",
+    "Muzzleparticles",
 
     -- Physic components
-    "components/physic/Moving",
-    "components/physic/Rotating",
-    "components/physic/Accelerating",
-    "components/physic/Transformable",
-    "components/physic/Circle",
+    "Moving",
+    "Rotating",
+    "Accelerating",
+    "Transformable",
+    "Circle",
 
     -- Gameplay components
-    "components/gameplay/Weapon",
-    "components/gameplay/Controllable",
-    "components/gameplay/Attitude",
-    "components/gameplay/HasGold",
-    "components/gameplay/Shield",
-    "components/gameplay/Hull",
-    "components/gameplay/Inventory",
-    "components/meta/Player"
+    "Weapon",
+    "Controllable",
+    "Attitude",
+    "HasGold",
+    "Shield",
+    "Hull",
+    "Inventory",
+    "Player"
 })
 
 function createPlayerCollection(entity)
