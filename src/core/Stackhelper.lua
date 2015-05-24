@@ -23,6 +23,7 @@ end
 
 function StackHelper:pop()
     if self:current() then 
+        if self:current().pop then self:current():pop() end
         table.remove(self.states, #self.states)
     end
 end

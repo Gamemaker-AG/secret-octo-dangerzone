@@ -15,21 +15,23 @@ function ShieldSystem:draw()
         local shieldPercentage = 100*shield.hitpoints/shield.maxHitpoints
         local maxAlpha = 40
         local minAlpha = 40
+        local shieldSize = constants.player.diameter*2/3
+        local shieldStep = 10
         if (shieldPercentage/100)*maxAlpha < minAlpha then alpha = minAlpha
         else alpha = (shieldPercentage/100)*maxAlpha
         end
         love.graphics.setColor(200, 100, 250, alpha)
-        if shieldPercentage > 0 then love.graphics.circle("fill", position.x, position.y, 85, 8) end
+        if shieldPercentage > 0 then love.graphics.circle("fill", position.x, position.y, shieldSize, 8) end
         love.graphics.setColor(200, 100, 250, 2*alpha)
-        if shieldPercentage > 0 then love.graphics.circle("line", position.x, position.y, 85, 8) end
+        if shieldPercentage > 0 then love.graphics.circle("line", position.x, position.y, shieldSize, 8) end
         love.graphics.setColor(200, 100, 250, 5*alpha/6)
-        if shieldPercentage > 20 then love.graphics.circle("fill", position.x, position.y, 95, 8) end
+        if shieldPercentage > 20 then love.graphics.circle("fill", position.x, position.y, shieldSize+shieldStep, 8) end
         love.graphics.setColor(200, 100, 250, 4*alpha/6)
-        if shieldPercentage > 40 then love.graphics.circle("fill", position.x, position.y, 105, 8) end
+        if shieldPercentage > 40 then love.graphics.circle("fill", position.x, position.y, shieldSize+shieldStep*2, 8) end
         love.graphics.setColor(200, 100, 250, 3*alpha/6)
-        if shieldPercentage > 60 then love.graphics.circle("fill", position.x, position.y, 115, 8) end
+        if shieldPercentage > 60 then love.graphics.circle("fill", position.x, position.y, shieldSize+shieldStep*3, 8) end
         love.graphics.setColor(200, 100, 250, 2*alpha/6)
-        if shieldPercentage > 80 then love.graphics.circle("fill", position.x, position.y, 125, 8) end
+        if shieldPercentage > 80 then love.graphics.circle("fill", position.x, position.y, shieldSize+shieldStep*4, 8) end
 
     end
 end

@@ -12,7 +12,7 @@ return function(position)
 
 	table.insert(components, Drawable(img, nil, nil, nil, ox, oy))
 	table.insert(components, Transformable(position))
-	table.insert(components, CircleShape(constants.spaceStation.diameter))
+	table.insert(components, CircleShape(constants.spaceStation.radius))
 	table.insert(components, SpaceStation())
 	table.insert(components, Debris())
 

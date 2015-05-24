@@ -22,7 +22,7 @@ function MenuState:load()
     self.eventmanager = EventManager()
     self.engine:getRootEntity():add(Transformable())
 
-    self.eventmanager:addListener("KeyPressed", {self, function(key, isrepeat)
+    self.eventmanager:addListener("KeyReleased", {self, function(key, isrepeat)
         -- Start the game when any key is pressed
         stack:push(GameState())
     end})

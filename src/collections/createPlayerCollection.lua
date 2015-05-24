@@ -53,11 +53,11 @@ function createPlayerCollection(entity)
     table.insert(components, Muzzleparticles(100 ,500, 500, 3000))
 
         local ship = resources.images.player
-        local ox, oy = ship:getWidth()*(2/3), ship:getHeight()/2
+        local ox, oy = ship:getWidth()/2, ship:getHeight()/2
     table.insert(components, (Drawable(ship, 1, sx, sy, ox, oy)))
 
     -- Creating particle system
-    local particleComponent = Particle(resources.images.particle1, 5000, Vector(-50, 0), {0.2, 1.2}, nil)
+    local particleComponent = Particle(resources.images.particle1, 5000, Vector(-constants.player.diameter*5/8, 0), {0.2, 1.2}, nil)
     table.insert(components, particleComponent)
 
     -- Local variables for particle position calculation

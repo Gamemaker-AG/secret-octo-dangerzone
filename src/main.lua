@@ -27,6 +27,7 @@ function love.load()
     resources:addImage("beam", "data/img/beam.png")
     resources:addImage("rocket", "data/img/rocket.png")
     resources:addImage("space_station", "data/img/space_station.png")
+    resources:addImage("space_station_ui", "data/img/space_station_ui.png")
     -- Turret
     resources:addImage("particlemuzzle" ,"/data/img/particlemuzzle.png")
     resources:addImage("particle1" ,"/data/img/particle1.png")

@@ -9,7 +9,7 @@ constants = {
     screenWidth = sw,
     screenHeight = sh,
     player = {
-        diameter = percentToPixels(20),
+        diameter = percentToPixels(15),
         defaultAcceleration = percentToPixels(100),
         defaultRotationSpeed = math.pi*3/2,
         maxSpeed = percentToPixels(60)
@@ -38,7 +38,7 @@ constants = {
         traillength = percentToPixels(50)
     },
     spaceStation = {
-        diameter = percentToPixels(4), 
+        radius = percentToPixels(10), 
     },
     camera = {
         -- between 0 and 1

@@ -9,7 +9,7 @@ function TransformableUpdateSystem:updatePositions(parent)
                 childTrans.position:set(childTrans.offset:rotate(parentTrans.direction:getRadian()):add(parentTrans.position))
             else
                 childTrans.position:set(childTrans.offset:add(parentTrans.position))
-            end    
+            end
             self:updatePositions(child)
         end
     end)

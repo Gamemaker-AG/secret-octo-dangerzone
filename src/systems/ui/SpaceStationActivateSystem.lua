@@ -1,5 +1,5 @@
-local Transformable = require("components/physic/Transformable")
-local DrawableText = require("components/graphic/DrawableText")
+local SpaceStationState = require("states/SpaceStationState")
+Component.load({"Transformable", "DrawableText"})
 
 local SpaceStationActivateSystem = class("SpaceStationActivateSystem", System)
 
@@ -13,9 +13,9 @@ function SpaceStationActivateSystem:getCollidingStation()
 	end
 end
 
-function SpaceStationActivateSystem:keyPressed(event)
+function SpaceStationActivateSystem:startUI(event)
 	if event.key == " " and self:getCollidingStation() then
-		print("docking process starting!")
+		stack:push(SpaceStationState())
 	end
 end
 

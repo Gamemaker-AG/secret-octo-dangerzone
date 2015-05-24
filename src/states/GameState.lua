@@ -169,7 +169,7 @@ function GameState:load()
     self.engine:addSystem(debugsystem, "draw")
 
     -- Registering event listeners
-    self.eventmanager:addListener("KeyPressed", spaceStationSystem, spaceStationSystem.keyPressed)
+    self.eventmanager:addListener("KeyReleased", spaceStationSystem, spaceStationSystem.startUI)
     self.eventmanager:addListener("KeyPressed", playercontrol, playercontrol.fireEvent)
     self.eventmanager:addListener("KeyPressed", debugsystem, debugsystem.setInvisibility)
     self.eventmanager:addListener("KeyReleased", playercontrol, playercontrol.fireEvent)
@@ -247,6 +247,8 @@ function GameState:load()
     goldstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Gold %i", {{player:get("HasGold"), "gold"}} ))
     goldstring:add(Transformable(Vector(50, 150),nil, false))
     self.engine:addEntity(goldstring)
+
+    stack:push(require("states/SpaceStationState")())
 end
 
 function GameState:update(dt)
