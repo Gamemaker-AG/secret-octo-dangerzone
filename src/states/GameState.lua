@@ -174,7 +174,7 @@ function GameState:load()
     self.eventmanager:addListener("KeyPressed", debugsystem, debugsystem.setInvisibility)
     self.eventmanager:addListener("KeyReleased", playercontrol, playercontrol.fireEvent)
 
-    -- self.eventmanager:addListener("AddingGold", goldsystem, goldsystem.addGold)
+    self.eventmanager:addListener("AddingGold", goldsystem, goldsystem.addGold)
     self.eventmanager:addListener("DamageDone", damagesystem, damagesystem.fireEvent)
     self.eventmanager:addListener("UpdateTransformable", transformableUpdateSystem, transformableUpdateSystem.onDemandUpdate)
     self.eventmanager:addListener("UpdateParticlePosition", particlePositionSyncSystem, particlePositionSyncSystem.updatePosition)
