@@ -21,7 +21,7 @@ function AccelerationSystem:update(dt)
 end
 
 function AccelerationSystem:requires()
-    return {"Accelerating"}
+    return {"Accelerating", "Moving"}
 end
 
 return AccelerationSystem

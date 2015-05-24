@@ -1,4 +1,1 @@
-local Wave = class("Wave", Component)
-
-
-return Wave
+return Component.create("Wave")

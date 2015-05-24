@@ -26,7 +26,7 @@ function SpaceStationActivateSystem:update()
 		if not self.hoverText then
 			self.hoverText = Entity(collidingStation)
 			self.hoverText:add(Transformable())
-			self.hoverText:add(DrawableText(nil, nil, "Press space to enter station"))
+			self.hoverText:add(DrawableText(resources.fonts.regular, nil, "Press space to enter station"))
 			stack:current().engine:addEntity(self.hoverText)
 		end
 	elseif self.hoverText then

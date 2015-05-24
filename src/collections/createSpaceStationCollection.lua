@@ -4,8 +4,6 @@ local Debris = require("components/gameplay/Debris")
 local CircleShape = require("components/physic/Circle")
 local SpaceStation = require("components/gameplay/SpaceStation")
 
-local constants = require("constants")
-
 return function(position)
 	local components = {}
 

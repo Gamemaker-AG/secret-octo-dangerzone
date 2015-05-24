@@ -5,7 +5,7 @@ function percentToPixels(percent)
     return percent * smallerDimension/100
 end
 
-local constants = {
+constants = {
     screenWidth = sw,
     screenHeight = sh,
     player = {
@@ -23,6 +23,11 @@ local constants = {
         diameter = percentToPixels(4),
         defaultRotationSpeed = math.pi*2,
     },
+    collectible = {
+        diameter = percentToPixels(20),
+        defaultAcceleration = percentToPixels(200),
+        maxSpeed = percentToPixels(60)
+    },
     bullet = {
         diameter = percentToPixels(3),
         speed = percentToPixels(100)
@@ -31,6 +36,9 @@ local constants = {
         diameter = percentToPixels(2),
         speed = percentToPixels(50),
         traillength = percentToPixels(50)
+    },
+    spaceStation = {
+        diameter = percentToPixels(4), 
     },
     camera = {
         -- between 0 and 1
@@ -47,5 +55,3 @@ local constants = {
 }
 
 constants.enemy.maxSpeed = constants.player.maxSpeed / 5
-
-return constants

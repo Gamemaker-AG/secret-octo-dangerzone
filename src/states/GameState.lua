@@ -1,14 +1,57 @@
+require("constants")
+
+-- Load Components
+require("components/gameplay/Attitude")
+require("components/gameplay/Camera")
+require("components/gameplay/Controllable")
+require("components/gameplay/Damaging")
+require("components/gameplay/Debris")
+require("components/gameplay/Destroyed")
+require("components/gameplay/HasLoot")
+require("components/gameplay/ExplodesOnContact")
+require("components/gameplay/HasGold")
+require("components/gameplay/Hull")
+require("components/gameplay/Inventory")
+require("components/gameplay/LookingAt")
+require("components/gameplay/MovingTo")
+require("components/gameplay/Parallax")
+require("components/gameplay/Shield")
+require("components/gameplay/ShootsProjectile")
+require("components/gameplay/Wave")
+require("components/gameplay/Weapon")
+require("components/gameplay/Collectible")
+
+require("components/graphic/DebugText")
+require("components/graphic/Drawable")
+require("components/graphic/DrawableText")
+require("components/graphic/Muzzleparticles")
+
+require("components/meta/Pirate")
+require("components/meta/Player")
+
+require("components/particle/Particle")
+
+require("components/physic/Accelerating")
+require("components/physic/Circle")
+require("components/physic/CountingDown")
+require("components/physic/Moving")
+require("components/physic/Rectangle")
+require("components/physic/Rotating")
+require("components/physic/Transformable")
+
+require("components/ui/Clickable")
+
 -- Collections
 local createPlayerCollection = require("collections/createPlayerCollection")
 local createTurretCollection = require("collections/createTurretCollection")
 
 -- Graphic systems
 local DrawSystem = require("systems/draw/DrawSystem")
-local StringDrawSystem = require("systems/draw/StringDrawSystem")
+local TextDrawSystem = require("systems/draw/TextDrawSystem")
 local CameraSystem = require("systems/draw/CameraSystem")
 local MuzzleparticlesSystem = require("systems/draw/MuzzleparticlesSystem")
 
--- Particle systems 
+-- Particle systems
 local ParticleDrawSystem = require("systems/particle/ParticleDrawSystem")
 local ParticlePositionSyncSystem = require("systems/particle/ParticlePositionSyncSystem")
 local ParticleUpdateSystem = require("systems/particle/ParticleUpdateSystem")
@@ -20,7 +63,7 @@ local AccelerationSystem = require("systems/physic/AccelerationSystem")
 local TransformableUpdateSystem = require("systems/physic/TransformableUpdateSystem")
 local MapGenerationSystem = require("systems/physic/MapGenerationSystem")
 
--- Gameplay 
+-- Gameplay
 local ProjectileSystem = require("systems/gameplay/ProjectileSystem")
 local FacingSystem = require("systems/gameplay/FacingSystem")
 local TargetingSystem = require("systems/gameplay/TargetingSystem")
@@ -36,6 +79,7 @@ local DamageSystem = require("systems/gameplay/DamageSystem")
 local ShieldSystem = require("systems/gameplay/ShieldSystem")
 local DebugSystem = require("systems/gameplay/DebugSystem")
 local Camera = require("components/gameplay/Camera")
+local CollectingSystem = require("systems/gameplay/CollectingSystem")
 
 -- UI
 local ClickableSystem = require("systems/ui/ClickableSystem")
@@ -93,7 +137,7 @@ function GameState:load()
     self.engine:addSystem(TargetMoveSystem())
     self.engine:addSystem(playercontrol)
     self.engine:addSystem(ExplodeOnContactSystem())
-    self.engine:addSystem(ParticleUpdateSystem())    
+    self.engine:addSystem(ParticleUpdateSystem())
     self.engine:addSystem(particlePositionSyncSystem)
     self.engine:addSystem(TargetingSystem())
     self.engine:addSystem(MuzzleparticlesSystem())
@@ -105,6 +149,7 @@ function GameState:load()
     self.engine:addSystem(cameraSystem, "update")
     self.engine:addSystem(transformableUpdateSystem)
     self.engine:addSystem(MapGenerationSystem())
+    self.engine:addSystem(CollectingSystem())
 
 
     -- Adding draw systems
@@ -112,7 +157,7 @@ function GameState:load()
     self.engine:addSystem(cameraSystem, "draw")
 
     self.engine:addSystem(DrawSystem())
-    self.engine:addSystem(StringDrawSystem())
+    self.engine:addSystem(TextDrawSystem())
     self.engine:addSystem(ParticleDrawSystem())
     self.engine:addSystem(shieldSystem, "draw")
 
@@ -145,32 +190,32 @@ function GameState:load()
             end
         end
     )
-    
+
     -- Adding player entity
-    self.player = Entity()
-    self.player:addMultiple(createPlayerCollection(Entity()))
-    self.engine:addEntity(self.player)
+    player = Entity()
+    player:addMultiple(createPlayerCollection(Entity()))
+    self.engine:addEntity(player)
 
     local camera = Entity()
-    camera:add(Camera(self.player))
-    camera:add(Transformable(self.player:get("Transformable").position:clone()))
+    camera:add(Camera(player))
+    camera:add(Transformable(player:get("Transformable").position:clone()))
     stack:current().engine:addEntity(camera)
 
     -- Adding player turret
-    local turret = Entity(self.player)
+    local turret = Entity(player)
     turret:addMultiple(createTurretCollection(turret, Vector(30, 0)))
     self.engine:addEntity(turret)
 
     -- Adding Hull and Shield string entity
 
     local hull = Entity(camera)
-    hull:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's hull: %i", {{self.player:get("Hull"), "hitpoints"}}))
+    hull:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's hull: %i", {{player:get("Hull"), "hitpoints"}}))
     hull:add(Transformable(Vector(10,10),nil))
     hull:add(DebugText())
     self.engine:addEntity(hull)
 
     local shield = Entity(camera)
-    shield:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's shield: %i", {{self.player:get("Shield"), "hitpoints"}}))
+    shield:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's shield: %i", {{player:get("Shield"), "hitpoints"}}))
     shield:add(Transformable(Vector(10,30),nil))
     shield:add(DebugText())
     self.engine:addEntity(shield)
@@ -188,18 +233,18 @@ function GameState:load()
     self.engine:addEntity(ups)
 
     -- Debug strings
-    local posstring = Entity(self.player)
-    posstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Position %i %i", {{self.player:get("Transformable").position, "x"},{self.player:get("Transformable").position, "y"}} ))
+    local posstring = Entity(player)
+    posstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Position %i %i", {{player:get("Transformable").position, "x"},{player:get("Transformable").position, "y"}} ))
     posstring:add(Transformable(Vector(50,50),nil, false))
     self.engine:addEntity(posstring)
 
-    local speedstring = Entity(self.player)
-    speedstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Speed %i %i", {{self.player:get("Moving").speed, "x"}, {self.player:get("Moving").speed, "y"}} ))
+    local speedstring = Entity(player)
+    speedstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Speed %i %i", {{player:get("Moving").speed, "x"}, {player:get("Moving").speed, "y"}} ))
     speedstring:add(Transformable(Vector(50,100),nil, false))
     self.engine:addEntity(speedstring)
 
-    local goldstring = Entity(self.player)
-    goldstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Gold %i", {{self.player:get("HasGold"), "gold"}} ))
+    local goldstring = Entity(player)
+    goldstring:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's Gold %i", {{player:get("HasGold"), "gold"}} ))
     goldstring:add(Transformable(Vector(50, 150),nil, false))
     self.engine:addEntity(goldstring)
 end
