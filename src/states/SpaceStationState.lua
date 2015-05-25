@@ -19,19 +19,18 @@ function SpaceStationState:__init()
 end
 
 function SpaceStationState:load()
-	self.oldPlayer = player
-	player = Entity()
-
 	self.engine = Engine()
     self.engine:getRootEntity():add(Transformable())
 	self.eventmanager = EventManager()
 
 	self.eventmanager:addListener("KeyReleased", {}, function() stack:pop() end)
 
+	-- Systems
 	self.engine:addSystem(DrawSystem())
 	self.engine:addSystem(TransformableUpdateSystem())
 	self.engine:addSystem(TextDrawSystem())
 
+	-- BG
 	local uiBg = Entity()
 	local img = resources.images.space_station_ui
 	local sy = constants.screenHeight / img:getHeight()
@@ -41,10 +40,29 @@ function SpaceStationState:load()
 	uiBg:add(Transformable(Vector(ox, 0)))
 	self.engine:addEntity(uiBg)
 
-	player:add(Transformable(Vector(ox+280*sx, 240*sy)))
-	player:add(Drawable(resources.images.player))	
+	-- Reposition Player
+	self.oldPlayer = player
+	player = Entity()
+	local playerOffset = Vector(ox+280*sx, 240*sy)
+	player:add(Transformable(playerOffset))
+	player:add(Drawable(resources.images.player))
 	player:add(Circle(percentToPixels(15)))
+	player:add(self.oldPlayer:get("Inventory"))
 	self.engine:addEntity(player)
+
+	-- Display Inventory Items
+	local itemRadius = (img:getWidth()/26)*sx
+	local globalItemOffset = playerOffset:clone():add(Vector(600*sx, itemRadius))
+	for index, item in pairs(player:get("Inventory").inventory) do
+		print(index)
+		local entity = Entity()
+		entity:add(item:get("Drawable"))
+		local gap = itemRadius*8/3
+		local localOffset = Vector(gap * ((index-1) % 4), gap * math.floor((index-1)/4))
+		entity:add(Transformable(globalItemOffset:add(localOffset)))
+		entity:add(Circle(itemRadius))
+		self.engine:addEntity(entity)
+	end
 end
 
 function SpaceStationState:pop()

@@ -1,5 +1,6 @@
 -- Main Lövetoys Library
 require("lib/lovetoys/lovetoys")
+lovetoyDebug = true
 
 -- Core and Helper Requirements
 require("helper/tables")

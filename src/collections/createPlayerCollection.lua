@@ -45,9 +45,10 @@ function createPlayerCollection(entity)
     table.insert(components, Hull(200))
     table.insert(components, HasGold(0))
     table.insert(components, Shield(200, 5))
-    local turretCollection = Entity()
-    turretCollection:addMultiple(createTurretCollection(turretCollection))
-    table.insert(components, turretCollection)
+    local turret = Entity()
+    turret:addMultiple(createTurretCollection(turret))
+    table.insert(components, turret)
+    table.insert(components, Inventory({turret, turret, turret, turret, turret, turret}))
 
     -- Graphic components
     table.insert(components, Muzzleparticles(100 ,500, 500, 3000))

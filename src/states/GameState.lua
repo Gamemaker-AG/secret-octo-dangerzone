@@ -207,7 +207,6 @@ function GameState:load()
     self.engine:addEntity(turret)
 
     -- Adding Hull and Shield string entity
-
     local hull = Entity(camera)
     hull:add(DrawableText(resources.fonts.regular, {255, 255, 255, 255}, "Player's hull: %i", {{player:get("Hull"), "hitpoints"}}))
     hull:add(Transformable(Vector(10,10),nil))
