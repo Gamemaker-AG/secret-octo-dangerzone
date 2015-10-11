@@ -12,7 +12,7 @@ end
 
 function PlayerControlSystem:fireEvent(event) 
     for index, entity in pairs(self.targets) do
-         if event.__name == "KeyPressed" then
+         if event.name == "KeyPressed" then
             if event.key == "a" or event.key == "left" then
                 local rotating = entity:get("Rotating")
                 rotating.rotationSpeed = -rotating.defaultRotationSpeed
@@ -20,7 +20,7 @@ function PlayerControlSystem:fireEvent(event)
                 local rotating = entity:get("Rotating")
                 rotating.rotationSpeed = rotating.defaultRotationSpeed
             end
-         elseif event.__name == "KeyReleased" then
+         elseif event.name == "KeyReleased" then
             if event.key == "w" or event.key == "up" then
                 entity:get("Accelerating").acceleration:set(0, 0)
             elseif event.key == "a" or event.key == "left" then

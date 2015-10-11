@@ -1,6 +1,6 @@
 local MouseReleased = class("MouseReleased")
 
-function MouseReleased:__init(x, y, button)
+function MouseReleased:initialize(x, y, button)
     self.button = button
     self.y = y
     self.x = x

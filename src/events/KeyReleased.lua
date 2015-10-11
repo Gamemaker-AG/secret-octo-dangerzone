@@ -1,6 +1,6 @@
 local KeyReleased = class("KeyReleased")
 
-function KeyReleased:__init(key, isrepeat)
+function KeyReleased:initialize(key, isrepeat)
     self.key = key
     self.isrepeat = isrepeat
 end

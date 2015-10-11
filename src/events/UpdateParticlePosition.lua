@@ -1,6 +1,6 @@
 local UpdateParticlePosition = class("UpdateParticlePosition")
 
-function UpdateParticlePosition:__init(target)
+function UpdateParticlePosition:initialize(target)
     self.entity = target
 end
 

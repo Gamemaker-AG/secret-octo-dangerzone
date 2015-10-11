@@ -9,7 +9,7 @@ end
 
 local MapGenerationSystem = class("MapGenerationSystem", System)
 
-function MapGenerationSystem:__init()
+function MapGenerationSystem:initialize()
 	self.tileSize = 128
 	self.tileScope = 2
     self.generatedTiles = {}

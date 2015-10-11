@@ -1,6 +1,6 @@
 local DamageDone = class("DamageDone")
 
-function DamageDone:__init(damage, target)
+function DamageDone:initialize(damage, target)
     self.damage = damage
     self.target = target
 end

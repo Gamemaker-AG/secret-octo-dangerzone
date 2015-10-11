@@ -1,6 +1,6 @@
 local UpdateTransformable = class("UpdateTransformable")
 
-function UpdateTransformable:__init(target)
+function UpdateTransformable:initialize(target)
     self.entity = target
 end
 

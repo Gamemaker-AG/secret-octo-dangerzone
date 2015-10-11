@@ -1,6 +1,6 @@
 StackHelper = class("StackHelper")
 
-function StackHelper:__init()
+function StackHelper:initialize()
     self.states = {}
     self.backCounter = 0
 end

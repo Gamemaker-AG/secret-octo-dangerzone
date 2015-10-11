@@ -1,6 +1,6 @@
 local Shield = Component.create("Shield")
 
-function Shield:__init(max, restores)
+function Shield:initialize(max, restores)
     self.hitpoints = max
     self.restores = restores
     self.maxHitpoints = max

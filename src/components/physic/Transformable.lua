@@ -2,7 +2,7 @@ local Vector = require("helper/Vector")
 
 local Transformable = Component.create("Transformable")
 
-function Transformable:__init(offset, dir, rotflag)
+function Transformable:initialize(offset, dir, rotflag)
     self.offset = offset or Vector()
 
     self.position = Vector()

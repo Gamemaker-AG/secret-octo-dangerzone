@@ -1,6 +1,6 @@
 Vector = class("Vector")
 
-function Vector:__init(x, y)
+function Vector:initialize(x, y)
     if y == nil then
         self.x = x or 0
         self.y = x or 0
@@ -14,7 +14,7 @@ function Vector:set(x, y)
     if type(x) == "number" and type(y) == "number"then
         self.x = x
         self.y = y
-    elseif x.__name == "Vector" then
+    elseif x.class.name == "Vector" then
         self.x = x.x
         self.y = x.y
     end
@@ -48,7 +48,7 @@ end
 function Vector:add(vector)
     if type(vector) == "number" then
         return Vector(self.x + vector, self.y + vector)
-    elseif vector.__name == "Vector" then
+    elseif vector.name == "Vector" then
         return Vector(self.x + vector.x, self.y + vector.y)
     end
 end
@@ -56,7 +56,7 @@ end
 function Vector:subtract(vector)
     if type(vector) == "number" then
         return Vector(self.x - vector, self.y - vector)
-    elseif vector.__name == "Vector" then
+    elseif vector.name == "Vector" then
         return Vector(self.x - vector.x, self.y - vector.y)
     end
 end
@@ -64,7 +64,7 @@ end
 function Vector:multiply(vector)
     if type(vector) == "number" then
         return Vector(self.x * vector, self.y * vector)
-    elseif vector.__name == "Vector" then
+    elseif vector.name == "Vector" then
         return Vector(self.x * vector.x, self.y * vector.y)
     end
 end
@@ -72,7 +72,7 @@ end
 function Vector:divide(vector)
     if type(vector) == "number" then
         return Vector(self.x / vector, self.y / vector)
-    elseif vector.__name == "Vector" then
+    elseif vector.name == "Vector" then
         return Vector(self.x / vector.x, self.y / vector.y)
     end
 end
@@ -80,13 +80,13 @@ end
 function Vector:modulo(vector)
     if type(vector) == "number" then
         return Vector(self.x % vector, self.y % vector)
-    elseif vector.__name == "Vector" then
+    elseif vector.name == "Vector" then
         return Vector(self.x % vector.x, self.x % vector.y)
     end
 end
 
 function Vector:abs()
-    return Vector(math.abs(self.x), math.abs(self.y))  
+    return Vector(math.abs(self.x), math.abs(self.y))
 end
 
 function Vector:rotate(radian)

@@ -1,6 +1,6 @@
 local Inventory = Component.create("Inventory")
 
-function Inventory:__init(inventory)
+function Inventory:initialize(inventory)
     self.inventory = inventory or {}
 end
 

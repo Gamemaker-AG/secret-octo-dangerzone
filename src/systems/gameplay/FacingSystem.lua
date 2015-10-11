@@ -1,6 +1,6 @@
 local FacingSystem = class("FacingSystem", System)
 
-function FacingSystem:__init()
+function FacingSystem:initialize()
     self.sortedTargets = {}
 end
 

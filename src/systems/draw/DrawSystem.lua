@@ -1,6 +1,6 @@
 local DrawSystem = class("DrawSystem", System)
 
-function DrawSystem:__init()
+function DrawSystem:initialize()
     self.sortedTargets = {}
 end
 
