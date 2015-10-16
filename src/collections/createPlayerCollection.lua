@@ -2,7 +2,11 @@
 local Vector = require("helper/Vector")
 local createTurretCollection = require("collections/createTurretCollection")
 
-Component.load({
+--for k, v in pairs(Component.load("Drawable", "Particle")) do
+--    print(v.class.name)
+--end
+
+local Drawable, Particle, Muzzleparticles, Moving, Rotating, Accelerating, Transformable, Circle, Weapon, Controllable, Attitude, HasGold, Shield, Hull, Inventory, Player = Component.load({
     -- Graphic components
     "Drawable",
     "Particle",

@@ -1,4 +1,4 @@
-Component.load({"Moving", "Transformable", "Circle", "Damaging", "ExplodesOnContact", "Drawable"})
+local Moving, Transformable, Circle, Damaging, ExplodesOnContact, Drawable = Component.load({"Moving", "Transformable", "Circle", "Damaging", "ExplodesOnContact", "Drawable"})
 
 function createProjectileCollection(pos, target, damage, precision)
     local components = {}

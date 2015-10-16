@@ -1,4 +1,4 @@
-Component.load({"MovingTo", "Transformable", "Drawable", "Accelerating", "Moving", "Collectible"})
+local MovingTo, Transformable, Drawable, Accelerating, Moving, Collectible = Component.load({"MovingTo", "Transformable", "Drawable", "Accelerating", "Moving", "Collectible"})
 
 local GoldSystem = class("GoldSystem", System)
 
