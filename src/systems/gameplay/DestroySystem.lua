@@ -30,7 +30,7 @@ function DestroySystem:update(dt)
         local particleComponent = Particle(resources.images.particle1, 5000, Vector(0, 0), {0.2, 1.2}, 1.2)
         explosion:add(particleComponent)
         local particle = particleComponent.particle
-    
+
         -- Setzen der Position
         local transformable = entity:get("Transformable")
         local radian = transformable.direction:getRadian()

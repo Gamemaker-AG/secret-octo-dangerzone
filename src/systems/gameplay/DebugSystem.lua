@@ -7,6 +7,7 @@ local Vector = require("helper/Vector")
 local DebugSystem = class("DebugSystem", System)
 
 function DebugSystem:initialize()
+    System.initialize(self)
     self.active = true
     self.fps = 0
     self.ups = 0

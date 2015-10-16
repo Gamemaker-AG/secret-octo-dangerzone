@@ -3,7 +3,7 @@ Component.load({"MovingTo", "Transformable", "Drawable", "Accelerating", "Moving
 local GoldSystem = class("GoldSystem", System)
 
 function GoldSystem:addGold(event)
-    local enemy = event.enemy  
+    local enemy = event.enemy
 	local player = table.firstElement(stack:current().engine:getEntitiesWithComponent("Player"))
 
 	local loot = Entity()

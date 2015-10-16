@@ -11,7 +11,7 @@ function MuzzleparticlesSystem:update()
         local minspeed = lume.lerp(muzzleparticles.idlespeed, muzzleparticles.maxspeed, accelerationPercentage)
         local maxspeed = minspeed*2
         local emission = lume.lerp(muzzleparticles.idleemission, muzzleparticles.maxemission, accelerationPercentage)
-        
+
         particle.particle:setSpeed(minspeed, maxspeed)
         particle.particle:setEmissionRate(emission)
     end

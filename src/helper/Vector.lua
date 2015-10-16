@@ -48,7 +48,7 @@ end
 function Vector:add(vector)
     if type(vector) == "number" then
         return Vector(self.x + vector, self.y + vector)
-    elseif vector.name == "Vector" then
+    elseif vector.class.name == "Vector" then
         return Vector(self.x + vector.x, self.y + vector.y)
     end
 end
@@ -56,7 +56,7 @@ end
 function Vector:subtract(vector)
     if type(vector) == "number" then
         return Vector(self.x - vector, self.y - vector)
-    elseif vector.name == "Vector" then
+    elseif vector.class.name == "Vector" then
         return Vector(self.x - vector.x, self.y - vector.y)
     end
 end
@@ -64,7 +64,7 @@ end
 function Vector:multiply(vector)
     if type(vector) == "number" then
         return Vector(self.x * vector, self.y * vector)
-    elseif vector.name == "Vector" then
+    elseif vector.class.name == "Vector" then
         return Vector(self.x * vector.x, self.y * vector.y)
     end
 end
@@ -72,7 +72,7 @@ end
 function Vector:divide(vector)
     if type(vector) == "number" then
         return Vector(self.x / vector, self.y / vector)
-    elseif vector.name == "Vector" then
+    elseif vector.class.name == "Vector" then
         return Vector(self.x / vector.x, self.y / vector.y)
     end
 end
@@ -80,7 +80,7 @@ end
 function Vector:modulo(vector)
     if type(vector) == "number" then
         return Vector(self.x % vector, self.y % vector)
-    elseif vector.name == "Vector" then
+    elseif vector.class.name == "Vector" then
         return Vector(self.x % vector.x, self.x % vector.y)
     end
 end
