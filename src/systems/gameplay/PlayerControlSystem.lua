@@ -10,9 +10,9 @@ function PlayerControlSystem:update()
     end
 end
 
-function PlayerControlSystem:fireEvent(event) 
+function PlayerControlSystem:fireEvent(event)
     for index, entity in pairs(self.targets) do
-         if event.name == "KeyPressed" then
+         if event.class.name == "KeyPressed" then
             if event.key == "a" or event.key == "left" then
                 local rotating = entity:get("Rotating")
                 rotating.rotationSpeed = -rotating.defaultRotationSpeed
@@ -20,9 +20,10 @@ function PlayerControlSystem:fireEvent(event)
                 local rotating = entity:get("Rotating")
                 rotating.rotationSpeed = rotating.defaultRotationSpeed
             end
-         elseif event.name == "KeyReleased" then
+         elseif event.class.name == "KeyReleased" then
             if event.key == "w" or event.key == "up" then
                 entity:get("Accelerating").acceleration:set(0, 0)
+                print(entity:get("Accelerating").acceleration.x)
             elseif event.key == "a" or event.key == "left" then
                 if not (love.keyboard.isDown("d") or love.keyboard.isDown("right")) then
                     entity:get("Rotating").rotationSpeed = 0
@@ -36,7 +37,7 @@ function PlayerControlSystem:fireEvent(event)
     end
 end
 
-function PlayerControlSystem:requires() 
+function PlayerControlSystem:requires()
     return {"Controllable"}
 end
 
