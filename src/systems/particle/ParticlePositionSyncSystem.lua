@@ -1,3 +1,5 @@
+local UpdateParticlePosition = require("events/UpdateParticlePosition")
+
 local ParticlePositionSyncSystem = class("ParticlePositionSyncSystem", System)
 
 function ParticlePositionSyncSystem:update()
@@ -18,6 +20,10 @@ function ParticlePositionSyncSystem:syncPosition(entity)
 
     particle.particle:setPosition(rotatedOffset.x, rotatedOffset.y)
     particle.particle:setDirection(math.pi+radian)
+end
+
+function ParticlePositionSyncSystem:onAddEntity(entity)
+    stack:current().eventmanager:fireEvent(UpdateParticlePosition(entity))
 end
 
 function ParticlePositionSyncSystem:requires()

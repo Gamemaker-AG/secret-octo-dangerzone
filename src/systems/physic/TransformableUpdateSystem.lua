@@ -33,4 +33,8 @@ function TransformableUpdateSystem:onDemandUpdate(event)
     self:updatePositions(target)
 end
 
+function TransformableUpdateSystem:onAddEntity(entity)
+    stack:current().eventmanager:fireEvent(UpdateTransformable(entity))
+end
+
 return TransformableUpdateSystem

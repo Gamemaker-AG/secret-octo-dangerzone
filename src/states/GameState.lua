@@ -6,6 +6,7 @@ require("components/gameplay/Camera")
 require("components/gameplay/Controllable")
 require("components/gameplay/Damaging")
 require("components/gameplay/Debris")
+require("components/gameplay/Description")
 require("components/gameplay/Destroyed")
 require("components/gameplay/HasLoot")
 require("components/gameplay/ExplodesOnContact")
@@ -179,17 +180,6 @@ function GameState:load()
     self.eventmanager:addListener("UpdateTransformable", transformableUpdateSystem, transformableUpdateSystem.onDemandUpdate)
     self.eventmanager:addListener("UpdateParticlePosition", particlePositionSyncSystem, particlePositionSyncSystem.updatePosition)
     self.eventmanager:addListener("MouseReleased", clickableSystem, clickableSystem.mouseReleased)
-
-
-    -- Adding Initializer to Engine
-    self.engine:addInitializer("Transformable",
-        function(entity)
-            stack:current().eventmanager:fireEvent(UpdateTransformable(entity))
-            if entity:has("Particle") then
-                stack:current().eventmanager:fireEvent(UpdateParticlePosition(entity))
-            end
-        end
-    )
 
     -- Adding player entity
     player = Entity()

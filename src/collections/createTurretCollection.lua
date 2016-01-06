@@ -1,4 +1,5 @@
-local Drawable, Rotating, Circle, Transformable, Weapon, Attitude, LookingAt, ShootsProjectile, Clickable = Component.load({"Drawable", "Rotating", "Circle", "Transformable", "Weapon", "Attitude", "LookingAt", "ShootsProjectile", "Clickable"})
+local Description, Drawable, Rotating, Circle, Transformable, Weapon, Attitude, LookingAt, ShootsProjectile, Clickable = 
+    Component.load({"Description", "Drawable", "Rotating", "Circle", "Transformable", "Weapon", "Attitude", "LookingAt", "ShootsProjectile", "Clickable"})
 
 local Vector = require("helper/Vector")
 

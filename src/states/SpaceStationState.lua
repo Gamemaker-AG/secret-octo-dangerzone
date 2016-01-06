@@ -9,7 +9,7 @@ local KeyReleased = require("events/KeyReleased")
 local State = require("core/State")
 local SpaceStationState = class("SpaceStationState", State)
 
-Component.load({
+local Drawable, Transformable, Circle = Component.load({
 	"Drawable",
 	"Transformable",
 	"Circle"
