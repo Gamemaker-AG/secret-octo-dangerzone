@@ -1,5 +1,5 @@
 local SpaceStationState = require("states/SpaceStationState")
-Component.load({"Transformable", "DrawableText"})
+local Transformable, DrawableText = Component.load({"Transformable", "DrawableText"})
 
 local SpaceStationActivateSystem = class("SpaceStationActivateSystem", System)
 
@@ -14,7 +14,7 @@ function SpaceStationActivateSystem:getCollidingStation()
 end
 
 function SpaceStationActivateSystem:startUI(event)
-	if event.key == " " and self:getCollidingStation() then
+	if event.key == "space" and self:getCollidingStation() then
 		stack:push(SpaceStationState())
 	end
 end

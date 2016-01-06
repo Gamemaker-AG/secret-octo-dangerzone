@@ -13,6 +13,8 @@ end
 local MapGenerationSystem = class("MapGenerationSystem", System)
 
 function MapGenerationSystem:initialize()
+    System.initialize(self)
+
 	self.tileSize = 128
 	self.tileScope = 2
     self.generatedTiles = {}
@@ -20,7 +22,6 @@ function MapGenerationSystem:initialize()
 end
 
 function MapGenerationSystem:update(dt)
-    -- Gets player reference at first run.
     if self.firstRun then
     	self.lastTile = self:getCurrentTile()
         self:initializeMap()
