@@ -54,7 +54,6 @@ function SpaceStationState:load()
 	local itemRadius = (img:getWidth()/26)*sx
 	local globalItemOffset = playerOffset:clone():add(Vector(600*sx, itemRadius))
 	for index, item in pairs(player:get("Inventory").inventory) do
-		print(index)
 		local entity = Entity()
 		entity:add(item:get("Drawable"))
 		local gap = itemRadius*8/3

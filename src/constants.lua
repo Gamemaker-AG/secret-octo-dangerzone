@@ -20,6 +20,8 @@ constants = {
         defaultRotationSpeed = math.pi,
     },
     turret = {
+        name = "Basic Turret",
+        description = "Might as well be your grandpas weapon. Fires bullets.",
         diameter = percentToPixels(4),
         defaultRotationSpeed = math.pi*2,
     },

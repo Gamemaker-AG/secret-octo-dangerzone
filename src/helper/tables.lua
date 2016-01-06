@@ -31,6 +31,18 @@ function table.find(list, pred)
     return nil
 end
 
+function table.where(list, props)
+    local result = {}
+    for _, item in pairs(list) do
+        local hasEverything = true
+        for key, wanted in pairs(props) do
+            if not item[key] == wanted then hasEverything = false end
+        end
+        if hasEverything then table.insert(result, item) end
+    end
+    return result
+end
+
 function table.contains(list, element)
     for k, v in pairs(list) do
         if v == element then

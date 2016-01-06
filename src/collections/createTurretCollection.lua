@@ -17,6 +17,7 @@ function createTurretCollection(entity, offset)
     table.insert(components, Attitude({Pirate=1}))
     table.insert(components, Weapon(1000, nil))
     table.insert(components, ShootsProjectile(10, 2, 20, 10, 0.05, 0.02))
+    table.insert(components, Description(constants.turret.name, constants.turret.description))
 
     -- Graphic components
     local turret = resources.images.circle
