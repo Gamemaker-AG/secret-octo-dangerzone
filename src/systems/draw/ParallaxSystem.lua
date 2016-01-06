@@ -7,7 +7,7 @@ function ParallaxSystem:update(dt)
         local depth = entity:get("Parallax").depth
         local offset = entity:get("Transformable").offset
         local cam = table.firstElement(stack:current().engine:getEntitiesWithComponent("Camera"))
-        if cam then 
+        if cam then
             offset:set(cam:get("Transformable").position:multiply(1/depth))
         end
     end

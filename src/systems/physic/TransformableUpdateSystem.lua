@@ -3,7 +3,7 @@ local TransformableUpdateSystem = class("TransformableUpdateSystem", System)
 function TransformableUpdateSystem:updatePositions(parent)
     local parentTrans = parent:get("Transformable")
     table.each(parent.children, function(_, child)
-        local childTrans = child:get("Transformable") 
+        local childTrans = child:get("Transformable")
         if childTrans then
             if childTrans.rotationEnabled then
                 childTrans.position:set(childTrans.offset:rotate(parentTrans.direction:getRadian()):add(parentTrans.position))

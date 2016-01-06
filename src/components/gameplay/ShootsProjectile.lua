@@ -1,6 +1,6 @@
 local ShootsProjectile = Component.create("ShootsProjectile")
 
-function ShootsProjectile:__init(damage, cooldown, precision, shotsPerVolley, volleyTime, waitTime)
+function ShootsProjectile:initialize(damage, cooldown, precision, shotsPerVolley, volleyTime, waitTime)
     self.damage = damage
     self.precision = precision or 0
     self.shotsPerVolley = shotsPerVolley or 1

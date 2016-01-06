@@ -9,7 +9,7 @@ local createButtonComponents = require("models/ui/createButtonComponents")
 
 local TurretMenu = class("TurretMenu")
 
-function TurretMenu:__init(turret, circle)
+function TurretMenu:initialize(turret, circle)
     self.buttons = {}
     self.turret = turret
     self.visible = false

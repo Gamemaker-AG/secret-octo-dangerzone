@@ -1,6 +1,7 @@
 local GenerationNotifierSystem = class("GenerationNotifierSystem", System)
 
-function GenerationNotifierSystem:__init(x, y)
+function GenerationNotifierSystem:initialize(x, y)
+    System.initialize(self)
     self.x = x
     self.y = y
 end

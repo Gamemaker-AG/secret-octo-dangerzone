@@ -1,6 +1,6 @@
 Resources = class("Resources")
 
-function Resources:__init()
+function Resources:initialize()
     
     self.imageQueue = {}
     self.musicQueue = {}

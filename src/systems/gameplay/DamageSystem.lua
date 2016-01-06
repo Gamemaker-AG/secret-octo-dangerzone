@@ -4,7 +4,7 @@ local DamageSystem = class("DamageSystem", System)
 
 function DamageSystem:fireEvent(event)
     local target = event.target
-    local damage = event.damage  
+    local damage = event.damage
     local shield
     if target:get("Shield") then shield = target:get("Shield") end
     local hull = target:get("Hull")

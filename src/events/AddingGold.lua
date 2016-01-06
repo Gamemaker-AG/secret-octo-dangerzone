@@ -1,6 +1,6 @@
 local AddingGold = class("AddingGold")
 
-function AddingGold:__init(enemy)
+function AddingGold:initialize(enemy)
     self.enemy = enemy
 end
 
