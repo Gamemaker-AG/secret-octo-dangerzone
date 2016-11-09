@@ -22,10 +22,7 @@ function MenuState:load()
     self.eventmanager = EventManager()
     self.engine:getRootEntity():add(Transformable())
 
-    self.eventmanager:addListener("KeyReleased", {self, function(key, isrepeat)
-        -- Start the game when any key is pressed
-        stack:push(GameState())
-    end})
+    self.eventmanager:addListener("KeyReleased", self, self.start)
 
     self.engine:addSystem(TextDrawSystem())
     self.engine:addSystem(TransformableUpdateSystem())
@@ -49,6 +46,10 @@ end
 
 function MenuState:draw()
     self.engine:draw()
+end
+
+function MenuState:start(key, isrepeat)
+    stack:push(GameState())
 end
 
 return MenuState
