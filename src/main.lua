@@ -1,6 +1,9 @@
 -- Main Lövetoys Library
-require("lib/lovetoys/lovetoys")
-lovetoyDebug = true
+local lovetoys = require("lib.lovetoys.lovetoys")
+lovetoys.initialize({
+    debug = true,
+    globals = true
+})
 
 -- Core and Helper Requirements
 require("helper/tables")

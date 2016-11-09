@@ -23,7 +23,7 @@ function SpaceStationState:load()
     self.engine:getRootEntity():add(Transformable())
 	self.eventmanager = EventManager()
 
-	self.eventmanager:addListener("KeyReleased", {}, function() stack:pop() end)
+	self.eventmanager:addListener("KeyReleased", self, self.exit)
 
 	-- Systems
 	self.engine:addSystem(DrawSystem())
@@ -74,6 +74,10 @@ end
 
 function SpaceStationState:draw()
 	self.engine:draw()
+end
+
+function SpaceStationState:exit()
+    stack:pop()
 end
 
 return SpaceStationState
